@@ -5,8 +5,8 @@
 <h1 align="center">BVS Bengkel Untirta</h1>
 
 <p align="center">
-  Website bengkel motor resmi BVS (Bengkel Virtual Shop) — Universitas Tirtayasa<br>
-  Proyek UAS Semester 2025/2026
+  Website bengkel mobil dan motor resmi BVS (Bengkel Virtual Shop) — Universitas Tirtayasa<br>
+  Proyek UAS Semester Antara 2025/2026
 </p>
 
 <p align="center">
@@ -17,9 +17,9 @@
 
 ## 📌 Tentang
 
-**BVS Bengkel Untirta** adalah platform e-commerce khusus bengkel motor yang dibangun menggunakan Laravel 13. Website ini menyediakan layanan pemesanan produk (ban, aki, oli, shock absorber) dan jasa servis motor secara online.
+**BVS Bengkel Untirta** adalah platform e-commerce bengkel mobil dan motor yang dibangun menggunakan Laravel 13. Website ini menyediakan layanan pemesanan produk (ban, aki, oli, shock absorber) dan jasa servis secara online.
 
-Dibuat sebagai proyek **Ujian Akhir Semester** (UAS) untuk mata kuliah di lingkungan Universitas Tirtayasa.
+Dibuat sebagai proyek **Ujian Akhir Semester** (UAS) Semester Antara 2025/2026 — Universitas Tirtayasa.
 
 ---
 
@@ -49,11 +49,9 @@ Dibuat sebagai proyek **Ujian Akhir Semester** (UAS) untuk mata kuliah di lingku
 
 ---
 
-## 🚀 Akses
+## 🚀 Live URL
 
-- **Live URL:** [http://bvsuntirta.rf.gd/](http://bvsuntirta.rf.gd/)
-- **Admin Login:** `/login` — admin@bengkel.test / `password`
-- **Customer Login:** `/login` — customer@bengkel.test / `password`
+[http://bvsuntirta.rf.gd/](http://bvsuntirta.rf.gd/)
 
 ---
 

@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .card {
+        @apply bg-white border border-brand-border shadow-sm rounded-xl;
+    }
+    .card-hover {
+        @apply card transition-all duration-200 hover:border-brand-gold-light hover:shadow-lg hover:-translate-y-1;
+    }
+    .card-accent {
+        @apply card-hover border-l-4 border-l-brand-gold;
+    }
+    .card-glow {
+        @apply card-hover hover:shadow-[0_0_20px_-5px_rgba(245,158,11,0.2)];
+    }
+    .btn-primary {
+        @apply inline-flex items-center justify-center gap-2 bg-brand-gold text-white font-semibold px-6 py-3 text-sm hover:bg-brand-gold-dark transition-all duration-200 shadow-sm hover:shadow-md;
+    }
+    .btn-outline {
+        @apply inline-flex items-center justify-center gap-2 border-2 border-brand-ink-muted text-brand-ink-muted px-6 py-3 text-sm hover:border-brand-gold hover:text-brand-gold transition-all duration-200;
+    }
+    .btn-danger {
+        @apply inline-flex items-center justify-center gap-2 bg-red-600 text-white font-semibold px-4 py-2 text-sm hover:bg-red-500 transition-colors;
+    }
+    .section-heading {
+        @apply font-display text-3xl md:text-4xl font-bold tracking-wide text-brand-ink;
+    }
+    .section-heading::after {
+        content: '';
+        display: block;
+        width: 3rem;
+        height: 2px;
+        background: #F59E0B;
+        margin-top: 0.75rem;
+    }
+    .section-label {
+        @apply text-brand-gold font-display text-sm font-semibold uppercase tracking-[0.2em] mb-2;
+    }
+    .text-muted {
+        @apply text-brand-ink-muted;
+    }
+    .badge {
+        @apply inline-block px-3 py-1 text-xs font-semibold uppercase tracking-wider border border-brand-border rounded;
+    }
+    .badge-paid {
+        @apply badge border-green-500/40 text-green-700 bg-green-50;
+    }
+    .badge-pending {
+        @apply badge border-brand-gold/40 text-brand-gold-dark bg-amber-50;
+    }
+    .badge-failed {
+        @apply badge border-red-500/40 text-red-600 bg-red-50;
+    }
+    .input-field {
+        @apply border border-brand-border bg-white px-3 py-2.5 text-sm focus:border-brand-blue focus:ring-1 focus:ring-brand-blue/30 w-full text-brand-ink placeholder-brand-ink-faint rounded-lg;
+    }
+}
+
+@layer utilities {
+    .safe-area-bottom {
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    .line-clamp-2 {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+}

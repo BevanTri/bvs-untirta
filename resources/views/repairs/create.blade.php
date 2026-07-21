@@ -106,7 +106,7 @@
     </div>
 
     <div id="bottom-sheet-overlay" class="fixed inset-0 bg-black/50 z-50 hidden transition-opacity duration-300" onclick="closeBottomSheet()"></div>
-    <div id="bottom-sheet" class="fixed bottom-0 left-0 right-0 z-50 bg-white rounded-t-2xl shadow-2xl translate-y-full transition-transform duration-300 max-h-[85vh] flex flex-col" style="will-change: transform;">
+    <div id="bottom-sheet" class="fixed bottom-0 left-0 right-0 z-50 bg-white rounded-t-2xl shadow-2xl translate-y-full transition-transform duration-300 max-h-[90vh] flex flex-col" style="will-change: transform;">
         <div class="shrink-0 px-4 pt-3 pb-2 border-b border-brand-border/50">
             <div class="flex justify-center mb-2"><div class="w-10 h-1 rounded-full bg-brand-border"></div></div>
             <div class="flex items-center justify-between mb-2">
@@ -124,7 +124,7 @@
                 <input type="text" id="product-search" placeholder="Cari sparepart..." class="w-full pl-9 pr-3 py-2 text-sm border border-brand-border rounded-lg focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/30 outline-none" oninput="filterProducts()">
             </div>
         </div>
-        <div class="flex-1 overflow-y-auto p-3 sm:p-4" id="product-grid">
+        <div class="flex-1 overflow-y-auto p-3 sm:p-4 pb-[calc(64px+env(safe-area-inset-bottom,0px))]" id="product-grid">
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3" id="product-list"></div>
         </div>
     </div>

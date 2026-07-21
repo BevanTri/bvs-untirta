@@ -50,8 +50,7 @@ class IpaymuService
                 'signature: ' . $signature,
                 'timestamp: ' . $timestamp,
             ],
-            CURLOPT_SSL_VERIFYPEER => false,
-            CURLOPT_SSL_VERIFYHOST => 0,
+            CURLOPT_SSL_VERIFYPEER => true,
             CURLOPT_TIMEOUT => 30,
         ]);
 

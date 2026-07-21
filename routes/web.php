@@ -135,52 +135,103 @@ Route::get('/storage/{path}', function (string $path) {
     return response()->file($fullPath, ['Cache-Control' => 'public, max-age=86400']);
 })->where('path', '.*');
 
-Route::withoutMiddleware(['auth', 'admin'])->get('/setup', function () {
+Route::get('/setup', function () {
+    if (\App\Models\User::count() > 0 && (!auth()->check() || !auth()->user()->is_admin)) {
+        abort(404);
+    }
     \Illuminate\Support\Facades\Artisan::call('migrate:fresh', ['--force' => true]);
     \Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
     return nl2br(\Illuminate\Support\Facades\Artisan::output());
 });
 
-Route::withoutMiddleware([\Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class])->get('/fix-session', function () {
-    $output = '';
-    try {
-        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
-        $output .= \Illuminate\Support\Facades\Artisan::output() . "\n";
-    } catch (\Exception $e) {
-        $output .= $e->getMessage() . "\n";
-    }
-    try {
-        \Illuminate\Support\Facades\DB::statement('ALTER TABLE payments MODIFY order_id BIGINT UNSIGNED NULL');
-        $output .= "payments.order_id set to nullable.\n";
-    } catch (\Exception $e) {
-        $output .= "ALTER TABLE payments: " . $e->getMessage() . "\n";
-    }
-    return nl2br($output);
-});
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::withoutMiddleware([\Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class])->get('/fix-session', function () {
+        $output = '';
+        try {
+            \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+            $output .= \Illuminate\Support\Facades\Artisan::output() . "\n";
+        } catch (\Exception $e) {
+            $output .= $e->getMessage() . "\n";
+        }
+        try {
+            \Illuminate\Support\Facades\DB::statement('ALTER TABLE payments MODIFY order_id BIGINT UNSIGNED NULL');
+            $output .= "payments.order_id set to nullable.\n";
+        } catch (\Exception $e) {
+            $output .= "ALTER TABLE payments: " . $e->getMessage() . "\n";
+        }
+        return nl2br($output);
+    });
 
-Route::withoutMiddleware([\Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class])->get('/sync-products-images', function () {
-    $count = 0;
-    foreach (\App\Models\Product::all() as $p) {
-        foreach (['png', 'jpg', 'jpeg', 'webp'] as $ext) {
-            $path = public_path("uploads/products/{$p->id}.{$ext}");
-            if (file_exists($path)) {
-                $p->update(['image' => "products/{$p->id}.{$ext}"]);
-                $count++;
-                break;
+    Route::withoutMiddleware([\Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class])->get('/sync-products-images', function () {
+        $count = 0;
+        foreach (\App\Models\Product::all() as $p) {
+            foreach (['png', 'jpg', 'jpeg', 'webp'] as $ext) {
+                $path = public_path("uploads/products/{$p->id}.{$ext}");
+                if (file_exists($path)) {
+                    $p->update(['image' => "products/{$p->id}.{$ext}"]);
+                    $count++;
+                    break;
+                }
             }
         }
-    }
-    return "Sync $count images sukses!";
-});
+        return "Sync $count images sukses!";
+    });
 
-Route::withoutMiddleware([\Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class])->get('/reseed', function () {
-    try { \Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]); } catch (\Exception $e) {}
-    try { \Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => 'ProductSeeder', '--force' => true]); } catch (\Exception $e) {}
-    try { \Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => 'CustomerSeeder', '--force' => true]); } catch (\Exception $e) {}
-    try { \Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => 'VehicleSeeder', '--force' => true]); } catch (\Exception $e) {}
-    try { \Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => 'MechanicSeeder', '--force' => true]); } catch (\Exception $e) {}
-    try { \Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => 'RepairOrderSeeder', '--force' => true]); } catch (\Exception $e) {}
-    return 'Seed selesai (duplikat dilewati)';
+    Route::withoutMiddleware([\Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class])->get('/reseed', function () {
+        try { \Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]); } catch (\Exception $e) {}
+        try { \Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => 'ProductSeeder', '--force' => true]); } catch (\Exception $e) {}
+        try { \Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => 'CustomerSeeder', '--force' => true]); } catch (\Exception $e) {}
+        try { \Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => 'VehicleSeeder', '--force' => true]); } catch (\Exception $e) {}
+        try { \Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => 'MechanicSeeder', '--force' => true]); } catch (\Exception $e) {}
+        try { \Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => 'RepairOrderSeeder', '--force' => true]); } catch (\Exception $e) {}
+        return 'Seed selesai (duplikat dilewati)';
+    });
+
+    Route::withoutMiddleware([\Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class])->get('/debug-ipaymu', function () {
+        $va = config('services.ipaymu.va');
+        $apiKey = config('services.ipaymu.api_key');
+        $payload = [
+            'product' => ['Test Product'],
+            'qty' => ['1'],
+            'price' => ['1000'],
+            'returnUrl' => url('/'),
+            'cancelUrl' => url('/'),
+            'notifyUrl' => url('/payment/callback'),
+            'referenceId' => 'test-debug-' . time(),
+        ];
+        $body = json_encode($payload, JSON_UNESCAPED_SLASHES);
+        $requestBody = strtolower(hash('sha256', $body));
+        $stringToSign = 'POST:' . $va . ':' . $requestBody . ':' . $apiKey;
+        $signature = hash_hmac('sha256', $stringToSign, $apiKey);
+        $timestamp = date('YmdHis');
+        $ch = curl_init('https://sandbox.ipaymu.com/api/v2/payment');
+        curl_setopt_array($ch, [
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => $body,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => [
+                'Accept: application/json',
+                'Content-Type: application/json',
+                'va: ' . $va,
+                'signature: ' . $signature,
+                'timestamp: ' . $timestamp,
+            ],
+            CURLOPT_SSL_VERIFYPEER => true,
+            CURLOPT_TIMEOUT => 30,
+        ]);
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $error = curl_error($ch);
+        curl_close($ch);
+        return response()->json([
+            'http_code' => $httpCode,
+            'curl_error' => $error,
+            'response' => json_decode($response, true),
+            'payload_sent' => $payload,
+            'signature' => $signature,
+            'va' => $va,
+        ]);
+    });
 });
 
 Route::middleware(['auth', 'admin'])->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class])->prefix('admin')->name('admin.')->group(function () {
@@ -203,53 +254,6 @@ Route::middleware(['auth', 'admin'])->withoutMiddleware([\Illuminate\Foundation\
         \Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => $name, '--force' => true]);
         return nl2br(\Illuminate\Support\Facades\Artisan::output());
     })->name('seed');
-});
-
-Route::get('/debug-ipaymu', function () {
-    $va = config('services.ipaymu.va');
-    $apiKey = config('services.ipaymu.api_key');
-    $payload = [
-        'product' => ['Test Product'],
-        'qty' => ['1'],
-        'price' => ['1000'],
-        'returnUrl' => url('/'),
-        'cancelUrl' => url('/'),
-        'notifyUrl' => url('/payment/callback'),
-        'referenceId' => 'test-debug-' . time(),
-    ];
-    $body = json_encode($payload, JSON_UNESCAPED_SLASHES);
-    $requestBody = strtolower(hash('sha256', $body));
-    $stringToSign = 'POST:' . $va . ':' . $requestBody . ':' . $apiKey;
-    $signature = hash_hmac('sha256', $stringToSign, $apiKey);
-    $timestamp = date('YmdHis');
-    $ch = curl_init('https://sandbox.ipaymu.com/api/v2/payment');
-    curl_setopt_array($ch, [
-        CURLOPT_POST => true,
-        CURLOPT_POSTFIELDS => $body,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_HTTPHEADER => [
-            'Accept: application/json',
-            'Content-Type: application/json',
-            'va: ' . $va,
-            'signature: ' . $signature,
-            'timestamp: ' . $timestamp,
-        ],
-        CURLOPT_SSL_VERIFYPEER => false,
-        CURLOPT_SSL_VERIFYHOST => 0,
-        CURLOPT_TIMEOUT => 30,
-    ]);
-    $response = curl_exec($ch);
-    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    $error = curl_error($ch);
-    curl_close($ch);
-    return response()->json([
-        'http_code' => $httpCode,
-        'curl_error' => $error,
-        'response' => json_decode($response, true),
-        'payload_sent' => $payload,
-        'signature' => $signature,
-        'va' => $va,
-    ]);
 });
 
 require __DIR__.'/auth.php';

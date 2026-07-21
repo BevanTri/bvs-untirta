@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    html {
+        -webkit-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: transparent;
+    }
+    input, select, textarea, button {
+        font-size: 16px;
+    }
+    * {
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
 @layer components {
     .card {
         @apply bg-white border border-brand-border shadow-sm rounded-xl;

@@ -5,18 +5,20 @@
     <div class="card p-4 mb-4 border-l-4 border-green-500 bg-green-50 text-green-800 font-medium">{{ session('success') }}</div>
     @endif
 
-    <div class="mb-4 flex gap-2">
-        <form method="GET" class="flex gap-2 flex-1">
-            <input type="text" name="search" placeholder="Cari INV, nama, atau telepon..." value="{{ $search }}" class="input-field flex-1">
-            <button type="submit" class="btn-primary">Cari</button>
-            @if($search)
-            <a href="{{ route('admin.orders') }}" class="btn-outline">Reset</a>
-            @endif
-        </form>
-        <a href="{{ route('admin.orders.export') }}{{ $search ? '?search=' . urlencode($search) : '' }}" class="btn-outline shrink-0">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-            Export CSV
-        </a>
+    <div class="card p-4 mb-6">
+        <div class="flex flex-col sm:flex-row gap-2">
+            <form method="GET" class="flex gap-2 flex-1 flex-wrap">
+                <input type="text" name="search" placeholder="Cari INV, nama..." value="{{ $search }}" class="input-field w-full sm:flex-1 sm:w-auto">
+                <button type="submit" class="btn-primary shrink-0 min-h-[44px]">Cari</button>
+                @if($search)
+                <a href="{{ route('admin.orders') }}" class="btn-outline shrink-0 min-h-[44px]">Reset</a>
+                @endif
+            </form>
+            <a href="{{ route('admin.orders.export') }}{{ $search ? '?search=' . urlencode($search) : '' }}" class="btn-outline shrink-0 self-start min-h-[44px]">
+                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                Export CSV
+            </a>
+        </div>
     </div>
 
     <div class="card overflow-x-auto">
@@ -59,3 +61,4 @@
     </div>
     <div class="mt-4">{{ $orders->links() }}</div>
 </x-admin-layout>
+

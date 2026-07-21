@@ -10,7 +10,7 @@
         <link href="https://fonts.bunny.net/css?family=oswald:500,600,700&display=swap" rel="stylesheet" />
         <link href="https://fonts.bunny.net/css?family=jetbrains-mono:400,500,700&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/webp" href="{{ asset('images/logo-untirta.webp') }}">
-    <link rel="stylesheet" href="{{ asset('build/assets/app-BZ5sQYsh.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/assets/app-DhU0CEjf.css') }}">
     <script type="module" src="{{ asset('build/assets/app-B9qO1Jfl.js') }}"></script>
 </head>
     <body class="font-sans antialiased text-brand-ink bg-brand-warm min-h-screen flex flex-col overflow-x-hidden">
@@ -37,7 +37,7 @@
                                 <img src="{{ asset('images/logo-untirta.webp') }}" alt="Untirta" class="h-7 w-auto">
                                 <span class="font-display font-bold text-white text-xl tracking-[0.05em] uppercase">BVS Untirta</span>
                             </div>
-                            <p class="text-sm leading-relaxed text-zinc-400">Bengkel Vokasi & Sains — solusi perawatan kendaraan terpercaya di lingkungan Universitas Sultan Ageng Tirtayasa.</p>
+                            <p class="text-sm leading-relaxed text-zinc-400">Bengkel & Variasi Motor & Mobil — solusi perawatan kendaraan terpercaya.</p>
                         </div>
                         <div>
                             <div class="font-semibold text-white text-sm mb-4 uppercase tracking-[0.15em] font-display">Navigasi</div>

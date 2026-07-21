@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\RepairOrder;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -14,7 +15,9 @@ class OrderController extends Controller
 
     public function history()
     {
-        $orders = Order::where('user_id', Auth::id())->latest()->paginate(10);
+        $productOrders = Order::where('user_id', Auth::id())->latest()->get();
+        $repairOrders = RepairOrder::where('user_id', Auth::id())->latest()->get();
+        $orders = $productOrders->concat($repairOrders)->sortByDesc('created_at');
         return view('orders.history', compact('orders'));
     }
 

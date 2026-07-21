@@ -24,7 +24,7 @@ class PaymentController extends Controller
 
         try {
             $ipaymu = new IpaymuService();
-            $result = $ipaymu->createTransaction($order);
+            $result = $ipaymu->createTransaction($order, 'payment.success', 'orders.pay');
         } catch (\Exception $e) {
             Log::error('Payment checkout exception', [
                 'order_id' => $order->id,
@@ -42,7 +42,7 @@ class PaymentController extends Controller
             return back()->with('error', 'Gagal memproses pembayaran: ' . $result['message']);
         }
 
-        $order->payments()->create([
+        $payment = $order->payments()->create([
             'method' => 'ipaymu',
             'amount' => $order->total,
             'reference_id' => $result['reference_id'] ?? $order->order_number,
@@ -50,6 +50,7 @@ class PaymentController extends Controller
             'status' => 'pending',
             'raw_response' => $result['raw'],
         ]);
+        $payment->update(['payable_type' => Order::class, 'payable_id' => $order->id]);
 
         $order->update(['payment_status' => 'pending']);
 
@@ -81,7 +82,14 @@ class PaymentController extends Controller
 
         $status = $data['status'] ?? 'pending';
         $payment->update(['status' => $status, 'raw_response' => $data]);
-        $payment->order->update(['payment_status' => $status === 'berhasil' ? 'paid' : ($status === 'gagal' ? 'failed' : 'pending')]);
+
+        $payable = $payment->payable;
+        if ($payable) {
+            $payable->update(['payment_status' => $status === 'berhasil' ? 'paid' : ($status === 'gagal' ? 'failed' : 'pending')]);
+            if ($status === 'berhasil' && $payable instanceof Order) {
+                $payable->update(['status' => 'processing']);
+            }
+        }
 
         return response('OK', 200);
     }
@@ -93,17 +101,14 @@ class PaymentController extends Controller
             $data = $request->all();
             Log::info('Payment success page accessed', ['order_id' => $order->id, 'data' => $data]);
 
-            // Check if iPaymu sent data in query params
             if (isset($data['status']) && $data['status'] === 'berhasil') {
                 if ($payment) $payment->update(['status' => 'berhasil', 'raw_response' => $data]);
                 $order->update(['payment_status' => 'paid', 'status' => 'processing']);
             } elseif (isset($data['trx_id'])) {
-                // iPaymu sends trx_id when redirecting back
                 if ($payment) $payment->update(['status' => 'berhasil', 'raw_response' => $data]);
                 $order->update(['payment_status' => 'paid', 'status' => 'processing']);
             }
 
-            // Dump all request data for debugging
             file_put_contents(storage_path('logs/ipaymu_return.log'),
                 date('Y-m-d H:i:s') . ' | Order: ' . $order->id . ' | URL: ' . $request->fullUrl() . "\n"
                 . 'GET: ' . json_encode($request->query->all(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n"
@@ -112,5 +117,35 @@ class PaymentController extends Controller
                 FILE_APPEND);
         }
         return view('orders.success', compact('order'));
+    }
+
+    public function payRepair(\App\Models\RepairOrder $repairOrder)
+    {
+        if ($repairOrder->user_id !== Auth::id()) abort(403);
+
+        try {
+            $ipaymu = new IpaymuService();
+            $result = $ipaymu->createTransaction($repairOrder, 'repairs.show', 'repairs.pay');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Gagal menghubungi gateway pembayaran: ' . $e->getMessage());
+        }
+
+        if (!$result['success']) {
+            return back()->with('error', 'Gagal memproses pembayaran: ' . $result['message']);
+        }
+
+        $payment = $repairOrder->payments()->create([
+            'method' => 'ipaymu',
+            'amount' => $repairOrder->total,
+            'reference_id' => $result['reference_id'] ?? $repairOrder->order_number,
+            'payment_url' => $result['payment_url'],
+            'status' => 'pending',
+            'raw_response' => $result['raw'],
+        ]);
+        $payment->update(['payable_type' => \App\Models\RepairOrder::class, 'payable_id' => $repairOrder->id]);
+
+        $repairOrder->update(['payment_status' => 'pending']);
+
+        return redirect($result['payment_url']);
     }
 }

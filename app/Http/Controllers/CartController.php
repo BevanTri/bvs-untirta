@@ -109,7 +109,6 @@ class CartController extends Controller
 
         $data = $request->validate([
             'customer_name' => 'required|string|max:255',
-            'customer_phone' => 'required|string|max:20',
             'notes' => 'nullable|string',
         ]);
 
@@ -117,7 +116,6 @@ class CartController extends Controller
             'user_id' => Auth::id(),
             'order_number' => 'INV-' . now()->format('Ymd') . '-' . str()->upper(str()->random(6)),
             'customer_name' => $data['customer_name'],
-            'customer_phone' => $data['customer_phone'],
             'notes' => $data['notes'],
             'subtotal' => 0,
             'total' => 0,

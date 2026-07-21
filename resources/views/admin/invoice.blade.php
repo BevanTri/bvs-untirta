@@ -42,9 +42,8 @@
     <div class="page">
         <div class="header">
             <div>
-                <h1>BVS Motor</h1>
-                <p>Bengkel & Variasi Sepeda Motor</p>
-                <p>Universitas Sultan Ageng Tirtayasa</p>
+                <h1>BVS UNTIRTA</h1>
+                <p>Bengkel & Variasi Motor & Mobil</p>
             </div>
             <div class="right">
                 <h1 style="font-size:16px;letter-spacing:2px;margin-bottom:4px;">INVOICE</h1>
@@ -57,7 +56,6 @@
             <div>
                 <label>Pelanggan</label>
                 <p><strong>{{ $order->customer_name }}</strong></p>
-                <p>{{ $order->customer_phone ?: '-' }}</p>
             </div>
             <div>
                 <label>Status</label>
@@ -87,7 +85,6 @@
             </tbody>
             <tfoot>
                 <tr class="total-row"><td colspan="3" class="text-right">Subtotal</td><td class="text-right">Rp{{ number_format($order->subtotal, 0, ',', '.') }}</td></tr>
-                <tr class="total-row"><td colspan="3" class="text-right">Ongkir</td><td class="text-right">Rp{{ number_format($order->shipping_cost ?? 0, 0, ',', '.') }}</td></tr>
                 <tr class="grand-total"><td colspan="3" class="text-right">Total</td><td class="text-right">Rp{{ number_format($order->total, 0, ',', '.') }}</td></tr>
             </tfoot>
         </table>
@@ -99,7 +96,7 @@
         @endif
 
         <div class="footer">
-            <p>Terima kasih telah berbelanja di BVS Motor</p>
+            <p>Terima kasih telah berbelanja di BVS UNTIRTA</p>
             <p>Barang yang sudah dibeli tidak dapat ditukar/dikembalikan</p>
         </div>
     </div>

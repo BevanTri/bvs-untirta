@@ -25,13 +25,13 @@
             </label>
         </div>
 
-        <div class="flex items-center justify-end mt-6 gap-4">
+        <div class="flex flex-col sm:flex-row items-center justify-end mt-6 gap-3">
             @if (Route::has('password.request'))
                 <a class="text-sm text-brand-blue hover:text-brand-blue/80 font-medium" href="{{ route('password.request') }}">
                     {{ __('Forgot your password?') }}
                 </a>
             @endif
-            <x-primary-button>
+            <x-primary-button class="w-full sm:w-auto justify-center">
                 {{ __('Log in') }}
             </x-primary-button>
         </div>

@@ -7,17 +7,17 @@
 
     {{-- Search & Filter --}}
     <form method="GET" action="{{ route('admin.products') }}" class="card p-4 mb-6 flex gap-2 flex-wrap">
-        <input type="text" name="search" placeholder="Cari produk..." value="{{ $search ?? '' }}" class="input-field flex-1 min-w-[200px]">
-        <select name="category_id" class="input-field w-auto" onchange="this.form.submit()">
+        <input type="text" name="search" placeholder="Cari produk..." value="{{ $search ?? '' }}" class="input-field w-full sm:flex-1 sm:w-auto">
+        <select name="category_id" class="input-field w-full sm:w-auto" onchange="this.form.submit()">
             <option value="">Semua Kategori</option>
             @foreach($categories as $cat)
             <option value="{{ $cat->id }}" {{ ($filterCat ?? '') == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
             @endforeach
         </select>
         @if($search || $filterCat)
-        <a href="{{ route('admin.products') }}" class="btn-outline shrink-0 !border-brand-steel/30 !text-brand-steel">Reset</a>
+        <a href="{{ route('admin.products') }}" class="btn-outline shrink-0 !border-brand-steel/30 !text-brand-steel min-h-[44px]">Reset</a>
         @endif
-        <button type="submit" class="btn-primary shrink-0">Cari</button>
+        <button type="submit" class="btn-primary shrink-0 min-h-[44px]">Cari</button>
     </form>
 
     <form method="POST" action="{{ route('admin.products.store') }}" class="card p-5 mb-6" enctype="multipart/form-data">
@@ -42,23 +42,23 @@
         </div>
     </form>
 
-    <div class="card overflow-hidden">
+    <div class="card overflow-x-auto">
         <table class="w-full text-sm">
-            <thead><tr class="border-b border-brand-steel/20 bg-brand-warm"><th class="p-3 text-left font-semibold text-brand-steel text-xs uppercase tracking-widest">Nama</th><th class="p-3 text-left font-semibold text-brand-steel text-xs uppercase tracking-widest hidden lg:table-cell">Deskripsi</th><th class="p-3 text-left font-semibold text-brand-steel text-xs uppercase tracking-widest hidden sm:table-cell">Kategori</th><th class="p-3 text-right font-semibold text-brand-steel text-xs uppercase tracking-widest">Harga</th><th class="p-3 text-right font-semibold text-brand-steel text-xs uppercase tracking-widest hidden sm:table-cell">Stok</th><th class="p-3 text-center font-semibold text-brand-steel text-xs uppercase tracking-widest">Aktif</th><th class="p-3 text-center font-semibold text-brand-steel text-xs uppercase tracking-widest">Aksi</th></tr></thead>
+            <thead><tr class="border-b border-brand-steel/20 bg-brand-warm"><th class="p-3 text-left font-semibold text-brand-steel text-xs uppercase tracking-widest whitespace-nowrap">Nama</th><th class="p-3 text-left font-semibold text-brand-steel text-xs uppercase tracking-widest hidden lg:table-cell whitespace-nowrap">Deskripsi</th><th class="p-3 text-left font-semibold text-brand-steel text-xs uppercase tracking-widest hidden sm:table-cell whitespace-nowrap">Kategori</th><th class="p-3 text-right font-semibold text-brand-steel text-xs uppercase tracking-widest whitespace-nowrap">Harga</th><th class="p-3 text-right font-semibold text-brand-steel text-xs uppercase tracking-widest hidden sm:table-cell whitespace-nowrap">Stok</th><th class="p-3 text-center font-semibold text-brand-steel text-xs uppercase tracking-widest whitespace-nowrap">Aktif</th><th class="p-3 text-center font-semibold text-brand-steel text-xs uppercase tracking-widest whitespace-nowrap">Aksi</th></tr></thead>
             <tbody>
                 @foreach($products as $p)
                 <tr class="border-b border-brand-steel/10">
-                    <td class="p-3 font-medium">{{ $p->name }}</td>
+                    <td class="p-3 font-medium break-words max-w-[160px] sm:max-w-none">{{ $p->name }}</td>
                     <td class="p-3 text-brand-steel text-xs hidden lg:table-cell max-w-[200px] truncate">{{ $p->description ?? '—' }}</td>
-                    <td class="p-3 text-brand-steel hidden sm:table-cell">{{ $p->category->name }}</td>
-                    <td class="p-3 text-right font-medium tabular-nums">Rp{{ number_format($p->price,0,',','.') }}</td>
-                    <td class="p-3 text-right tabular-nums hidden sm:table-cell">{{ $p->stock ?? '∞' }}</td>
+                    <td class="p-3 text-brand-steel hidden sm:table-cell whitespace-nowrap">{{ $p->category->name }}</td>
+                    <td class="p-3 text-right font-medium tabular-nums whitespace-nowrap">Rp{{ number_format($p->price,0,',','.') }}</td>
+                    <td class="p-3 text-right tabular-nums hidden sm:table-cell whitespace-nowrap">{{ $p->stock ?? '∞' }}</td>
                     <td class="p-3 text-center">{{ $p->is_active ? '✓' : '✗' }}</td>
-                    <td class="p-3 text-center">
-                        <button onclick="document.getElementById('prod-edit-{{ $p->id }}').classList.toggle('hidden')" class="text-brand-amber text-sm font-medium hover:underline">Edit</button>
+                    <td class="p-3 text-center whitespace-nowrap">
+                        <button onclick="document.getElementById('prod-edit-{{ $p->id }}').classList.toggle('hidden')" class="text-brand-amber text-sm font-medium hover:underline min-h-[44px] px-2">Edit</button>
                         <form method="POST" action="{{ route('admin.products.destroy', $p) }}" class="inline" onsubmit="return confirm('Yakin hapus?')">
                             @csrf @method('DELETE')
-                            <button type="submit" class="text-red-400 hover:text-red-600 text-sm font-medium ml-2 hover:underline">Hapus</button>
+                            <button type="submit" class="text-red-400 hover:text-red-600 text-sm font-medium ml-2 hover:underline min-h-[44px] px-2">Hapus</button>
                         </form>
                     </td>
                 </tr>

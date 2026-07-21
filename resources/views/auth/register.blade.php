@@ -29,7 +29,7 @@
         </div>
 
         <div class="flex items-center justify-end mt-6">
-            <x-primary-button>
+            <x-primary-button class="w-full sm:w-auto justify-center">
                 {{ __('Register') }}
             </x-primary-button>
         </div>

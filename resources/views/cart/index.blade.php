@@ -20,20 +20,22 @@
                 @csrf
                 <div class="card overflow-hidden mb-6">
                     @foreach($items as $item)
-                    <div class="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 {{ !$loop->last ? 'border-b border-brand-border' : '' }}" data-price="{{ $item->unit_price }}">
-                        <label class="flex items-center cursor-pointer">
+                    <div class="flex items-center gap-2 p-3 {{ !$loop->last ? 'border-b border-brand-border' : '' }}" data-price="{{ $item->unit_price }}">
+                        <label class="flex items-center cursor-pointer shrink-0">
                             <input type="checkbox" name="selected[]" value="{{ $item->id }}" checked class="cart-check w-4 h-4 text-brand-gold rounded" data-id="{{ $item->id }}">
                         </label>
                         <div class="flex-1 min-w-0">
-                            <p class="font-medium text-brand-ink truncate">{{ $item->name }}</p>
+                            <p class="font-medium text-brand-ink truncate text-sm sm:text-base">{{ $item->name }}</p>
                             <p class="text-xs text-brand-ink-faint font-mono">
                                 @if($item->itemable_type === 'App\Models\Product') PRODUK @else SERVICE @endif
                             </p>
-                            <p class="text-sm font-bold text-brand-gold mt-1 tabular-nums font-mono">Rp{{ number_format($item->unit_price, 0, ',', '.') }}</p>
+                            <p class="text-xs sm:text-sm font-bold text-brand-gold mt-1 tabular-nums font-mono">Rp{{ number_format($item->unit_price, 0, ',', '.') }}</p>
                         </div>
-                        <input type="number" name="qty[{{ $item->id }}]" value="{{ $item->quantity }}" min="0" class="cart-qty w-14 input-field text-center font-mono" data-id="{{ $item->id }}">
-                        <p class="cart-line font-display font-bold text-brand-gold text-sm w-20 text-right tabular-nums font-mono" data-id="{{ $item->id }}">Rp{{ number_format($item->unit_price * $item->quantity, 0, ',', '.') }}</p>
-                        <a href="#" onclick="event.preventDefault(); if(confirm('Hapus item ini?')) document.getElementById('delete-{{ $item->id }}').submit();" class="text-red-500 hover:text-red-700 text-lg font-bold leading-none">&times;</a>
+                        <div class="flex items-center gap-1 shrink-0">
+                            <input type="number" name="qty[{{ $item->id }}]" value="{{ $item->quantity }}" min="0" class="cart-qty w-14 sm:w-20 input-field text-center font-mono text-sm" data-id="{{ $item->id }}">
+                            <p class="cart-line font-display font-bold text-brand-gold text-xs sm:text-sm w-20 sm:w-24 text-right tabular-nums font-mono" data-id="{{ $item->id }}">Rp{{ number_format($item->unit_price * $item->quantity, 0, ',', '.') }}</p>
+                            <a href="#" onclick="event.preventDefault(); if(confirm('Hapus item ini?')) document.getElementById('delete-{{ $item->id }}').submit();" class="text-red-500 hover:text-red-700 text-lg font-bold leading-none px-1">&times;</a>
+                        </div>
                     </div>
                     @endforeach
                 </div>
@@ -64,23 +66,11 @@
                 </script>
 
                 <div class="card p-6">
-                    <h3 class="font-display font-bold text-lg text-brand-ink uppercase tracking-wide mb-4">Data Pelanggan</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                        <div>
-                            <x-input-label for="customer_name" value="Nama" class="text-brand-ink-faint text-xs uppercase tracking-wider font-display" />
-                            <x-text-input id="customer_name" name="customer_name" required class="w-full input-field" value="{{ old('customer_name', Auth::user()->name) }}" />
-                            <x-input-error :messages="$errors->get('customer_name')" />
-                        </div>
-                        <div>
-                            <x-input-label for="customer_phone" value="No. Telepon" class="text-brand-ink-faint text-xs uppercase tracking-wider font-display" />
-                            <x-text-input id="customer_phone" name="customer_phone" required class="w-full input-field" value="{{ old('customer_phone') }}" />
-                            <x-input-error :messages="$errors->get('customer_phone')" />
-                        </div>
-                    </div>
                     <div class="mb-4">
                         <x-input-label for="notes" value="Catatan" class="text-brand-ink-faint text-xs uppercase tracking-wider font-display" />
                         <textarea id="notes" name="notes" class="input-field" rows="2">{{ old('notes') }}</textarea>
                     </div>
+                    <input type="hidden" name="customer_name" value="{{ Auth::user()->name }}">
                     <button type="submit" class="btn-primary w-full !py-3 font-semibold">Checkout & Bayar</button>
                 </div>
             </form>

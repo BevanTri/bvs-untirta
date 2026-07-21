@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "efc013d7b1ca50dea035fa69d50022c4",
+    "content-hash": "e242ea734474659842c24ab25882c527",
     "packages": [
         {
             "name": "brick/math",
@@ -1058,6 +1058,58 @@
             "time": "2026-07-08T16:19:22+00:00"
         },
         {
+            "name": "ipaymu/ipaymu-php-api",
+            "version": "v3.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ipaymu/ipaymu-php-api.git",
+                "reference": "d020ee9d83fccfdcdd29e950ff1b7662a743a82e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ipaymu/ipaymu-php-api/zipball/d020ee9d83fccfdcdd29e950ff1b7662a743a82e",
+                "reference": "d020ee9d83fccfdcdd29e950ff1b7662a743a82e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "fzaninotto/faker": "^1.9@dev",
+                "mockery/mockery": "^1.2.3",
+                "phpunit/phpunit": "5.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "iPaymu\\": "iPaymu/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "iPaymu X Dev Fintech",
+                    "email": "support@ipaymu.com"
+                }
+            ],
+            "description": "iPaymu PHP API Package Library",
+            "homepage": "https://github.com/ipaymu/ipaymu-php-api",
+            "keywords": [
+                "indonesia",
+                "ipaymu",
+                "payment gateway"
+            ],
+            "support": {
+                "issues": "https://github.com/ipaymu/ipaymu-php-api/issues",
+                "source": "https://github.com/ipaymu/ipaymu-php-api/tree/v3.0.2"
+            },
+            "time": "2021-11-27T17:29:36+00:00"
+        },
+        {
             "name": "laravel/framework",
             "version": "v13.20.0",
             "source": {
@@ -1342,6 +1394,69 @@
                 "source": "https://github.com/laravel/prompts/tree/v0.3.21"
             },
             "time": "2026-06-26T00:11:25+00:00"
+        },
+        {
+            "name": "laravel/sanctum",
+            "version": "v4.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/sanctum.git",
+                "reference": "2a9bccc18e9907808e0018dd15fa643937886b1e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/sanctum/zipball/2a9bccc18e9907808e0018dd15fa643937886b1e",
+                "reference": "2a9bccc18e9907808e0018dd15fa643937886b1e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "illuminate/console": "^11.0|^12.0|^13.0",
+                "illuminate/contracts": "^11.0|^12.0|^13.0",
+                "illuminate/database": "^11.0|^12.0|^13.0",
+                "illuminate/support": "^11.0|^12.0|^13.0",
+                "php": "^8.2",
+                "symfony/console": "^7.0|^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.6",
+                "orchestra/testbench": "^9.15|^10.8|^11.0",
+                "phpstan/phpstan": "^1.10"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Sanctum\\SanctumServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Sanctum\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Laravel Sanctum provides a featherweight authentication system for SPAs and simple APIs.",
+            "keywords": [
+                "auth",
+                "laravel",
+                "sanctum"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/sanctum/issues",
+                "source": "https://github.com/laravel/sanctum"
+            },
+            "time": "2026-04-30T11:46:25+00:00"
         },
         {
             "name": "laravel/serializable-closure",

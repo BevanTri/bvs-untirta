@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white/95 backdrop-blur border-b border-brand-border sticky top-0 z-40">
+<nav class="bg-white/95 backdrop-blur border-b border-brand-border sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-14 items-center">
             <a href="{{ url('/') }}" class="flex items-center gap-2.5">
@@ -31,29 +31,7 @@
                         </form>
                     </div>
                 </div>
-                <button @click="open = ! open" class="sm:hidden p-2 rounded-lg text-brand-ink-muted hover:text-brand-blue hover:bg-brand-warm-2 transition-colors">
-                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
             </div>
-        </div>
-    </div>
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden border-t border-brand-border">
-        <div class="pt-2 pb-3 space-y-1 px-4 bg-white">
-            <a href="{{ route('home') }}" class="block px-3 py-2 text-sm text-brand-ink-muted hover:text-brand-blue rounded-lg hover:bg-brand-warm-2 transition-colors font-display uppercase tracking-wide">Beranda</a>
-            <a href="{{ route('products') }}" class="block px-3 py-2 text-sm text-brand-ink-muted hover:text-brand-blue rounded-lg hover:bg-brand-warm-2 transition-colors font-display uppercase tracking-wide">Produk</a>
-            <a href="{{ route('services') }}" class="block px-3 py-2 text-sm text-brand-ink-muted hover:text-brand-blue rounded-lg hover:bg-brand-warm-2 transition-colors font-display uppercase tracking-wide">Service</a>
-            <a href="{{ route('orders.history') }}" class="block px-3 py-2 text-sm text-brand-ink-muted hover:text-brand-blue rounded-lg hover:bg-brand-warm-2 transition-colors font-display uppercase tracking-wide">Pesanan</a>
-            @if(Auth::user()?->is_admin)
-            <a href="{{ route('admin.dashboard') }}" class="block px-3 py-2 text-sm text-brand-ink-muted hover:text-brand-blue rounded-lg hover:bg-brand-warm-2 transition-colors font-display uppercase tracking-wide">Admin</a>
-            @endif
-            <a href="{{ route('profile.edit') }}" class="block px-3 py-2 text-sm text-brand-ink-muted hover:text-brand-blue rounded-lg hover:bg-brand-warm-2 transition-colors font-display uppercase tracking-wide">Profile</a>
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="block w-full text-left px-3 py-2 text-sm text-brand-ink-muted hover:text-brand-blue rounded-lg hover:bg-brand-warm-2 transition-colors font-display uppercase tracking-wide">Log Out</button>
-            </form>
         </div>
     </div>
 </nav>

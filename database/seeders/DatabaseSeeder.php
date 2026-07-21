@@ -27,6 +27,10 @@ class DatabaseSeeder extends Seeder
             ServiceSeeder::class,
             BrandPartnerSeeder::class,
             ProductSeeder::class,
+            CustomerSeeder::class,
+            VehicleSeeder::class,
+            MechanicSeeder::class,
+            RepairOrderSeeder::class,
         ]);
     }
 }

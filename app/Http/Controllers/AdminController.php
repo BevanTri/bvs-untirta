@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\BrandPartner;
 use App\Models\Category;
+use App\Models\Customer;
+use App\Models\Mechanic;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\RepairOrder;
 use App\Models\Service;
+use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -15,6 +19,15 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
+        $hari = ['Sun' => 'Min', 'Mon' => 'Sen', 'Tue' => 'Sel', 'Wed' => 'Rab', 'Thu' => 'Kam', 'Fri' => 'Jum', 'Sat' => 'Sab'];
+        $chartData = collect(range(0, 6))->map(function ($i) use ($hari) {
+            $date = now()->startOfWeek()->addDays($i);
+            $total = RepairOrder::whereDate('created_at', $date)->sum('total') + Order::whereDate('created_at', $date)->sum('total');
+            $count = RepairOrder::whereDate('created_at', $date)->count() + Order::whereDate('created_at', $date)->count();
+            return ['label' => $hari[$date->format('D')] ?? $date->format('D'), 'total' => $total, 'count' => $count];
+        });
+        $chartMax = $chartData->max('total') ?: 1;
+
         return view('admin.dashboard', [
             'totalOrders' => Order::count(),
             'pendingOrders' => Order::where('status', 'pending')->count(),
@@ -22,8 +35,14 @@ class AdminController extends Controller
             'completedOrders' => Order::where('status', 'completed')->count(),
             'cancelledOrders' => Order::where('status', 'cancelled')->count(),
             'paidOrders' => Order::where('payment_status', 'paid')->count(),
-            'totalRevenue' => Order::sum('total'),
+            'totalRevenue' => Order::sum('total') + RepairOrder::sum('total'),
             'recentOrders' => Order::with('user', 'items')->latest()->take(10)->get(),
+            'totalCustomers' => Customer::count(),
+            'totalVehicles' => Vehicle::count(),
+            'totalRepairOrders' => RepairOrder::count(),
+            'todayRepairs' => RepairOrder::whereDate('date', today())->count(),
+            'chartData' => $chartData,
+            'chartMax' => $chartMax,
         ]);
     }
 
@@ -258,15 +277,15 @@ class AdminController extends Controller
 
     public function syncImages()
     {
-        $products = Product::where('image', 'like', 'products/p_%')->orWhere('image', 'like', 'products/placeholder_%')->get();
         $count = 0;
-        foreach ($products as $p) {
-            $ext = 'png';
-            $newName = 'products/' . $p->id . '.' . $ext;
-            $fullPath = storage_path('app/public/' . $newName);
-            if (file_exists($fullPath)) {
-                $p->update(['image' => $newName]);
-                $count++;
+        foreach (Product::all() as $p) {
+            foreach (['png', 'jpg', 'jpeg', 'webp'] as $ext) {
+                $path = storage_path("app/public/products/{$p->id}.{$ext}");
+                if (file_exists($path)) {
+                    $p->update(['image' => "products/{$p->id}.{$ext}"]);
+                    $count++;
+                    break;
+                }
             }
         }
         return response("Sync $count images sukses!", 200);
@@ -324,8 +343,12 @@ class AdminController extends Controller
 
     public function runArtisan(Request $r)
     {
+        if ($r->isMethod('get')) {
+            return view('admin.artisan');
+        }
+
         $cmd = $r->input('cmd', 'migrate');
-        $allowed = ['migrate', 'migrate:fresh', 'db:seed', 'db:seed --class=DatabaseSeeder'];
+        $allowed = ['migrate', 'migrate:fresh', 'db:seed', 'db:seed --class=DatabaseSeeder', 'db:seed --class=CustomerSeeder', 'db:seed --class=VehicleSeeder', 'db:seed --class=MechanicSeeder', 'db:seed --class=RepairOrderSeeder', 'db:seed --class=CategorySeeder', 'db:seed --class=ServiceSeeder', 'db:seed --class=BrandPartnerSeeder', 'db:seed --class=ProductSeeder'];
         if (!in_array($cmd, $allowed)) {
             return response('Command not allowed', 403);
         }

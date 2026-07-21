@@ -39,9 +39,9 @@
                 @csrf
                 <input type="hidden" name="type" value="product">
                 <input type="hidden" name="id" value="{{ $product->id }}">
-                <input type="number" name="quantity" value="1" min="1" class="w-16 input-field text-center font-mono">
-                <button type="submit" class="btn-primary flex-1">+ Keranjang</button>
-                <button type="submit" name="buy_now" value="1" class="btn-outline">Beli Sekarang</button>
+                <input type="number" name="quantity" value="1" min="1" class="w-20 input-field text-center font-mono">
+                <button type="submit" class="btn-primary flex-1 min-h-[44px]">+ Keranjang</button>
+                <button type="submit" name="buy_now" value="1" class="btn-outline min-h-[44px]">Beli Sekarang</button>
             </form>
             @else
             <a href="{{ route('login') }}" class="btn-primary w-full text-center mt-6">Login untuk Membeli</a>

@@ -32,12 +32,12 @@
     <div class="max-w-7xl mx-auto px-4 py-10">
         <div class="grid {{ $brands->count() ? 'grid-cols-2' : 'grid-cols-1' }} gap-6 text-center max-w-md mx-auto">
             <div class="{{ $brands->count() ? 'border-r border-brand-border' : '' }}">
-                <div class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-brand-blue leading-none break-all">{{ $totalProducts }}+</div>
+                <div class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-brand-blue leading-none break-words">{{ $totalProducts }}+</div>
                 <div class="text-brand-ink-faint text-xs uppercase tracking-[0.15em] mt-2 font-display">Produk</div>
             </div>
             @if($brands->count())
             <div>
-                <div class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-brand-blue leading-none break-all">{{ $brands->count() }}</div>
+                <div class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-brand-blue leading-none break-words">{{ $brands->count() }}</div>
                 <div class="text-brand-ink-faint text-xs uppercase tracking-[0.15em] mt-2 font-display">Brand</div>
             </div>
             @endif
@@ -141,24 +141,7 @@
             <p class="text-sm text-brand-ink-muted mt-2 leading-relaxed">{{ $service->description }}</p>
             <p class="text-2xl font-bold mt-4 text-brand-gold tabular-nums font-mono">Rp{{ number_format($service->price, 0, ',', '.') }}</p>
             @auth
-            <form action="{{ route('cart.add') }}" method="POST" class="mt-4">
-                @csrf
-                <input type="hidden" name="type" value="service">
-                <input type="hidden" name="id" value="{{ $service->id }}">
-                <input type="hidden" name="quantity" value="1">
-                @if($service->name === 'Ganti Oli')
-                <select name="service_product_id" class="w-full input-field mb-3">
-                    <option value="">Pilih Oli (opsional)</option>
-                    @foreach($oliProducts as $p)
-                    <option value="{{ $p->id }}">{{ $p->name }} - Rp{{ number_format($p->price, 0, ',', '.') }}</option>
-                    @endforeach
-                </select>
-                @endif
-                <div class="flex items-center gap-2">
-                    <button type="submit" class="btn-primary flex-1 text-sm">+ Keranjang</button>
-                    <button type="submit" name="buy_now" value="1" class="btn-outline text-sm">Beli</button>
-                </div>
-            </form>
+            <a href="{{ route('repairs.create', ['service' => $service->id]) }}" class="mt-4 block text-center btn-primary text-sm">Pesan</a>
             @else
             <a href="{{ route('login') }}" class="mt-4 block text-center text-sm text-brand-ink-muted border-2 border-brand-border py-3 uppercase tracking-wider font-display rounded-lg hover:border-brand-gold hover:text-brand-gold transition-colors">Login untuk Memesan</a>
             @endauth
@@ -172,7 +155,7 @@
     <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-8">
             <span class="section-label">Lokasi</span>
-            <h2 class="section-heading">Temukan Kami</h2>
+            <h2 class="font-display text-3xl md:text-4xl font-bold tracking-wide text-brand-ink">Temukan Kami</h2>
             <p class="text-brand-ink-muted text-sm mt-2">Kampus FKIP Untirta, Ciwaru — Cipocok Jaya, Kota Serang</p>
         </div>
         <div class="flex justify-center">

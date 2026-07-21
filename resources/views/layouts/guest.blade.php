@@ -10,7 +10,7 @@
     <link href="https://fonts.bunny.net/css?family=oswald:500,600,700&display=swap" rel="stylesheet" />
     <link href="https://fonts.bunny.net/css?family=jetbrains-mono:400,500,700&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/webp" href="{{ asset('images/logo-untirta.webp') }}">
-    <link rel="stylesheet" href="{{ asset('build/assets/app-BZ5sQYsh.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/assets/app-DhU0CEjf.css') }}">
     <script type="module" src="{{ asset('build/assets/app-B9qO1Jfl.js') }}"></script>
 </head>
 <body class="font-sans antialiased bg-brand-navy min-h-screen flex flex-col overflow-x-hidden">
@@ -20,7 +20,7 @@
             <span class="font-display font-bold text-white text-2xl tracking-[0.05em] uppercase">BVS Untirta</span>
         </a>
         <div class="w-full sm:max-w-md">
-            <div class="bg-white rounded-xl shadow-lg p-8">
+            <div class="bg-white rounded-xl shadow-lg p-6 sm:p-8">
                 {{ $slot }}
             </div>
         </div>

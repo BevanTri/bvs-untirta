@@ -16,7 +16,6 @@ class PageController extends Controller
             'products' => Product::where('is_active', true)->with('category')->latest()->take(8)->get(),
             'totalProducts' => Product::where('is_active', true)->count(),
             'services' => Service::where('is_active', true)->get(),
-            'oliProducts' => Product::where('is_active', true)->where('category_id', 4)->get(),
             'brands' => BrandPartner::where('is_active', true)->get(),
         ]);
     }
@@ -36,7 +35,6 @@ class PageController extends Controller
     public function services()
     {
         $services = Service::where('is_active', true)->get();
-        $oliProducts = Product::where('is_active', true)->where('category_id', 4)->get();
-        return view('pages.services', compact('services', 'oliProducts'));
+        return view('pages.services', compact('services'));
     }
 }

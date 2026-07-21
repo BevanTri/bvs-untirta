@@ -27,24 +27,7 @@
             <p class="text-sm text-brand-ink-muted mt-2 leading-relaxed">{{ $service->description }}</p>
             <p class="text-2xl font-bold mt-4 text-brand-gold tabular-nums font-mono">Rp{{ number_format($service->price, 0, ',', '.') }}</p>
             @auth
-            <form action="{{ route('cart.add') }}" method="POST" class="mt-4">
-                @csrf
-                <input type="hidden" name="type" value="service">
-                <input type="hidden" name="id" value="{{ $service->id }}">
-                <input type="hidden" name="quantity" value="1">
-                @if($service->name === 'Ganti Oli')
-                <select name="service_product_id" class="w-full input-field mb-3">
-                    <option value="">Pilih Oli (opsional)</option>
-                    @foreach($oliProducts as $p)
-                    <option value="{{ $p->id }}">{{ $p->name }} - Rp{{ number_format($p->price, 0, ',', '.') }}</option>
-                    @endforeach
-                </select>
-                @endif
-                <div class="flex items-center gap-2">
-                    <button type="submit" class="btn-primary flex-1 text-sm">+ Keranjang</button>
-                    <button type="submit" name="buy_now" value="1" class="btn-outline text-sm">Beli</button>
-                </div>
-            </form>
+            <a href="{{ route('repairs.create', ['service' => $service->id]) }}" class="mt-4 block text-center btn-primary text-sm">Pesan</a>
             @else
             <a href="{{ route('login') }}" class="mt-4 block text-center text-sm text-brand-ink-muted border-2 border-brand-border py-3 uppercase tracking-wider font-display rounded-lg hover:border-brand-gold hover:text-brand-gold transition-colors">Login untuk Memesan</a>
             @endauth

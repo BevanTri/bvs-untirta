@@ -117,15 +117,7 @@
     </style>
 
     <script>
-        const products = @json($products->map(fn($p) => [
-            'id' => $p->id,
-            'name' => $p->name,
-            'price' => $p->price,
-            'price_fmt' => 'Rp' . number_format($p->price, 0, ',', '.'),
-            'stock' => $p->stock,
-            'image' => $p->image ? asset('uploads/' . $p->image) : null,
-            'category' => $p->category->name ?? '',
-        ]));
+        const products = {!! json_encode($productsJson) !!};
 
         let selectedItems = [];
         let itemCounter = 0;

@@ -33,11 +33,22 @@ class RepairOrderController extends Controller
 
     public function create()
     {
+        $products = Product::with('category')->where('stock', '>', 0)->orWhereNull('stock')->get();
+        $productsJson = $products->map(fn($p) => [
+            'id' => $p->id,
+            'name' => $p->name,
+            'price' => (int) $p->price,
+            'price_fmt' => 'Rp' . number_format($p->price, 0, ',', '.'),
+            'stock' => $p->stock,
+            'image' => $p->image ? asset('uploads/' . $p->image) : null,
+            'category' => $p->category->name ?? '',
+        ])->values();
+
         return view('admin.repair-orders-form', [
             'customers' => Customer::all(),
             'vehicles' => Vehicle::all(),
             'mechanics' => Mechanic::all(),
-            'products' => Product::with('category')->where('stock', '>', 0)->orWhereNull('stock')->get(),
+            'productsJson' => $productsJson,
             'categories' => \App\Models\Category::where('is_active', true)->get(),
         ]);
     }
@@ -99,12 +110,23 @@ class RepairOrderController extends Controller
 
     public function edit(RepairOrder $repair_order)
     {
+        $products = Product::with('category')->where('stock', '>', 0)->orWhereNull('stock')->get();
+        $productsJson = $products->map(fn($p) => [
+            'id' => $p->id,
+            'name' => $p->name,
+            'price' => (int) $p->price,
+            'price_fmt' => 'Rp' . number_format($p->price, 0, ',', '.'),
+            'stock' => $p->stock,
+            'image' => $p->image ? asset('uploads/' . $p->image) : null,
+            'category' => $p->category->name ?? '',
+        ])->values();
+
         return view('admin.repair-orders-form', [
             'order' => $repair_order->load('items'),
             'customers' => Customer::all(),
             'vehicles' => Vehicle::all(),
             'mechanics' => Mechanic::all(),
-            'products' => Product::with('category')->where('stock', '>', 0)->orWhereNull('stock')->get(),
+            'productsJson' => $productsJson,
             'categories' => \App\Models\Category::where('is_active', true)->get(),
         ]);
     }

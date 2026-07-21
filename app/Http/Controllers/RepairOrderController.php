@@ -34,7 +34,18 @@ class RepairOrderController extends Controller
         }
         $customer = \App\Models\Customer::where('email', Auth::user()->email)->first();
         $vehicles = $customer ? $customer->vehicles : collect();
-        return view('repairs.create', compact('mechanics', 'services', 'products', 'categories', 'selectedService', 'vehicles', 'customer'));
+
+        $productsJson = $products->map(fn($p) => [
+            'id' => $p->id,
+            'name' => $p->name,
+            'price' => (int) $p->price,
+            'price_fmt' => 'Rp' . number_format($p->price, 0, ',', '.'),
+            'stock' => $p->stock,
+            'image' => $p->image ? asset('uploads/' . $p->image) : null,
+            'category' => $p->category->name ?? '',
+        ])->values();
+
+        return view('repairs.create', compact('mechanics', 'services', 'productsJson', 'categories', 'selectedService', 'vehicles', 'customer'));
     }
 
     public function store(Request $r)

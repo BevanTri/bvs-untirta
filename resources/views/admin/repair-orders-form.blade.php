@@ -32,7 +32,7 @@
             ];
         @endphp
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
             <div>
                 <x-bottom-sheet-picker name="customer_id" label="Pelanggan" placeholder="Pilih Pelanggan" required :selected="isset($order) ? (string)$order->customer_id : ''" :options="$customerOptions" />
             </div>
@@ -48,17 +48,17 @@
             </div>
         </div>
 
-        <div class="mb-4">
+        <div class="mb-3">
             <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">Keluhan</label>
             <textarea name="complaint" class="input-field w-full" rows="3" required>{{ $order->complaint ?? '' }}</textarea>
         </div>
 
-        <div class="mb-4">
+        <div class="mb-3">
             <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">Tindakan</label>
             <textarea name="action" class="input-field w-full" rows="3">{{ $order->action ?? '' }}</textarea>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-3">
             <div>
                 <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">Biaya Jasa</label>
                 <input type="number" name="service_fee" id="service-fee" value="{{ $order->service_fee ?? 0 }}" class="input-field w-full" min="0" step="0.01" required oninput="updateSummary()">
@@ -68,7 +68,7 @@
             </div>
         </div>
 
-        <div class="mb-4">
+        <div class="mb-3">
             <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">Sparepart Dipakai</label>
             <div id="items-container">
                 @if(isset($order) && $order->items->count())
@@ -88,7 +88,7 @@
             <button type="button" onclick="openBottomSheet()" class="btn-outline mt-2 !border-brand-steel/30 !text-brand-steel text-sm w-full justify-center">+ Pilih Sparepart</button>
         </div>
 
-        <div id="payment-summary" class="border-t border-brand-border pt-4 mb-4">
+        <div id="payment-summary" class="border-t border-brand-border pt-3 mb-3">
             <p class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-3">Ringkasan Pembayaran</p>
             <div class="bg-brand-warm rounded-xl p-4 space-y-2">
                 <div class="flex justify-between text-sm">
@@ -112,10 +112,10 @@
         </div>
     </form>
 
-    <div id="bottom-sheet-overlay" class="fixed inset-0 bg-black/50 z-50" onclick="closeBottomSheet()"></div>
-    <div id="bottom-sheet" class="fixed bottom-0 left-0 right-0 z-50 bg-white rounded-t-2xl shadow-2xl flex flex-col">
+    <div id="bottom-sheet-overlay" class="fixed inset-0 bg-black/50 z-50" onclick="if(event.target===this)closeBottomSheet()">
+    <div id="bottom-sheet" class="bg-white rounded-t-2xl shadow-2xl flex flex-col" onclick="event.stopPropagation();">
         <div class="shrink-0 px-4 pt-3 pb-2 border-b border-brand-border/50">
-            <div class="flex justify-center mb-2"><div class="w-10 h-1 rounded-full bg-brand-border"></div></div>
+            <div class="flex justify-center mb-2 md:hidden"><div class="w-10 h-1 rounded-full bg-brand-border"></div></div>
             <div class="flex items-center justify-between mb-2">
                 <h3 class="font-display font-bold text-brand-ink text-lg">Pilih Sparepart</h3>
                 <button type="button" onclick="closeBottomSheet()" class="text-brand-ink-muted hover:text-brand-ink p-1">&times;</button>
@@ -135,11 +135,12 @@
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3" id="product-list"></div>
         </div>
     </div>
+    </div>
 
     <style>
         #bottom-sheet-overlay { transition: opacity 250ms ease; opacity: 0; pointer-events: none; }
         #bottom-sheet-overlay.show { opacity: 1; pointer-events: auto; }
-        #bottom-sheet { transition: transform 300ms cubic-bezier(0.32, 0.72, 0, 1); transform: translateY(100%); max-height: 90dvh; }
+        #bottom-sheet { position: fixed; bottom: 0; left: 0; right: 0; max-height: 90dvh; transform: translateY(100%); transition: transform 300ms cubic-bezier(0.32, 0.72, 0, 1); }
         #bottom-sheet.show { transform: translateY(0); }
         .cat-filter { background: #F3F4F6; color: #6B7280; border-color: #E5E7EB; }
         .cat-filter.active { background: #0F172A; color: white; border-color: #0F172A; }

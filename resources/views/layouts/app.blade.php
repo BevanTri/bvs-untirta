@@ -63,7 +63,7 @@
 
         @include('layouts.partials.bottom-nav')
 
-        <div id="toast" class="fixed bottom-20 right-4 md:bottom-6 md:right-6 bg-brand-navy border border-brand-navy-2 text-white px-5 py-3 text-sm font-medium z-50 rounded-lg shadow-lg transition-all duration-300 translate-y-4 opacity-0 pointer-events-none">toast</div>
+        <div id="toast" class="fixed bottom-20 right-4 md:bottom-6 md:right-6 bg-brand-navy border border-brand-navy-2 text-white px-5 py-3 text-sm font-medium z-[70] rounded-lg shadow-lg transition-all duration-300 translate-y-4 opacity-0 pointer-events-none">toast</div>
 
         <script>
         (function() {

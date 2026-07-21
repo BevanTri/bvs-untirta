@@ -112,7 +112,7 @@
         </div>
     </form>
 
-    <div id="bottom-sheet-overlay" class="fixed inset-0 bg-black/50 z-50" onclick="if(event.target===this)closeBottomSheet()">
+    <div id="bottom-sheet-overlay" class="fixed inset-0 bg-black/50 z-[60]" onclick="if(event.target===this)closeBottomSheet()">
     <div id="bottom-sheet" class="bg-white rounded-t-2xl shadow-2xl flex flex-col" onclick="event.stopPropagation();">
         <div class="shrink-0 px-4 pt-3 pb-2 border-b border-brand-border/50">
             <div class="flex justify-center mb-2 md:hidden"><div class="w-10 h-1 rounded-full bg-brand-border"></div></div>

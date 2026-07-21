@@ -123,7 +123,7 @@ window.Picker = window.Picker || (function() {
 
     <input type="hidden" name="{{ $name }}" value="{{ $selected }}" class="picker-hidden" {{ $required ? 'required' : '' }}>
 
-    <div id="picker-overlay-{{ $pickerId }}" class="picker-overlay fixed inset-0 bg-black/50 z-50" data-picker="{{ $pickerId }}">
+    <div id="picker-overlay-{{ $pickerId }}" class="picker-overlay fixed inset-0 bg-black/50 z-[60]" data-picker="{{ $pickerId }}">
         <div id="picker-sheet-{{ $pickerId }}" class="picker-sheet bg-white rounded-t-2xl shadow-2xl flex flex-col" onclick="event.stopPropagation();">
             <div class="shrink-0 px-4 pt-3 pb-2 border-b border-brand-border/50">
                 <div class="flex justify-center mb-2 md:hidden">

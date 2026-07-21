@@ -24,4 +24,9 @@ class Product extends Model
     {
         return $this->morphMany(OrderItem::class, 'itemable');
     }
+
+    public function scopeAvailable($q)
+    {
+        return $q->where(fn($q) => $q->where('stock', '>', 0)->orWhereNull('stock'));
+    }
 }

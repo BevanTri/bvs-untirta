@@ -140,7 +140,7 @@ window.Picker = window.Picker || (function() {
                 </div>
                 @endif
             </div>
-            <div class="flex-1 overflow-y-auto px-2 pb-[calc(80px+env(safe-area-inset-bottom,0px))]">
+            <div class="flex-1 overflow-y-auto p-3 sm:p-4 pb-[calc(88px+env(safe-area-inset-bottom,0px))]" style="overscroll-behavior:contain">
                 @foreach($options as $opt)
                 <button type="button" class="picker-option flex items-center justify-between w-full px-3 py-3 text-sm text-left rounded-xl hover:bg-brand-warm transition-colors duration-150 {{ $selected == $opt['value'] ? 'selected bg-brand-warm' : '' }}"
                     data-value="{{ $opt['value'] }}" data-label="{{ $opt['label'] }}"

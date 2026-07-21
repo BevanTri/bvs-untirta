@@ -131,7 +131,7 @@
                 <input type="text" id="product-search" placeholder="Cari sparepart..." class="w-full pl-9 pr-3 py-2 text-sm border border-brand-border rounded-lg focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/30 outline-none" oninput="filterProducts()">
             </div>
         </div>
-        <div class="flex-1 overflow-y-auto p-3 sm:p-4 pb-[calc(80px+env(safe-area-inset-bottom,0px))]" id="product-grid">
+        <div class="flex-1 overflow-y-auto p-3 sm:p-4 pb-[calc(88px+env(safe-area-inset-bottom,0px))]" id="product-grid" style="overscroll-behavior:contain">
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3" id="product-list"></div>
         </div>
     </div>

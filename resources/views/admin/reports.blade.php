@@ -32,7 +32,7 @@
         </div>
     </div>
 
-    <div class="flex flex-col gap-8">
+    <div class="flex flex-col gap-16">
         <div class="card">
             <div class="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-brand-border bg-brand-warm/30">
                 <h3 class="font-display font-bold text-brand-ink uppercase text-sm tracking-wide">Pesanan Produk</h3>
@@ -59,6 +59,11 @@
                 </tbody>
             </table>
             @endif
+        </div>
+
+        <div class="relative">
+            <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-brand-border"></div></div>
+            <div class="relative flex justify-center"><span class="bg-brand-warm px-4 text-xs font-semibold text-brand-ink-muted uppercase tracking-widest">Servis Workshop</span></div>
         </div>
 
         <div class="card">

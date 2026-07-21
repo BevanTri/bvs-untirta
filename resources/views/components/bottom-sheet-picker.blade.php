@@ -17,25 +17,39 @@
 
 @once
 <style>
-.picker-overlay { transition: opacity 250ms ease; }
-.picker-sheet { transition: transform 300ms cubic-bezier(0.32, 0.72, 0, 1); }
-.picker-overlay.show { display: block; opacity: 1; }
-.picker-overlay:not(.show) { opacity: 0; }
+.picker-overlay { transition: opacity 250ms ease; opacity: 0; pointer-events: none; }
+.picker-overlay.show { opacity: 1; pointer-events: auto; }
+.picker-sheet { transition: transform 300ms cubic-bezier(0.32, 0.72, 0, 1); transform: translateY(100%); max-height: 90dvh; }
 .picker-sheet.show { transform: translateY(0); }
 .picker-option:active { background: #F3F4F6; }
 .picker-search::placeholder { color: #9CA3AF; }
+@media (min-width: 768px) {
+  .picker-overlay { display: flex; align-items: center; justify-content: center; }
+  .picker-sheet { position: relative !important; bottom: auto !important; left: auto !important; right: auto !important; transform: none !important; width: 100%; max-width: 560px; max-height: 80vh; margin: 0 16px; border-radius: 16px; opacity: 0; transition: opacity 250ms ease; }
+  .picker-sheet.show { opacity: 1; }
+}
 </style>
 <script>
 window.Picker = window.Picker || (function() {
     function open(id) {
         document.getElementById('picker-overlay-'+id).classList.add('show');
         document.getElementById('picker-sheet-'+id).classList.add('show');
+        document.body.dataset.scrollY = window.scrollY;
         document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
+        document.body.style.top = '-' + window.scrollY + 'px';
     }
     function close(id) {
+        var sy = parseFloat(document.body.dataset.scrollY || '0');
         document.getElementById('picker-overlay-'+id).classList.remove('show');
         document.getElementById('picker-sheet-'+id).classList.remove('show');
         document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+        document.body.style.top = '';
+        window.scrollTo(0, sy);
+        delete document.body.dataset.scrollY;
     }
     function select(id, btn) {
         var value = btn.dataset.value;
@@ -110,9 +124,9 @@ window.Picker = window.Picker || (function() {
 
     <input type="hidden" name="{{ $name }}" value="{{ $selected }}" class="picker-hidden" {{ $required ? 'required' : '' }}>
 
-    <div id="picker-overlay-{{ $pickerId }}" class="picker-overlay fixed inset-0 bg-black/50 z-50 hidden" data-picker="{{ $pickerId }}"></div>
+    <div id="picker-overlay-{{ $pickerId }}" class="picker-overlay fixed inset-0 bg-black/50 z-50" data-picker="{{ $pickerId }}"></div>
 
-    <div id="picker-sheet-{{ $pickerId }}" class="picker-sheet fixed bottom-0 left-0 right-0 z-50 bg-white rounded-t-2xl shadow-2xl translate-y-full max-h-[75dvh] flex flex-col" data-picker="{{ $pickerId }}">
+    <div id="picker-sheet-{{ $pickerId }}" class="picker-sheet fixed bottom-0 left-0 right-0 z-50 bg-white rounded-t-2xl shadow-2xl flex flex-col" data-picker="{{ $pickerId }}">
         <div class="shrink-0 px-4 pt-3 pb-2 border-b border-brand-border/50">
             <div class="flex justify-center mb-2">
                 <div class="w-10 h-1 rounded-full bg-brand-border"></div>

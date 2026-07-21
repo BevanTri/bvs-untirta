@@ -105,8 +105,8 @@
         </form>
     </div>
 
-    <div id="bottom-sheet-overlay" class="fixed inset-0 bg-black/50 z-50 hidden transition-opacity duration-300" onclick="closeBottomSheet()"></div>
-    <div id="bottom-sheet" class="fixed bottom-0 left-0 right-0 z-50 bg-white rounded-t-2xl shadow-2xl translate-y-full transition-transform duration-300 max-h-[75dvh] flex flex-col" style="will-change: transform;">
+    <div id="bottom-sheet-overlay" class="fixed inset-0 bg-black/50 z-50" onclick="closeBottomSheet()"></div>
+    <div id="bottom-sheet" class="fixed bottom-0 left-0 right-0 z-50 bg-white rounded-t-2xl shadow-2xl flex flex-col">
         <div class="shrink-0 px-4 pt-3 pb-2 border-b border-brand-border/50">
             <div class="flex justify-center mb-2"><div class="w-10 h-1 rounded-full bg-brand-border"></div></div>
             <div class="flex items-center justify-between mb-2">
@@ -130,7 +130,9 @@
     </div>
 
     <style>
-        #bottom-sheet-overlay.show { display: block; }
+        #bottom-sheet-overlay { transition: opacity 250ms ease; opacity: 0; pointer-events: none; }
+        #bottom-sheet-overlay.show { opacity: 1; pointer-events: auto; }
+        #bottom-sheet { transition: transform 300ms cubic-bezier(0.32, 0.72, 0, 1); transform: translateY(100%); max-height: 90dvh; }
         #bottom-sheet.show { transform: translateY(0); }
         .cat-filter { background: #F3F4F6; color: #6B7280; border-color: #E5E7EB; }
         .cat-filter.active { background: #0F172A; color: white; border-color: #0F172A; }
@@ -139,6 +141,11 @@
         #items-container .selected-tag { display: inline-flex; }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        @media (min-width: 768px) {
+            #bottom-sheet-overlay { display: flex; align-items: center; justify-content: center; }
+            #bottom-sheet { position: relative !important; bottom: auto !important; left: auto !important; right: auto !important; transform: none !important; width: 100%; max-width: 560px; max-height: 80vh; margin: 0 16px; border-radius: 16px; opacity: 0; transition: opacity 250ms ease; }
+            #bottom-sheet.show { opacity: 1; }
+        }
     </style>
 
     <script>
@@ -150,14 +157,24 @@
         function openBottomSheet() {
             document.getElementById('bottom-sheet-overlay').classList.add('show');
             document.getElementById('bottom-sheet').classList.add('show');
+            document.body.dataset.scrollY = window.scrollY;
             document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.width = '100%';
+            document.body.style.top = '-' + window.scrollY + 'px';
             renderProducts();
         }
 
         function closeBottomSheet() {
+            var sy = parseFloat(document.body.dataset.scrollY || '0');
             document.getElementById('bottom-sheet-overlay').classList.remove('show');
             document.getElementById('bottom-sheet').classList.remove('show');
             document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.width = '';
+            document.body.style.top = '';
+            window.scrollTo(0, sy);
+            delete document.body.dataset.scrollY;
         }
 
         function filterProducts() {

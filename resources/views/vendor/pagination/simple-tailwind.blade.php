@@ -1,5 +1,5 @@
 @if ($paginator->hasPages())
-    <nav role="navigation" aria-label="Navigasi Halaman" class="flex items-center justify-center gap-3 sm:gap-4">
+    <nav role="navigation" aria-label="Navigasi Halaman" class="flex items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-12">
         @if ($paginator->onFirstPage())
             <span class="inline-flex items-center px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-medium text-brand-ink-faint bg-brand-warm/70 rounded-full cursor-not-allowed select-none">
                 <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>

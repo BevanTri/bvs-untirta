@@ -32,28 +32,28 @@
         </div>
     </div>
 
-    <div class="space-y-6">
+    <div class="flex flex-col gap-8">
         <div class="card">
-            <div class="flex items-center justify-between p-3 sm:p-4 border-b border-brand-border">
+            <div class="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-brand-border bg-brand-warm/30">
                 <h3 class="font-display font-bold text-brand-ink uppercase text-sm tracking-wide">Pesanan Produk</h3>
-                <span class="text-xs text-brand-ink-muted">{{ $orderCount }} transaksi</span>
+                <span class="text-xs text-brand-ink-muted font-medium">{{ $orderCount }} transaksi</span>
             </div>
             @if($orders->isEmpty())
-            <div class="p-8 text-center text-sm text-brand-ink-muted">Tidak ada pesanan produk di periode ini</div>
+            <div class="py-12 text-center text-sm text-brand-ink-muted">Tidak ada pesanan produk di periode ini</div>
             @else
             <div class="overflow-x-auto"><table class="w-full text-sm">
-                <thead><tr class="border-b bg-brand-warm/70 text-brand-ink-faint text-xs uppercase tracking-widest"><th class="p-2.5 sm:p-3 text-left font-semibold">Invoice</th><th class="p-2.5 sm:p-3 text-left font-semibold hidden sm:table-cell">Customer</th><th class="p-2.5 sm:p-3 text-right font-semibold">Total</th><th class="p-2.5 sm:p-3 text-center font-semibold">Status</th><th class="p-2.5 sm:p-3 text-center font-semibold hidden md:table-cell">Tanggal</th></tr></thead>
+                <thead><tr class="border-b bg-brand-warm/70 text-brand-ink-faint text-xs uppercase tracking-widest"><th class="px-3 sm:px-5 py-3 text-left font-semibold">Invoice</th><th class="px-3 sm:px-5 py-3 text-left font-semibold hidden sm:table-cell">Customer</th><th class="px-3 sm:px-5 py-3 text-right font-semibold">Total</th><th class="px-3 sm:px-5 py-3 text-center font-semibold">Status</th><th class="px-3 sm:px-5 py-3 text-center font-semibold hidden md:table-cell">Tanggal</th></tr></thead>
                 <tbody>
                     @foreach($orders as $o)
-                    <tr class="border-b border-brand-border/40 hover:bg-brand-warm/40 transition-colors">
-                        <td class="p-2.5 sm:p-3 font-mono text-xs whitespace-nowrap">{{ $o->order_number }}</td>
-                        <td class="p-2.5 sm:p-3 hidden sm:table-cell whitespace-nowrap">{{ $o->user->name ?? '-' }}</td>
-                        <td class="p-2.5 sm:p-3 text-right font-medium tabular-nums whitespace-nowrap">Rp{{ number_format($o->total,0,',','.') }}</td>
-                        <td class="p-2.5 sm:p-3 text-center whitespace-nowrap">
+                    <tr class="border-b border-brand-border/30 hover:bg-brand-warm/40 transition-colors">
+                        <td class="px-3 sm:px-5 py-3 font-mono text-xs whitespace-nowrap">{{ $o->order_number }}</td>
+                        <td class="px-3 sm:px-5 py-3 hidden sm:table-cell whitespace-nowrap">{{ $o->user->name ?? '-' }}</td>
+                        <td class="px-3 sm:px-5 py-3 text-right font-medium tabular-nums whitespace-nowrap">Rp{{ number_format($o->total,0,',','.') }}</td>
+                        <td class="px-3 sm:px-5 py-3 text-center whitespace-nowrap">
                             @php $sc = $o->status === 'completed' ? 'bg-green-100 text-green-700' : ($o->status === 'cancelled' ? 'bg-red-100 text-red-600' : 'bg-yellow-100 text-yellow-700') @endphp
                             <span class="inline-block text-[11px] font-semibold px-2 py-0.5 rounded-full {{ $sc }}">{{ $o->status === 'completed' ? 'Selesai' : ($o->status === 'cancelled' ? 'Batal' : ($o->status === 'processing' ? 'Proses' : 'Pending')) }}</span>
                         </td>
-                        <td class="p-2.5 sm:p-3 text-center text-brand-ink-muted text-xs hidden md:table-cell whitespace-nowrap">{{ $o->created_at->format('d/m/Y H:i') }}</td>
+                        <td class="px-3 sm:px-5 py-3 text-center text-brand-ink-muted text-xs hidden md:table-cell whitespace-nowrap">{{ $o->created_at->format('d/m/Y H:i') }}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -62,27 +62,27 @@
         </div>
 
         <div class="card">
-            <div class="flex items-center justify-between p-3 sm:p-4 border-b border-brand-border">
+            <div class="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-brand-border bg-brand-warm/30">
                 <h3 class="font-display font-bold text-brand-ink uppercase text-sm tracking-wide">Servis Workshop</h3>
-                <span class="text-xs text-brand-ink-muted">{{ $repairCount }} transaksi</span>
+                <span class="text-xs text-brand-ink-muted font-medium">{{ $repairCount }} transaksi</span>
             </div>
             @if($repairs->isEmpty())
-            <div class="p-8 text-center text-sm text-brand-ink-muted">Tidak ada servis di periode ini</div>
+            <div class="py-12 text-center text-sm text-brand-ink-muted">Tidak ada servis di periode ini</div>
             @else
             <div class="overflow-x-auto"><table class="w-full text-sm">
-                <thead><tr class="border-b bg-brand-warm/70 text-brand-ink-faint text-xs uppercase tracking-widest"><th class="p-2.5 sm:p-3 text-left font-semibold">No. Servis</th><th class="p-2.5 sm:p-3 text-left font-semibold">Pelanggan</th><th class="p-2.5 sm:p-3 text-left font-semibold hidden sm:table-cell">Kendaraan</th><th class="p-2.5 sm:p-3 text-right font-semibold">Total</th><th class="p-2.5 sm:p-3 text-center font-semibold">Status</th><th class="p-2.5 sm:p-3 text-center font-semibold hidden md:table-cell">Tanggal</th></tr></thead>
+                <thead><tr class="border-b bg-brand-warm/70 text-brand-ink-faint text-xs uppercase tracking-widest"><th class="px-3 sm:px-5 py-3 text-left font-semibold">No. Servis</th><th class="px-3 sm:px-5 py-3 text-left font-semibold">Pelanggan</th><th class="px-3 sm:px-5 py-3 text-left font-semibold hidden sm:table-cell">Kendaraan</th><th class="px-3 sm:px-5 py-3 text-right font-semibold">Total</th><th class="px-3 sm:px-5 py-3 text-center font-semibold">Status</th><th class="px-3 sm:px-5 py-3 text-center font-semibold hidden md:table-cell">Tanggal</th></tr></thead>
                 <tbody>
                     @foreach($repairs as $r)
-                    <tr class="border-b border-brand-border/40 hover:bg-brand-warm/40 transition-colors">
-                        <td class="p-2.5 sm:p-3 font-mono text-xs whitespace-nowrap">{{ $r->order_number }}</td>
-                        <td class="p-2.5 sm:p-3 whitespace-nowrap">{{ $r->customer->name }}</td>
-                        <td class="p-2.5 sm:p-3 hidden sm:table-cell text-brand-ink-muted text-xs whitespace-nowrap">{{ $r->vehicle->plate_number }} ({{ $r->vehicle->brand }})</td>
-                        <td class="p-2.5 sm:p-3 text-right font-medium tabular-nums whitespace-nowrap">Rp{{ number_format($r->total,0,',','.') }}</td>
-                        <td class="p-2.5 sm:p-3 text-center whitespace-nowrap">
+                    <tr class="border-b border-brand-border/30 hover:bg-brand-warm/40 transition-colors">
+                        <td class="px-3 sm:px-5 py-3 font-mono text-xs whitespace-nowrap">{{ $r->order_number }}</td>
+                        <td class="px-3 sm:px-5 py-3 whitespace-nowrap">{{ $r->customer->name }}</td>
+                        <td class="px-3 sm:px-5 py-3 hidden sm:table-cell text-brand-ink-muted text-xs whitespace-nowrap">{{ $r->vehicle->plate_number }} ({{ $r->vehicle->brand }})</td>
+                        <td class="px-3 sm:px-5 py-3 text-right font-medium tabular-nums whitespace-nowrap">Rp{{ number_format($r->total,0,',','.') }}</td>
+                        <td class="px-3 sm:px-5 py-3 text-center whitespace-nowrap">
                             @php $sc = $r->status === 'selesai' ? 'bg-green-100 text-green-700' : ($r->status === 'dibatalkan' ? 'bg-red-100 text-red-600' : ($r->status === 'proses' ? 'bg-blue-100 text-blue-600' : 'bg-yellow-100 text-yellow-700')) @endphp
                             <span class="inline-block text-[11px] font-semibold px-2 py-0.5 rounded-full {{ $sc }}">{{ ucfirst($r->status) }}</span>
                         </td>
-                        <td class="p-2.5 sm:p-3 text-center text-brand-ink-muted text-xs hidden md:table-cell whitespace-nowrap">{{ $r->created_at->format('d/m/Y') }}</td>
+                        <td class="px-3 sm:px-5 py-3 text-center text-brand-ink-muted text-xs hidden md:table-cell whitespace-nowrap">{{ $r->created_at->format('d/m/Y') }}</td>
                     </tr>
                     @endforeach
                 </tbody>

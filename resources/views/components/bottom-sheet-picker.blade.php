@@ -112,7 +112,7 @@ window.Picker = window.Picker || (function() {
 
     <div id="picker-overlay-{{ $pickerId }}" class="picker-overlay fixed inset-0 bg-black/50 z-50 hidden" data-picker="{{ $pickerId }}"></div>
 
-    <div id="picker-sheet-{{ $pickerId }}" class="picker-sheet fixed bottom-0 left-0 right-0 z-50 bg-white rounded-t-2xl shadow-2xl translate-y-full max-h-[90vh] flex flex-col" data-picker="{{ $pickerId }}">
+    <div id="picker-sheet-{{ $pickerId }}" class="picker-sheet fixed bottom-0 left-0 right-0 z-50 bg-white rounded-t-2xl shadow-2xl translate-y-full max-h-[75dvh] flex flex-col" data-picker="{{ $pickerId }}">
         <div class="shrink-0 px-4 pt-3 pb-2 border-b border-brand-border/50">
             <div class="flex justify-center mb-2">
                 <div class="w-10 h-1 rounded-full bg-brand-border"></div>
@@ -128,7 +128,7 @@ window.Picker = window.Picker || (function() {
             </div>
             @endif
         </div>
-        <div class="flex-1 overflow-y-auto px-2 pb-[calc(64px+env(safe-area-inset-bottom,0px))]">
+        <div class="flex-1 overflow-y-auto px-2 pb-[calc(80px+env(safe-area-inset-bottom,0px))]">
             @foreach($options as $opt)
             <button type="button" class="picker-option flex items-center justify-between w-full px-3 py-3 text-sm text-left rounded-xl hover:bg-brand-warm transition-colors duration-150 {{ $selected == $opt['value'] ? 'selected bg-brand-warm' : '' }}"
                 data-value="{{ $opt['value'] }}" data-label="{{ $opt['label'] }}"

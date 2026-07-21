@@ -5,16 +5,37 @@
         <form method="POST" action="{{ route('repairs.store') }}" class="card p-5">
             @csrf
 
+            @php
+                $serviceOptions = array_merge(
+                    [['value' => '0', 'label' => 'Pilih Service (opsional)', 'data-price' => '0']],
+                    $services->map(fn($s) => [
+                        'value' => (string)$s->id,
+                        'label' => $s->name.' — Rp'.number_format($s->price,0,',','.'),
+                        'data-price' => (string)$s->price,
+                    ])->toArray()
+                );
+                $vehicleOptions = array_merge(
+                    [['value' => '', 'label' => 'Kendaraan Baru']],
+                    $vehicles->map(fn($v) => [
+                        'value' => (string)$v->id,
+                        'label' => $v->plate_number.' — '.$v->brand.' '.$v->model,
+                        'data-plate' => $v->plate_number,
+                        'data-brand' => $v->brand,
+                        'data-model' => $v->model,
+                        'data-year' => (string)$v->year,
+                    ])->toArray()
+                );
+                $mechanicOptions = array_merge(
+                    [['value' => '', 'label' => 'Pilih Mekanik']],
+                    $mechanics->map(fn($m) => [
+                        'value' => (string)$m->id,
+                        'label' => $m->name.($m->specialist ? ' ('.$m->specialist.')' : ''),
+                    ])->toArray()
+                );
+            @endphp
+
             <div class="mb-4">
-                <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">Jenis Service</label>
-                <select name="service_id" id="service-select" class="input-field w-full" onchange="updateSummary()">
-                    <option value="0" data-price="0">Pilih Service (opsional)</option>
-                    @foreach($services as $s)
-                    <option value="{{ $s->id }}" data-price="{{ $s->price }}" {{ $selectedService && $selectedService->id == $s->id ? 'selected' : '' }}>
-                        {{ $s->name }} — Rp{{ number_format($s->price,0,',','.') }}
-                    </option>
-                    @endforeach
-                </select>
+                <x-bottom-sheet-picker name="service_id" label="Jenis Service" placeholder="Pilih Service (opsional)" onselect="updateSummary" :selected="$selectedService ? (string)$selectedService->id : '0'" :options="$serviceOptions" />
             </div>
 
             <input type="hidden" name="name" value="{{ Auth::user()->name }}">
@@ -22,13 +43,7 @@
             <div class="border-t border-brand-border pt-4 mb-4">
                 <p class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-3">Data Kendaraan</p>
                 <div class="mb-3">
-                    <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">Pilih Kendaraan</label>
-                    <select id="vehicle-select" class="input-field w-full" onchange="toggleVehicleForm()">
-                        <option value="">Kendaraan Baru</option>
-                        @foreach($vehicles as $v)
-                        <option value="{{ $v->id }}" data-plate="{{ $v->plate_number }}" data-brand="{{ $v->brand }}" data-model="{{ $v->model }}" data-year="{{ $v->year }}">{{ $v->plate_number }} — {{ $v->brand }} {{ $v->model }}</option>
-                        @endforeach
-                    </select>
+                    <x-bottom-sheet-picker name="vehicle_id" label="Pilih Kendaraan" placeholder="Kendaraan Baru" onselect="toggleVehicleForm" :selected="''" :options="$vehicleOptions" />
                 </div>
                 <div id="new-vehicle-fields" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
@@ -48,19 +63,12 @@
                         <input type="number" name="year" id="year" class="input-field w-full" placeholder="2020" min="1900" max="2099">
                     </div>
                 </div>
-                <input type="hidden" name="vehicle_id" id="vehicle-id" value="">
             </div>
 
             <div class="border-t border-brand-border pt-4 mb-4">
                 <p class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-3">Detail Servis</p>
                 <div class="mb-3">
-                    <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">Mekanik (opsional)</label>
-                    <select name="mechanic_id" class="input-field w-full">
-                        <option value="">Pilih Mekanik</option>
-                        @foreach($mechanics as $m)
-                        <option value="{{ $m->id }}">{{ $m->name }} {{ $m->specialist ? "($m->specialist)" : '' }}</option>
-                        @endforeach
-                    </select>
+                    <x-bottom-sheet-picker name="mechanic_id" label="Mekanik (opsional)" placeholder="Pilih Mekanik" :selected="''" :options="$mechanicOptions" />
                 </div>
                 <div>
                     <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">Keluhan</label>
@@ -247,16 +255,14 @@
         }
 
         function toggleVehicleForm() {
-            const sel = document.getElementById('vehicle-select');
-            const opt = sel.options[sel.selectedIndex];
-            const isNew = !opt.value;
+            const hidden = document.querySelector('[name="vehicle_id"]');
+            const isNew = !hidden.value;
             document.getElementById('new-vehicle-fields').style.display = isNew ? 'grid' : 'none';
-            document.getElementById('vehicle-id').value = isNew ? '' : opt.value;
             if (!isNew) {
-                document.getElementById('plate-number').value = opt.dataset.plate || '';
-                document.getElementById('brand').value = opt.dataset.brand || '';
-                document.getElementById('model').value = opt.dataset.model || '';
-                document.getElementById('year').value = opt.dataset.year || '';
+                document.getElementById('plate-number').value = hidden.dataset.plate || '';
+                document.getElementById('brand').value = hidden.dataset.brand || '';
+                document.getElementById('model').value = hidden.dataset.model || '';
+                document.getElementById('year').value = hidden.dataset.year || '';
             } else {
                 document.getElementById('plate-number').value = '';
                 document.getElementById('brand').value = '';
@@ -269,9 +275,7 @@
         updateSummary();
 
         function updateSummary() {
-            const sel = document.getElementById('service-select');
-            const opt = sel.options[sel.selectedIndex];
-            const serviceFee = parseInt(opt?.dataset?.price) || 0;
+            const serviceFee = parseInt(document.querySelector('[name="service_id"]')?.dataset?.price) || 0;
 
             const partsTotal = selectedItems.reduce((sum, item) => sum + (item.price * item.qty), 0);
 

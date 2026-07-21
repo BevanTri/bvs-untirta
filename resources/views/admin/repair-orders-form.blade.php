@@ -3,33 +3,44 @@
 
     <form method="POST" action="{{ isset($order) ? route('admin.repair-orders.update', $order) : route('admin.repair-orders.store') }}" class="card p-5 max-w-3xl">
         @csrf
+
+        @php
+            $customerOptions = array_merge(
+                [['value' => '', 'label' => 'Pilih Pelanggan']],
+                $customers->map(fn($c) => ['value' => (string)$c->id, 'label' => $c->name])->toArray()
+            );
+            $vehicleOptions = array_merge(
+                [['value' => '', 'label' => 'Pilih Kendaraan']],
+                $vehicles->map(fn($v) => [
+                    'value' => (string)$v->id,
+                    'label' => $v->plate_number.' — '.$v->brand.' '.$v->model,
+                    'data-customer' => (string)$v->customer_id,
+                ])->toArray()
+            );
+            $mechanicOptions = array_merge(
+                [['value' => '', 'label' => 'Pilih Mekanik']],
+                $mechanics->map(fn($m) => [
+                    'value' => (string)$m->id,
+                    'label' => $m->name.($m->specialist ? ' ('.$m->specialist.')' : ''),
+                ])->toArray()
+            );
+            $statusOptions = [
+                ['value' => 'menunggu', 'label' => 'Menunggu'],
+                ['value' => 'proses', 'label' => 'Proses'],
+                ['value' => 'selesai', 'label' => 'Selesai'],
+                ['value' => 'dibatalkan', 'label' => 'Dibatalkan'],
+            ];
+        @endphp
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
-                <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">Pelanggan</label>
-                <select name="customer_id" class="input-field w-full" required>
-                    <option value="">Pilih Pelanggan</option>
-                    @foreach($customers as $c)
-                    <option value="{{ $c->id }}" {{ isset($order) && $order->customer_id === $c->id ? 'selected' : '' }}>{{ $c->name }}</option>
-                    @endforeach
-                </select>
+                <x-bottom-sheet-picker name="customer_id" label="Pelanggan" placeholder="Pilih Pelanggan" required :selected="isset($order) ? (string)$order->customer_id : ''" :options="$customerOptions" />
             </div>
             <div>
-                <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">Kendaraan</label>
-                <select name="vehicle_id" class="input-field w-full" required>
-                    <option value="">Pilih Kendaraan</option>
-                    @foreach($vehicles as $v)
-                    <option value="{{ $v->id }}" data-customer="{{ $v->customer_id }}" {{ isset($order) && $order->vehicle_id === $v->id ? 'selected' : '' }}>{{ $v->plate_number }} — {{ $v->brand }} {{ $v->model }}</option>
-                    @endforeach
-                </select>
+                <x-bottom-sheet-picker name="vehicle_id" label="Kendaraan" placeholder="Pilih Kendaraan" required :selected="isset($order) ? (string)$order->vehicle_id : ''" :options="$vehicleOptions" />
             </div>
             <div>
-                <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">Mekanik</label>
-                <select name="mechanic_id" class="input-field w-full">
-                    <option value="">Pilih Mekanik</option>
-                    @foreach($mechanics as $m)
-                    <option value="{{ $m->id }}" {{ isset($order) && $order->mechanic_id === $m->id ? 'selected' : '' }}>{{ $m->name }} {{ $m->specialist ? "($m->specialist)" : '' }}</option>
-                    @endforeach
-                </select>
+                <x-bottom-sheet-picker name="mechanic_id" label="Mekanik" placeholder="Pilih Mekanik" :selected="isset($order) ? (string)$order->mechanic_id : ''" :options="$mechanicOptions" />
             </div>
             <div>
                 <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">Tanggal</label>
@@ -53,13 +64,7 @@
                 <input type="number" name="service_fee" id="service-fee" value="{{ $order->service_fee ?? 0 }}" class="input-field w-full" min="0" step="0.01" required oninput="updateSummary()">
             </div>
             <div>
-                <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">Status</label>
-                <select name="status" class="input-field w-full" required>
-                    <option value="menunggu" {{ isset($order) && $order->status === 'menunggu' ? 'selected' : '' }}>Menunggu</option>
-                    <option value="proses" {{ isset($order) && $order->status === 'proses' ? 'selected' : '' }}>Proses</option>
-                    <option value="selesai" {{ isset($order) && $order->status === 'selesai' ? 'selected' : '' }}>Selesai</option>
-                    <option value="dibatalkan" {{ isset($order) && $order->status === 'dibatalkan' ? 'selected' : '' }}>Dibatalkan</option>
-                </select>
+                <x-bottom-sheet-picker name="status" label="Status" placeholder="Pilih Status" required :selected="isset($order) ? $order->status : 'menunggu'" :options="$statusOptions" />
             </div>
         </div>
 

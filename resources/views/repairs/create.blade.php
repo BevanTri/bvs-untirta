@@ -91,9 +91,9 @@
                 <button type="button" onclick="closeBottomSheet()" class="text-brand-ink-muted hover:text-brand-ink p-1">&times;</button>
             </div>
             <div class="flex gap-1.5 overflow-x-auto pb-2 scrollbar-hide -mx-1 px-1" id="category-filters">
-                <button type="button" class="cat-filter active shrink-0 px-3 py-1.5 text-xs font-semibold rounded-full bg-brand-navy text-white" data-cat="">Semua</button>
+                <button type="button" class="cat-filter active shrink-0 px-3 py-1.5 text-xs font-semibold rounded-full border" data-cat="">Semua</button>
                 @foreach($categories as $cat)
-                <button type="button" class="cat-filter shrink-0 px-3 py-1.5 text-xs font-semibold rounded-full bg-brand-warm text-brand-ink-muted hover:bg-brand-border" data-cat="{{ $cat->name }}">{{ $cat->name }}</button>
+                <button type="button" class="cat-filter shrink-0 px-3 py-1.5 text-xs font-semibold rounded-full border" data-cat="{{ $cat->name }}">{{ $cat->name }}</button>
                 @endforeach
             </div>
             <div class="relative">
@@ -109,7 +109,9 @@
     <style>
         #bottom-sheet-overlay.show { display: block; }
         #bottom-sheet.show { transform: translateY(0); }
-        .cat-filter.active { background: #0F172A; color: white; }
+        .cat-filter { background: #F3F4F6; color: #6B7280; border-color: #E5E7EB; }
+        .cat-filter.active { background: #0F172A; color: white; border-color: #0F172A; }
+        .cat-filter:not(.active):hover { background: #E5E7EB; }
         .product-card:active { transform: scale(0.97); }
         #items-container .selected-tag { display: inline-flex; }
         .scrollbar-hide::-webkit-scrollbar { display: none; }

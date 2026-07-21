@@ -8,6 +8,7 @@
     <div class="card p-4 mb-6">
         <div class="flex flex-col sm:flex-row gap-2">
             <a href="{{ route('admin.repair-orders.create') }}" class="btn-primary shrink-0 self-start min-h-[44px]">+ Buat Servis</a>
+            <a href="{{ route('admin.repair-orders.export', request()->query()) }}" class="btn-outline shrink-0 self-start min-h-[44px]">Export CSV</a>
             <form method="GET" class="flex gap-2 flex-1 flex-wrap">
                 <input type="text" name="search" placeholder="Cari nomor/pelanggan..." value="{{ $search ?? '' }}" class="input-field w-full sm:flex-1 sm:w-auto">
                 <select name="status" class="input-field w-full sm:w-auto" onchange="this.form.submit()">

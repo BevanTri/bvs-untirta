@@ -156,4 +156,45 @@ class RepairOrderController extends Controller
         $repair_order->delete();
         return back()->with('success', 'Servis dihapus');
     }
+
+    public function exportCsv(Request $r)
+    {
+        $q = RepairOrder::with('customer', 'vehicle', 'mechanic');
+        if ($s = $r->search) {
+            $q->where(function ($q) use ($s) {
+                $q->where('order_number', 'like', "%$s%")
+                  ->orWhereHas('customer', fn($q) => $q->where('name', 'like', "%$s%"));
+            });
+        }
+        if ($status = $r->status) {
+            $q->where('status', $status);
+        }
+        $orders = $q->latest()->get();
+        $headers = ['Content-Type'=>'text/csv; charset=utf-8','Content-Disposition'=>'attachment; filename=repair-orders-'.now()->format('Ymd').'.csv'];
+        $callback = function () use ($orders) {
+            $fh = fopen('php://output', 'w');
+            fprintf($fh, chr(0xEF).chr(0xBB).chr(0xBF));
+            fputcsv($fh, ['No. Servis','Pelanggan','Kendaraan','Plat Nomor','Mekanik','Tanggal','Komplain','Tindakan','Biaya Jasa','Item','Total','Status','Pembayaran'], ';');
+            foreach ($orders as $o) {
+                $items = $o->items->map(fn($i) => $i->name.' x'.$i->quantity.' (@Rp'.number_format($i->price,0,',','.').')')->implode(', ');
+                fputcsv($fh, [
+                    $o->order_number,
+                    $o->customer->name,
+                    $o->vehicle->brand.' '.$o->vehicle->model,
+                    $o->vehicle->plate_number,
+                    $o->mechanic->name ?? '-',
+                    $o->date,
+                    $o->complaint,
+                    $o->action ?? '-',
+                    number_format($o->service_fee,0,',','.'),
+                    $items,
+                    number_format($o->total,0,',','.'),
+                    $o->status,
+                    $o->payment_status === 'paid' ? 'Lunas' : 'Pending',
+                ], ';');
+            }
+            fclose($fh);
+        };
+        return response()->stream($callback, 200, $headers);
+    }
 }

@@ -63,6 +63,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/reports', [AdminReportController::class, 'index'])->name('reports');
+    Route::get('/reports/export', [AdminReportController::class, 'exportCsv'])->name('reports.export');
 
     Route::get('/categories', [AdminController::class, 'categories'])->name('categories');
     Route::post('/categories', [AdminController::class, 'storeCategory'])->name('categories.store');
@@ -95,6 +96,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::delete('/mechanics/{mechanic}', [AdminMechanicController::class, 'destroy'])->name('mechanics.destroy');
 
     Route::get('/repair-orders', [AdminRepairOrderController::class, 'index'])->name('repair-orders');
+    Route::get('/repair-orders/export', [AdminRepairOrderController::class, 'exportCsv'])->name('repair-orders.export');
     Route::get('/repair-orders/create', [AdminRepairOrderController::class, 'create'])->name('repair-orders.create');
     Route::post('/repair-orders', [AdminRepairOrderController::class, 'store'])->name('repair-orders.store');
     Route::get('/repair-orders/{repair_order}', [AdminRepairOrderController::class, 'show'])->name('repair-orders.show');

@@ -7,6 +7,7 @@
             @foreach(['daily' => 'Harian', 'weekly' => 'Mingguan', 'monthly' => 'Bulanan', 'yearly' => 'Tahunan'] as $key => $label)
             <a href="{{ route('admin.reports', ['period' => $key]) }}" class="px-4 py-2 text-sm font-medium rounded-lg transition-colors {{ $period === $key ? 'bg-brand-navy text-white' : 'bg-brand-warm text-brand-ink-muted hover:bg-brand-border' }}">{{ $label }}</a>
             @endforeach
+            <a href="{{ route('admin.reports.export', ['period' => $period]) }}" class="btn-outline shrink-0 self-start min-h-[44px] ml-auto">Export CSV</a>
         </form>
     </div>
 

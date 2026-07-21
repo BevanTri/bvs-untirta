@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/BevanTri/bvs-untirta/main/public/images/logo-untirta.webp" width="120" alt="BVS Untirta Logo" style="background: #0F172A; padding: 20px; border-radius: 16px;">
+  <img src="https://github.com/BevanTri/bvs-untirta/raw/main/public/images/logo-untirta.webp" width="120" alt="BVS Untirta Logo" style="background: #0F172A; padding: 20px; border-radius: 16px;">
 </p>
 
 <h1 align="center">BVS Bengkel Untirta</h1>

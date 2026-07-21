@@ -123,7 +123,7 @@
             'price' => $p->price,
             'price_fmt' => 'Rp' . number_format($p->price, 0, ',', '.'),
             'stock' => $p->stock,
-            'image' => $p->image ? '{{ asset('uploads') }}/' . $p->image : null,
+            'image' => $p->image ? asset('uploads/' . $p->image) : null,
             'category' => $p->category->name ?? '',
         ]));
 

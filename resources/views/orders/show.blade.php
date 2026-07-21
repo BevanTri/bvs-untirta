@@ -49,10 +49,6 @@
             @if($order->payment_status !== 'paid')
             <div class="flex flex-wrap gap-3">
                 <a href="{{ route('orders.pay', $order) }}" class="btn-primary !py-3 font-semibold text-center flex-1 min-w-[150px]">Bayar Sekarang</a>
-                <form method="POST" action="{{ route('orders.check-payment', $order) }}">
-                    @csrf
-                    <button type="submit" class="btn-outline !py-3 font-semibold whitespace-nowrap">Cek Pembayaran</button>
-                </form>
                 <a href="{{ route('orders.invoice', $order) }}" class="btn-outline !py-3 text-sm" target="_blank">Invoice (PDF)</a>
             </div>
             @else

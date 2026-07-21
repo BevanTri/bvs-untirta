@@ -7,17 +7,14 @@
 
             <div class="mb-4">
                 <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">Jenis Service</label>
-                <select name="service_id" class="input-field w-full">
-                    <option value="">Pilih Service (opsional)</option>
+                <select name="service_id" id="service-select" class="input-field w-full" onchange="updateSummary()">
+                    <option value="0" data-price="0">Pilih Service (opsional)</option>
                     @foreach($services as $s)
-                    <option value="{{ $s->id }}" {{ $selectedService && $selectedService->id == $s->id ? 'selected' : '' }}>
+                    <option value="{{ $s->id }}" data-price="{{ $s->price }}" {{ $selectedService && $selectedService->id == $s->id ? 'selected' : '' }}>
                         {{ $s->name }} — Rp{{ number_format($s->price,0,',','.') }}
                     </option>
                     @endforeach
                 </select>
-                @if($selectedService)
-                <p class="text-xs text-brand-gold mt-1">Biaya service: Rp{{ number_format($selectedService->price,0,',','.') }}</p>
-                @endif
             </div>
 
             <input type="hidden" name="name" value="{{ Auth::user()->name }}">
@@ -76,6 +73,24 @@
                 <div id="items-container"></div>
                 <input type="hidden" name="items_json" id="items-json" value="[]">
                 <button type="button" onclick="openBottomSheet()" class="btn-outline !border-brand-steel/30 !text-brand-steel text-sm mt-2 w-full justify-center">+ Pilih Sparepart</button>
+            </div>
+
+            <div id="payment-summary" class="border-t border-brand-border pt-4 mb-4">
+                <p class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-3">Ringkasan Pembayaran</p>
+                <div class="bg-brand-warm rounded-xl p-4 space-y-2">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-brand-ink-muted">Biaya Jasa</span>
+                        <span class="font-semibold text-brand-ink tabular-nums" id="summary-service">Rp0</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-brand-ink-muted">Total Sparepart</span>
+                        <span class="font-semibold text-brand-ink tabular-nums" id="summary-parts">Rp0</span>
+                    </div>
+                    <div class="border-t border-brand-border pt-2 flex justify-between text-base">
+                        <span class="font-bold text-brand-ink">Total Pembayaran</span>
+                        <span class="font-bold text-brand-gold tabular-nums" id="summary-total">Rp0</span>
+                    </div>
+                </div>
             </div>
 
             <button type="submit" class="btn-primary w-full">Ajukan Servis</button>
@@ -217,6 +232,7 @@
             }).join('');
             jsonInput.value = JSON.stringify(selectedItems.map(s => ({ id: s.id, qty: s.qty })));
             itemCounter = selectedItems.length;
+            updateSummary();
         }
 
         function updateQty(idx, val) {
@@ -250,5 +266,21 @@
         }
 
         toggleVehicleForm();
+        updateSummary();
+
+        function updateSummary() {
+            const sel = document.getElementById('service-select');
+            const opt = sel.options[sel.selectedIndex];
+            const serviceFee = parseInt(opt?.dataset?.price) || 0;
+
+            const partsTotal = selectedItems.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            const total = serviceFee + partsTotal;
+
+            const fmt = n => 'Rp' + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            document.getElementById('summary-service').textContent = fmt(serviceFee);
+            document.getElementById('summary-parts').textContent = fmt(partsTotal);
+            document.getElementById('summary-total').textContent = fmt(total);
+        }
     </script>
 </x-app-layout>

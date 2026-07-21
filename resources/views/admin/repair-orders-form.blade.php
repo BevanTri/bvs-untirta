@@ -50,7 +50,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
             <div>
                 <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">Biaya Jasa</label>
-                <input type="number" name="service_fee" value="{{ $order->service_fee ?? 0 }}" class="input-field w-full" min="0" step="0.01" required>
+                <input type="number" name="service_fee" id="service-fee" value="{{ $order->service_fee ?? 0 }}" class="input-field w-full" min="0" step="0.01" required oninput="updateSummary()">
             </div>
             <div>
                 <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">Status</label>
@@ -70,9 +70,9 @@
                     @foreach($order->items as $idx => $item)
                     <div class="item-row inline-flex items-center gap-2 px-3 py-1.5 bg-brand-warm border border-brand-border rounded-lg text-sm mb-1.5 mr-1.5">
                         <span class="font-medium text-brand-ink truncate max-w-[150px] sm:max-w-[200px]">{{ $item->name }}</span>
-                        <input type="number" name="items[{{ $idx }}][quantity]" value="{{ $item->quantity }}" min="1" class="w-14 text-center text-xs border border-brand-border rounded-md py-0.5">
+                        <input type="number" name="items[{{ $idx }}][quantity]" value="{{ $item->quantity }}" min="1" class="w-14 text-center text-xs border border-brand-border rounded-md py-0.5" oninput="updateSummary()">
                         <span class="text-xs text-brand-ink-muted tabular-nums">Rp{{ number_format($item->price,0,',','.') }}</span>
-                        <button type="button" onclick="this.closest('.item-row').remove()" class="text-red-400 hover:text-red-600 text-lg leading-none ml-0.5">&times;</button>
+                        <button type="button" onclick="this.closest('.item-row').remove(); updateSummary();" class="text-red-400 hover:text-red-600 text-lg leading-none ml-0.5">&times;</button>
                         <input type="hidden" name="items[{{ $idx }}][product_id]" value="{{ $item->product_id }}">
                         <input type="hidden" name="items[{{ $idx }}][name]" value="{{ $item->name }}">
                         <input type="hidden" name="items[{{ $idx }}][price]" value="{{ $item->price }}">
@@ -81,6 +81,24 @@
                 @endif
             </div>
             <button type="button" onclick="openBottomSheet()" class="btn-outline mt-2 !border-brand-steel/30 !text-brand-steel text-sm w-full justify-center">+ Pilih Sparepart</button>
+        </div>
+
+        <div id="payment-summary" class="border-t border-brand-border pt-4 mb-4">
+            <p class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-3">Ringkasan Pembayaran</p>
+            <div class="bg-brand-warm rounded-xl p-4 space-y-2">
+                <div class="flex justify-between text-sm">
+                    <span class="text-brand-ink-muted">Biaya Jasa</span>
+                    <span class="font-semibold text-brand-ink tabular-nums" id="summary-service">Rp0</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                    <span class="text-brand-ink-muted">Total Sparepart</span>
+                    <span class="font-semibold text-brand-ink tabular-nums" id="summary-parts">Rp0</span>
+                </div>
+                <div class="border-t border-brand-border pt-2 flex justify-between text-base">
+                    <span class="font-bold text-brand-ink">Total Pembayaran</span>
+                    <span class="font-bold text-brand-gold tabular-nums" id="summary-total">Rp0</span>
+                </div>
+            </div>
         </div>
 
         <div class="flex gap-3">
@@ -130,6 +148,23 @@
         let selectedItems = [];
         let itemIdx = {{ (isset($order) ? $order->items->count() : 0) }};
         let activeCategory = '';
+
+        function updateSummary() {
+            const fee = parseInt(document.getElementById('service-fee').value) || 0;
+            let parts = 0;
+            document.querySelectorAll('.item-row').forEach(row => {
+                const qtyInput = row.querySelector('input[name$="[quantity]"]');
+                const priceInput = row.querySelector('input[name$="[price]"]');
+                const qty = parseInt(qtyInput?.value) || 0;
+                const price = parseInt(priceInput?.value) || 0;
+                parts += qty * price;
+            });
+            const total = fee + parts;
+            const fmt = n => 'Rp' + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            document.getElementById('summary-service').textContent = fmt(fee);
+            document.getElementById('summary-parts').textContent = fmt(parts);
+            document.getElementById('summary-total').textContent = fmt(total);
+        }
 
         function openBottomSheet() {
             document.getElementById('bottom-sheet-overlay').classList.add('show');
@@ -193,9 +228,9 @@
             const container = document.getElementById('items-container');
             const html = `<div class="item-row inline-flex items-center gap-2 px-3 py-1.5 bg-brand-warm border border-brand-border rounded-lg text-sm mb-1.5 mr-1.5">
                 <span class="font-medium text-brand-ink truncate max-w-[150px] sm:max-w-[200px]">${prod.name}</span>
-                <input type="number" name="items[${itemIdx}][quantity]" value="1" min="1" class="w-14 text-center text-xs border border-brand-border rounded-md py-0.5">
+                <input type="number" name="items[${itemIdx}][quantity]" value="1" min="1" class="w-14 text-center text-xs border border-brand-border rounded-md py-0.5" oninput="updateSummary()">
                 <span class="text-xs text-brand-ink-muted tabular-nums">${prod.price_fmt}</span>
-                <button type="button" onclick="this.closest('.item-row').remove()" class="text-red-400 hover:text-red-600 text-lg leading-none ml-0.5">&times;</button>
+                <button type="button" onclick="this.closest('.item-row').remove(); updateSummary();" class="text-red-400 hover:text-red-600 text-lg leading-none ml-0.5">&times;</button>
                 <input type="hidden" name="items[${itemIdx}][product_id]" value="${prod.id}">
                 <input type="hidden" name="items[${itemIdx}][name]" value="${prod.name}">
                 <input type="hidden" name="items[${itemIdx}][price]" value="${prod.price}">
@@ -203,6 +238,9 @@
             container.insertAdjacentHTML('beforeend', html);
             itemIdx++;
             closeBottomSheet();
+            updateSummary();
         }
+
+        updateSummary();
     </script>
 </x-admin-layout>

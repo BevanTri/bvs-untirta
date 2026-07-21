@@ -148,13 +148,8 @@
 
         document.querySelectorAll('.cat-filter').forEach(el => {
             el.addEventListener('click', function() {
-                document.querySelectorAll('.cat-filter').forEach(b => {
-                    b.className = b.className.replace(' active', '');
-                    if (!b.classList.contains('bg-brand-navy')) {
-                        b.className = 'cat-filter shrink-0 px-3 py-1.5 text-xs font-semibold rounded-full bg-brand-warm text-brand-ink-muted hover:bg-brand-border';
-                    }
-                });
-                this.className = 'cat-filter active shrink-0 px-3 py-1.5 text-xs font-semibold rounded-full bg-brand-navy text-white';
+                document.querySelectorAll('.cat-filter').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
                 activeCategory = this.dataset.cat;
                 renderProducts();
             });

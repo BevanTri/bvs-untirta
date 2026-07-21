@@ -37,7 +37,8 @@ class RepairOrderController extends Controller
             'customers' => Customer::all(),
             'vehicles' => Vehicle::all(),
             'mechanics' => Mechanic::all(),
-            'products' => Product::where('stock', '>', 0)->orWhereNull('stock')->get(),
+            'products' => Product::with('category')->where('stock', '>', 0)->orWhereNull('stock')->get(),
+            'categories' => \App\Models\Category::where('is_active', true)->get(),
         ]);
     }
 
@@ -103,7 +104,8 @@ class RepairOrderController extends Controller
             'customers' => Customer::all(),
             'vehicles' => Vehicle::all(),
             'mechanics' => Mechanic::all(),
-            'products' => Product::where('stock', '>', 0)->orWhereNull('stock')->get(),
+            'products' => Product::with('category')->where('stock', '>', 0)->orWhereNull('stock')->get(),
+            'categories' => \App\Models\Category::where('is_active', true)->get(),
         ]);
     }
 

@@ -26,14 +26,15 @@ class RepairOrderController extends Controller
     {
         $mechanics = Mechanic::all();
         $services = Service::where('is_active', true)->get();
-        $products = Product::where(fn($q) => $q->where('stock', '>', 0)->orWhereNull('stock'))->get();
+        $products = Product::with('category')->where(fn($q) => $q->where('stock', '>', 0)->orWhereNull('stock'))->get();
+        $categories = \App\Models\Category::where('is_active', true)->get();
         $selectedService = null;
         if ($r->filled('service')) {
             $selectedService = Service::find($r->service);
         }
         $customer = \App\Models\Customer::where('email', Auth::user()->email)->first();
         $vehicles = $customer ? $customer->vehicles : collect();
-        return view('repairs.create', compact('mechanics', 'services', 'products', 'selectedService', 'vehicles', 'customer'));
+        return view('repairs.create', compact('mechanics', 'services', 'products', 'categories', 'selectedService', 'vehicles', 'customer'));
     }
 
     public function store(Request $r)

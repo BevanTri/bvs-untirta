@@ -33,9 +33,22 @@ export default {
                     border: '#E2E8F0',
                 }
             },
-            borderWidth: {
-                '3': '3px',
-            }
+            borderRadius: {
+                sm: '0.375rem',
+                DEFAULT: '0.5rem',
+                md: '0.625rem',
+                lg: '0.75rem',
+                xl: '0.875rem',
+                '2xl': '1rem',
+                '3xl': '1.5rem',
+            },
+            boxShadow: {
+                'level-1': '0 1px 2px 0 rgb(0 0 0 / 0.04)',
+                'level-2': '0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06)',
+                'level-3': '0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.06)',
+                'level-4': '0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.04)',
+                'card-hover': '0 12px 24px -8px rgb(0 0 0 / 0.12)',
+            },
         },
     },
 

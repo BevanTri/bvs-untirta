@@ -13,7 +13,7 @@ class CheckoutController extends Controller
     {
         $items = CartItem::where('user_id', Auth::id())->with('itemable', 'serviceProduct')->latest()->get();
         if ($items->isEmpty()) {
-            return redirect()->route('products');
+            return redirect()->route('cart.index')->with('warning', 'Keranjang masih kosong.');
         }
         $total = $items->sum(fn($i) => $i->unit_price * $i->quantity);
         return view('checkout.index', compact('items', 'total'));
@@ -23,7 +23,7 @@ class CheckoutController extends Controller
     {
         $items = CartItem::where('user_id', Auth::id())->with('itemable', 'serviceProduct')->get();
         if ($items->isEmpty()) {
-            return redirect()->route('products');
+            return redirect()->route('cart.index')->with('warning', 'Keranjang masih kosong.');
         }
 
         $data = $request->validate([

@@ -43,24 +43,24 @@
                 <x-bottom-sheet-picker name="mechanic_id" label="Mekanik" placeholder="Pilih Mekanik" :selected="isset($order) ? (string)$order->mechanic_id : ''" :options="$mechanicOptions" />
             </div>
             <div>
-                <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">Tanggal</label>
+                <label class="block text-sm font-medium text-brand-ink mb-1.5">Tanggal</label>
                 <input type="date" name="date" value="{{ isset($order) ? $order->date->format('Y-m-d') : date('Y-m-d') }}" class="input-field w-full" required>
             </div>
         </div>
 
         <div class="mb-3">
-            <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">Keluhan</label>
+            <label class="block text-sm font-medium text-brand-ink mb-1.5">Keluhan</label>
             <textarea name="complaint" class="input-field w-full" rows="3" required>{{ $order->complaint ?? '' }}</textarea>
         </div>
 
         <div class="mb-3">
-            <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">Tindakan</label>
+            <label class="block text-sm font-medium text-brand-ink mb-1.5">Tindakan</label>
             <textarea name="action" class="input-field w-full" rows="3">{{ $order->action ?? '' }}</textarea>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-3">
             <div>
-                <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">Biaya Jasa</label>
+                <label class="block text-sm font-medium text-brand-ink mb-1.5">Biaya Jasa</label>
                 <input type="number" name="service_fee" id="service-fee" value="{{ $order->service_fee ?? 0 }}" class="input-field w-full" min="0" step="0.01" required oninput="updateSummary()">
             </div>
             <div>
@@ -69,11 +69,11 @@
         </div>
 
         <div class="mb-3">
-            <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">Sparepart Dipakai</label>
+            <label class="block text-sm font-medium text-brand-ink mb-1.5">Sparepart Dipakai</label>
             <div id="items-container">
                 @if(isset($order) && $order->items->count())
                     @foreach($order->items as $idx => $item)
-                    <div class="item-row inline-flex items-center gap-2 px-3 py-1.5 bg-brand-warm border border-brand-border rounded-lg text-sm mb-1.5 mr-1.5">
+                    <div class="item-row inline-flex items-center gap-2 px-3 py-1.5 bg-brand-warm border border-brand-border rounded-xl text-sm mb-1.5 mr-1.5">
                         <span class="font-medium text-brand-ink truncate max-w-[150px] sm:max-w-[200px]">{{ $item->name }}</span>
                         <input type="number" name="items[{{ $idx }}][quantity]" value="{{ $item->quantity }}" min="1" class="w-14 text-center text-xs border border-brand-border rounded-md py-0.5" oninput="updateSummary()">
                         <span class="text-xs text-brand-ink-muted tabular-nums">Rp{{ number_format($item->price,0,',','.') }}</span>
@@ -85,11 +85,11 @@
                     @endforeach
                 @endif
             </div>
-            <button type="button" onclick="openBottomSheet()" class="btn-outline mt-2 !border-brand-steel/30 !text-brand-steel text-sm w-full justify-center">+ Pilih Sparepart</button>
+            <button type="button" onclick="openBottomSheet()" class="btn-outline mt-2 !border-brand-border/30 !text-brand-ink-muted text-sm w-full justify-center">+ Pilih Sparepart</button>
         </div>
 
         <div id="payment-summary" class="border-t border-brand-border pt-3 mb-3">
-            <p class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-3">Ringkasan Pembayaran</p>
+            <p class="font-display font-bold text-brand-ink text-sm mb-3">Ringkasan Pembayaran</p>
             <div class="bg-brand-warm rounded-xl p-4 space-y-2">
                 <div class="flex justify-between text-sm">
                     <span class="text-brand-ink-muted">Biaya Jasa</span>
@@ -107,12 +107,12 @@
         </div>
 
         <div class="flex gap-3">
-            <button type="submit" class="btn-primary">{{ isset($order) ? 'Simpan' : 'Buat Servis' }}</button>
-            <a href="{{ route('admin.repair-orders') }}" class="btn-outline !border-brand-steel/30 !text-brand-steel">Batal</a>
+            <button type="submit" class="btn-primary w-full md:w-auto">{{ isset($order) ? 'Simpan' : 'Buat Servis' }}</button>
+            <a href="{{ route('admin.repair-orders') }}" class="btn-outline !border-brand-border/30 !text-brand-ink-muted">Batal</a>
         </div>
     </form>
 
-    <div id="bottom-sheet-overlay" class="fixed inset-0 bg-black/50 z-[60]" onclick="if(event.target===this)closeBottomSheet()">
+    <div id="bottom-sheet-overlay" class="fixed inset-0 bg-black/50 z-[70]" onclick="if(event.target===this)closeBottomSheet()">
     <div id="bottom-sheet" class="bg-white rounded-t-2xl shadow-2xl flex flex-col" onclick="event.stopPropagation();">
         <div class="shrink-0 px-4 pt-3 pb-2 border-b border-brand-border/50">
             <div class="flex justify-center mb-2 md:hidden"><div class="w-10 h-1 rounded-full bg-brand-border"></div></div>
@@ -128,7 +128,7 @@
             </div>
             <div class="relative">
                 <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-ink-faint pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                <input type="text" id="product-search" placeholder="Cari sparepart..." class="w-full pl-9 pr-3 py-2 text-sm border border-brand-border rounded-lg focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/30 outline-none" oninput="filterProducts()">
+                <input type="text" id="product-search" placeholder="Cari sparepart..." class="w-full pl-9 pr-3 py-2 text-sm border border-brand-border rounded-xl focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/30 outline-none" oninput="filterProducts()">
             </div>
         </div>
         <div class="flex-1 overflow-y-auto p-3 sm:p-4 pb-[calc(88px+env(safe-area-inset-bottom,0px))]" id="product-grid" style="overscroll-behavior:contain">
@@ -138,9 +138,10 @@
     </div>
 
     <style>
-        #bottom-sheet-overlay { transition: opacity 250ms ease; opacity: 0; pointer-events: none; }
-        #bottom-sheet-overlay.show { opacity: 1; pointer-events: auto; }
+        #bottom-sheet-overlay { transition: opacity 250ms ease; opacity: 0; pointer-events: none; display: none; }
+        #bottom-sheet-overlay.show { opacity: 1; pointer-events: auto; display: block; }
         #bottom-sheet { position: fixed; bottom: 0; left: 0; right: 0; max-height: 90dvh; transform: translateY(100%); transition: transform 300ms cubic-bezier(0.32, 0.72, 0, 1); }
+        #bottom-sheet.show { transform: translateY(0); }
         #bottom-sheet.show { transform: translateY(0); }
         .cat-filter { background: #F3F4F6; color: #6B7280; border-color: #E5E7EB; }
         .cat-filter.active { background: #0F172A; color: white; border-color: #0F172A; }
@@ -150,6 +151,7 @@
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
         @media (min-width: 768px) {
             #bottom-sheet-overlay { display: flex; align-items: center; justify-content: center; }
+            #bottom-sheet-overlay.show { display: flex; }
             #bottom-sheet { position: relative !important; bottom: auto !important; left: auto !important; right: auto !important; transform: none !important; width: 100%; max-width: 560px; max-height: 80vh; margin: 0 16px; border-radius: 16px; opacity: 0; transition: opacity 250ms ease; }
             #bottom-sheet.show { opacity: 1; }
         }
@@ -180,8 +182,10 @@
         }
 
         function openBottomSheet() {
-            document.getElementById('bottom-sheet-overlay').classList.add('show');
+            var ov = document.getElementById('bottom-sheet-overlay');
+            ov.style.display = ''; if (ov.offsetHeight) {}
             document.getElementById('bottom-sheet').classList.add('show');
+            ov.classList.add('show');
             document.body.dataset.scrollY = window.scrollY;
             document.body.style.overflow = 'hidden';
             document.body.style.position = 'fixed';
@@ -192,7 +196,8 @@
 
         function closeBottomSheet() {
             var sy = parseFloat(document.body.dataset.scrollY || '0');
-            document.getElementById('bottom-sheet-overlay').classList.remove('show');
+            var ov = document.getElementById('bottom-sheet-overlay');
+            ov.classList.remove('show');
             document.getElementById('bottom-sheet').classList.remove('show');
             document.body.style.overflow = '';
             document.body.style.position = '';
@@ -200,6 +205,7 @@
             document.body.style.top = '';
             window.scrollTo(0, sy);
             delete document.body.dataset.scrollY;
+            setTimeout(function(){ if(!ov.classList.contains('show')) ov.style.display = 'none'; }, 300);
         }
 
         function filterProducts() {
@@ -249,7 +255,7 @@
             if (!prod) return;
 
             const container = document.getElementById('items-container');
-            const html = `<div class="item-row inline-flex items-center gap-2 px-3 py-1.5 bg-brand-warm border border-brand-border rounded-lg text-sm mb-1.5 mr-1.5">
+            const html = `<div class="item-row inline-flex items-center gap-2 px-3 py-1.5 bg-brand-warm border border-brand-border rounded-xl text-sm mb-1.5 mr-1.5">
                 <span class="font-medium text-brand-ink truncate max-w-[150px] sm:max-w-[200px]">${prod.name}</span>
                 <input type="number" name="items[${itemIdx}][quantity]" value="1" min="1" class="w-14 text-center text-xs border border-brand-border rounded-md py-0.5" oninput="updateSummary()">
                 <span class="text-xs text-brand-ink-muted tabular-nums">${prod.price_fmt}</span>

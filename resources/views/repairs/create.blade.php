@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="max-w-2xl mx-auto">
+    <div class="max-w-7xl mx-auto px-4 py-6">
         <h1 class="font-display font-bold text-2xl text-brand-ink mb-6">Ajukan Servis</h1>
 
         <form method="POST" action="{{ route('repairs.store') }}" class="card p-5">
@@ -22,7 +22,6 @@
                         'data-plate' => $v->plate_number,
                         'data-brand' => $v->brand,
                         'data-model' => $v->model,
-                        'data-year' => (string)$v->year,
                     ])->toArray()
                 );
                 $mechanicOptions = array_merge(
@@ -34,69 +33,65 @@
                 );
             @endphp
 
-            <div class="mb-3">
+            <div class="mb-4">
                 <x-bottom-sheet-picker name="service_id" label="Jenis Service" placeholder="Pilih Service (opsional)" onselect="updateSummary" :selected="$selectedService ? (string)$selectedService->id : '0'" :options="$serviceOptions" />
             </div>
 
             <input type="hidden" name="name" value="{{ Auth::user()->name }}">
 
-            <div class="border-t border-brand-border pt-3 mb-3">
-                <p class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-3">Data Kendaraan</p>
-                <div class="mb-3">
+            <div class="border-t border-brand-border pt-4 mb-4">
+                <p class="text-xs font-semibold text-brand-ink-muted uppercase tracking-widest mb-3">Data Kendaraan</p>
+                <div class="mb-4">
                     <x-bottom-sheet-picker name="vehicle_id" label="Pilih Kendaraan" placeholder="Kendaraan Baru" onselect="toggleVehicleForm" :selected="''" :options="$vehicleOptions" />
                 </div>
-                <div id="new-vehicle-fields" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div id="new-vehicle-fields" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">Plat Nomor</label>
+                        <label class="text-xs font-semibold text-brand-ink-muted uppercase tracking-widest mb-1 block">Plat Nomor</label>
                         <input type="text" name="plate_number" id="plate-number" class="input-field w-full" required placeholder="AB 1234 CD">
                     </div>
                     <div>
-                        <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">Merk</label>
+                        <label class="text-xs font-semibold text-brand-ink-muted uppercase tracking-widest mb-1 block">Merk</label>
                         <input type="text" name="brand" id="brand" class="input-field w-full" required placeholder="Honda / Yamaha / dll">
                     </div>
-                    <div>
-                        <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">Model</label>
+                    <div class="sm:col-span-2">
+                        <label class="text-xs font-semibold text-brand-ink-muted uppercase tracking-widest mb-1 block">Model</label>
                         <input type="text" name="model" id="model" class="input-field w-full" required placeholder="Vario 125 / NMax">
-                    </div>
-                    <div>
-                        <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">Tahun (opsional)</label>
-                        <input type="number" name="year" id="year" class="input-field w-full" placeholder="2020" min="1900" max="2099">
                     </div>
                 </div>
             </div>
 
-            <div class="border-t border-brand-border pt-3 mb-3">
-                <p class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-3">Detail Servis</p>
-                <div class="mb-3">
+            <div class="border-t border-brand-border pt-4 mb-4">
+                <p class="text-xs font-semibold text-brand-ink-muted uppercase tracking-widest mb-3">Detail Servis</p>
+                <div class="mb-4">
                     <x-bottom-sheet-picker name="mechanic_id" label="Mekanik (opsional)" placeholder="Pilih Mekanik" :selected="''" :options="$mechanicOptions" />
                 </div>
                 <div>
-                    <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">Keluhan</label>
+                    <label class="text-xs font-semibold text-brand-ink-muted uppercase tracking-widest mb-1 block">Keluhan</label>
                     <textarea name="complaint" class="input-field w-full" rows="4" required placeholder="Jelaskan keluhan kendaraan Anda..."></textarea>
                 </div>
             </div>
 
-            <div class="border-t border-brand-border pt-3 mb-3">
-                <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">Sparepart yang Dibutuhkan (opsional)</label>
+            <div class="border-t border-brand-border pt-4 mb-4">
+                <label class="text-xs font-semibold text-brand-ink-muted uppercase tracking-widest mb-1 block">Sparepart yang Dibutuhkan (opsional)</label>
                 <div id="items-container"></div>
                 <input type="hidden" name="items_json" id="items-json" value="[]">
-                <button type="button" onclick="openBottomSheet()" class="btn-outline !border-brand-steel/30 !text-brand-steel text-sm mt-2 w-full justify-center">+ Pilih Sparepart</button>
+                <button type="button" onclick="openBottomSheet()" class="btn-outline btn-sm mt-2 w-full justify-center">+ Pilih Sparepart</button>
             </div>
 
-            <div id="payment-summary" class="border-t border-brand-border pt-3 mb-3">
-                <p class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-3">Ringkasan Pembayaran</p>
-                <div class="bg-brand-warm rounded-xl p-4 space-y-2">
+            <div id="payment-summary" class="border-t border-brand-border pt-4 mb-4">
+                <p class="text-xs font-semibold text-brand-ink-muted uppercase tracking-widest mb-3">Ringkasan Pembayaran</p>
+                <div class="bg-brand-warm rounded-xl p-5 space-y-3">
                     <div class="flex justify-between text-sm">
                         <span class="text-brand-ink-muted">Biaya Jasa</span>
-                        <span class="font-semibold text-brand-ink tabular-nums" id="summary-service">Rp0</span>
+                        <span class="font-semibold text-brand-ink font-mono tabular-nums" id="summary-service">Rp0</span>
                     </div>
                     <div class="flex justify-between text-sm">
                         <span class="text-brand-ink-muted">Total Sparepart</span>
-                        <span class="font-semibold text-brand-ink tabular-nums" id="summary-parts">Rp0</span>
+                        <span class="font-semibold text-brand-ink font-mono tabular-nums" id="summary-parts">Rp0</span>
                     </div>
-                    <div class="border-t border-brand-border pt-2 flex justify-between text-base">
+                    <div class="border-t border-brand-border pt-3 flex justify-between text-base">
                         <span class="font-bold text-brand-ink">Total Pembayaran</span>
-                        <span class="font-bold text-brand-gold tabular-nums" id="summary-total">Rp0</span>
+                        <span class="font-bold text-brand-gold font-mono tabular-nums" id="summary-total">Rp0</span>
                     </div>
                 </div>
             </div>
@@ -105,9 +100,9 @@
         </form>
     </div>
 
-    <div id="bottom-sheet-overlay" class="fixed inset-0 bg-black/50 z-[60]" onclick="if(event.target===this)closeBottomSheet()">
+    <div id="bottom-sheet-overlay" class="fixed inset-0 bg-black/50 z-[70]" onclick="if(event.target===this)closeBottomSheet()">
     <div id="bottom-sheet" class="bg-white rounded-t-2xl shadow-2xl flex flex-col" onclick="event.stopPropagation();">
-        <div class="shrink-0 px-4 pt-3 pb-2 border-b border-brand-border/50">
+        <div class="shrink-0 px-5 pt-4 pb-3 border-b border-brand-border/50">
             <div class="flex justify-center mb-2 md:hidden"><div class="w-10 h-1 rounded-full bg-brand-border"></div></div>
             <div class="flex items-center justify-between mb-2">
                 <h3 class="font-display font-bold text-brand-ink text-lg">Pilih Sparepart</h3>
@@ -121,19 +116,20 @@
             </div>
             <div class="relative">
                 <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-ink-faint pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                <input type="text" id="product-search" placeholder="Cari sparepart..." class="w-full pl-9 pr-3 py-2 text-sm border border-brand-border rounded-lg focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/30 outline-none" oninput="filterProducts()">
+                <input type="text" id="product-search" placeholder="Cari sparepart..." class="w-full pl-9 pr-3 py-2 text-sm border border-brand-border rounded-xl focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/30 outline-none" oninput="filterProducts()">
             </div>
         </div>
-        <div class="flex-1 overflow-y-auto p-3 sm:p-4 pb-[calc(88px+env(safe-area-inset-bottom,0px))]" id="product-grid" style="overscroll-behavior:contain">
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3" id="product-list"></div>
+        <div class="flex-1 overflow-y-auto p-4 sm:p-5 pb-[calc(88px+env(safe-area-inset-bottom,0px))]" id="product-grid" style="overscroll-behavior:contain">
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4" id="product-list"></div>
         </div>
     </div>
     </div>
 
     <style>
-        #bottom-sheet-overlay { transition: opacity 250ms ease; opacity: 0; pointer-events: none; }
-        #bottom-sheet-overlay.show { opacity: 1; pointer-events: auto; }
+        #bottom-sheet-overlay { transition: opacity 250ms ease; opacity: 0; pointer-events: none; display: none; }
+        #bottom-sheet-overlay.show { opacity: 1; pointer-events: auto; display: block; }
         #bottom-sheet { position: fixed; bottom: 0; left: 0; right: 0; max-height: 90dvh; transform: translateY(100%); transition: transform 300ms cubic-bezier(0.32, 0.72, 0, 1); }
+        #bottom-sheet.show { transform: translateY(0); }
         #bottom-sheet.show { transform: translateY(0); }
         .cat-filter { background: #F3F4F6; color: #6B7280; border-color: #E5E7EB; }
         .cat-filter.active { background: #0F172A; color: white; border-color: #0F172A; }
@@ -144,6 +140,7 @@
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
         @media (min-width: 768px) {
             #bottom-sheet-overlay { display: flex; align-items: center; justify-content: center; }
+            #bottom-sheet-overlay.show { display: flex; }
             #bottom-sheet { position: relative !important; bottom: auto !important; left: auto !important; right: auto !important; transform: none !important; width: 100%; max-width: 560px; max-height: 80vh; margin: 0 16px; border-radius: 16px; opacity: 0; transition: opacity 250ms ease; }
             #bottom-sheet.show { opacity: 1; }
         }
@@ -156,8 +153,10 @@
         let itemCounter = 0;
 
         function openBottomSheet() {
-            document.getElementById('bottom-sheet-overlay').classList.add('show');
+            var ov = document.getElementById('bottom-sheet-overlay');
+            ov.style.display = ''; if (ov.offsetHeight) {}
             document.getElementById('bottom-sheet').classList.add('show');
+            ov.classList.add('show');
             document.body.dataset.scrollY = window.scrollY;
             document.body.style.overflow = 'hidden';
             document.body.style.position = 'fixed';
@@ -168,7 +167,8 @@
 
         function closeBottomSheet() {
             var sy = parseFloat(document.body.dataset.scrollY || '0');
-            document.getElementById('bottom-sheet-overlay').classList.remove('show');
+            var ov = document.getElementById('bottom-sheet-overlay');
+            ov.classList.remove('show');
             document.getElementById('bottom-sheet').classList.remove('show');
             document.body.style.overflow = '';
             document.body.style.position = '';
@@ -176,6 +176,7 @@
             document.body.style.top = '';
             window.scrollTo(0, sy);
             delete document.body.dataset.scrollY;
+            setTimeout(function(){ if(!ov.classList.contains('show')) ov.style.display = 'none'; }, 300);
         }
 
         function filterProducts() {
@@ -214,9 +215,9 @@
                     <div class="aspect-square bg-brand-warm flex items-center justify-center p-2">
                         <img src="${imgSrc}" alt="${p.name}" class="w-full h-full object-contain" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22 fill=%22%23ddd%22><rect width=%2280%22 height=%2280%22/><text x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2210%22 fill=%22%23999%22>No Image</text></svg>'">
                     </div>
-                    <div class="p-2 sm:p-2.5">
+                    <div class="p-2 sm:p-3">
                         <p class="text-[11px] sm:text-xs font-semibold text-brand-ink leading-tight line-clamp-2 min-h-[2em]">${p.name}</p>
-                        <p class="text-[11px] sm:text-xs font-bold text-brand-gold mt-0.5">${p.price_fmt}</p>
+                        <p class="text-[11px] sm:text-xs font-bold text-brand-gold mt-0.5 font-mono tabular-nums">${p.price_fmt}</p>
                         <p class="text-[10px] text-brand-ink-faint">Stok: ${p.stock ?? '~'}</p>
                     </div>
                 </div>`;
@@ -245,10 +246,10 @@
                 return;
             }
             container.innerHTML = selectedItems.map((item, i) => {
-                return `<div class="selected-tag inline-flex items-center gap-2 px-3 py-1.5 bg-brand-warm border border-brand-border rounded-lg text-sm mb-1.5 mr-1.5">
+                return `<div class="selected-tag inline-flex items-center gap-2 px-3 py-1.5 bg-brand-warm border border-brand-border rounded-xl text-sm mb-1.5 mr-1.5">
                     <span class="font-medium text-brand-ink truncate max-w-[150px] sm:max-w-[200px]">${item.name}</span>
                     <input type="number" value="${item.qty}" min="1" class="w-14 text-center text-xs border border-brand-border rounded-md py-0.5" onchange="updateQty(${i}, this.value)" onfocus="this.select()">
-                    <span class="text-xs text-brand-ink-muted tabular-nums">${item.price_fmt}</span>
+                    <span class="text-xs text-brand-ink-muted font-mono tabular-nums">${item.price_fmt}</span>
                     <button type="button" onclick="removeItem(${i})" class="text-red-400 hover:text-red-600 text-lg leading-none ml-0.5">&times;</button>
                     <input type="hidden" name="items[${i}][product_id]" value="${item.id}">
                     <input type="hidden" name="items[${i}][quantity]" value="${item.qty}">
@@ -280,12 +281,10 @@
                 document.getElementById('plate-number').value = hidden.dataset.plate || '';
                 document.getElementById('brand').value = hidden.dataset.brand || '';
                 document.getElementById('model').value = hidden.dataset.model || '';
-                document.getElementById('year').value = hidden.dataset.year || '';
             } else {
                 document.getElementById('plate-number').value = '';
                 document.getElementById('brand').value = '';
                 document.getElementById('model').value = '';
-                document.getElementById('year').value = '';
             }
         }
 
@@ -293,7 +292,8 @@
         updateSummary();
 
         function updateSummary() {
-            const serviceFee = parseInt(document.querySelector('[name="service_id"]')?.dataset?.price) || 0;
+            const selectedBtn = document.querySelector('.bottom-sheet-picker [name="service_id"]')?.closest('[data-picker]')?.querySelector('.picker-option.selected');
+            const serviceFee = selectedBtn ? parseInt(selectedBtn.dataset.price) || 0 : 0;
 
             const partsTotal = selectedItems.reduce((sum, item) => sum + (item.price * item.qty), 0);
 

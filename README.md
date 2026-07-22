@@ -35,11 +35,12 @@ Dibuat sebagai proyek **Ujian Akhir Semester** (UAS) Semester Antara 2025/2026 �
 
 ### 🔧 Workshop Management
 - **Data Pelanggan** — Riwayat kendaraan & servis per customer
-- **Data Kendaraan** — Multi-vehicle per customer (plat, merk, model, tahun)
+- **Data Kendaraan** — Multi-vehicle per customer (plat, merk, model), form ringkas tanpa tahun/warna
 - **Data Mekanik** — Manajemen mekanik dengan spesialisasi
-- **Repair Order** — Status: menunggu → proses → selesai/dibatalkan
+- **Repair Order** — Status: menunggu → proses → selesai/dibatalkan, timeline otomatis berdasarkan pembayaran
 - **Sparepart Tracking** — Setiap sparepart yang dipakai tercatat (nama, qty, harga)
-- **Pembayaran Terpadu** — Payment polymorphic (order produk + repair order)
+- **Pembayaran Terpadu** — Payment polymorphic (order produk + repair order), status sinkron otomatis
+- **Invoice Compact** — Format 420px profesional, siap print (seperti invoice Tokopedia/Shopee)
 - **Laporan** — Filter per period (harian/mingguan/bulanan/tahunan)
 
 ### 📱 Lainnya
@@ -48,6 +49,7 @@ Dibuat sebagai proyek **Ujian Akhir Semester** (UAS) Semester Antara 2025/2026 �
 - **📡 REST API** — Sanctum token auth untuk integrasi eksternal
 - **👨‍💼 Admin Panel** — CRUD semua entitas, inline edit, dashboard with chart
 - **🧾 Combined Order History** — Riwayat pesanan produk + servis dalam satu halaman
+- **🔔 Toast Modern** — Solid white, tanpa opacity, aksen left-border, progress bar gold
 
 ---
 

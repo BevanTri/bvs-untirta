@@ -157,6 +157,9 @@ class RepairOrderController extends Controller
         }
         $data['total'] = $data['service_fee'] + $itemsTotal;
 
+        if ($data['status'] === 'dibatalkan') {
+            $data['payment_status'] = 'failed';
+        }
         $repair_order->update($data);
 
         $repair_order->items()->delete();

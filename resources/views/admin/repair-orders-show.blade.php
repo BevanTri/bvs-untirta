@@ -1,7 +1,7 @@
 <x-admin-layout>
     <x-slot name="title">Detail Servis</x-slot>
 
-    <div class="card p-5 max-w-2xl mb-6">
+    <x-card class="max-w-2xl mb-6">
         <div class="flex items-start justify-between mb-6">
             <div>
                 <h2 class="font-display font-bold text-2xl text-brand-ink">{{ $order->order_number }}</h2>
@@ -35,21 +35,21 @@
 
         <div class="mb-6">
             <p class="text-xs text-brand-ink-faint uppercase tracking-wide font-semibold mb-1">Keluhan</p>
-            <p class="text-brand-ink bg-brand-warm p-3 rounded-lg">{{ $order->complaint }}</p>
+            <p class="text-brand-ink bg-brand-warm p-3 rounded-xl">{{ $order->complaint }}</p>
         </div>
 
         @if($order->action)
         <div class="mb-6">
             <p class="text-xs text-brand-ink-faint uppercase tracking-wide font-semibold mb-1">Tindakan</p>
-            <p class="text-brand-ink bg-brand-warm p-3 rounded-lg">{{ $order->action }}</p>
+            <p class="text-brand-ink bg-brand-warm p-3 rounded-xl">{{ $order->action }}</p>
         </div>
         @endif
 
         @if($order->items->count())
         <div class="mb-6">
-            <p class="text-xs text-brand-ink-faint uppercase tracking-wide font-semibold mb-3">Sparepart Dipakai</p>
-            <div class="overflow-x-auto"><table class="w-full text-sm">
-                <thead><tr class="border-b border-brand-border"><th class="p-2 text-left font-semibold text-brand-ink-faint text-xs uppercase whitespace-nowrap">Nama</th><th class="p-2 text-right font-semibold text-brand-ink-faint text-xs uppercase whitespace-nowrap">Qty</th><th class="p-2 text-right font-semibold text-brand-ink-faint text-xs uppercase whitespace-nowrap">Harga</th><th class="p-2 text-right font-semibold text-brand-ink-faint text-xs uppercase whitespace-nowrap">Subtotal</th></tr></thead>
+            <p class="font-display font-bold text-brand-ink uppercase tracking-wide mb-3 text-sm">Sparepart Dipakai</p>
+            <div class="overflow-x-auto rounded-xl border border-brand-border"><table class="w-full text-sm">
+                <thead><tr class="border-b border-brand-border bg-brand-warm"><th class="p-2 text-left font-semibold text-brand-ink-faint text-xs uppercase whitespace-nowrap">Nama</th><th class="p-2 text-right font-semibold text-brand-ink-faint text-xs uppercase whitespace-nowrap">Qty</th><th class="p-2 text-right font-semibold text-brand-ink-faint text-xs uppercase whitespace-nowrap">Harga</th><th class="p-2 text-right font-semibold text-brand-ink-faint text-xs uppercase whitespace-nowrap">Subtotal</th></tr></thead>
                 <tbody>
                     @foreach($order->items as $item)
                     <tr class="border-b border-brand-border/50">
@@ -64,7 +64,7 @@
         </div>
         @endif
 
-        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-t border-brand-border pt-4">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-t border-brand-border pt-5">
             <div>
                 <p class="text-sm text-brand-ink-muted">Biaya Jasa: Rp{{ number_format($order->service_fee,0,',','.') }}</p>
                 <p class="text-lg font-bold text-brand-ink font-mono">Total: Rp{{ number_format($order->total,0,',','.') }}</p>
@@ -98,10 +98,10 @@
                 @endif
             </div>
         </div>
-    </div>
+    </x-card>
 
     @if($order->payments->count())
-    <div class="card p-5 max-w-2xl">
+    <x-card class="max-w-2xl">
         <h3 class="font-display font-bold text-brand-ink uppercase tracking-wide mb-3">Pembayaran</h3>
         @foreach($order->payments as $p)
         <div class="flex items-center justify-between border-b border-brand-border/50 py-2">
@@ -114,6 +114,6 @@
             </span>
         </div>
         @endforeach
-    </div>
+    </x-card>
     @endif
 </x-admin-layout>

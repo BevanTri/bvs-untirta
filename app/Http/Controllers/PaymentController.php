@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Payment;
+use App\Models\Product;
+use App\Models\RepairOrder;
 use App\Services\IpaymuService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller
@@ -15,6 +18,10 @@ class PaymentController extends Controller
     {
         if ($order->user_id !== Auth::id()) {
             abort(403);
+        }
+
+        if ($order->status === 'cancelled') {
+            return redirect()->route('orders.show', $order)->with('error', 'Pesanan telah dibatalkan dan tidak dapat dibayar lagi.');
         }
 
         if (!$order->user) {
@@ -80,14 +87,57 @@ class PaymentController extends Controller
             return response('OK', 200);
         }
 
+        $payable = $payment->payable;
+
+        // Guard: jangan proses callback jika pesanan sudah dibatalkan
+        if ($payable) {
+            $isCancelled = ($payable instanceof Order && $payable->status === 'cancelled')
+                || ($payable instanceof RepairOrder && $payable->status === 'dibatalkan');
+            if ($isCancelled) {
+                $payment->update(['status' => 'cancelled', 'raw_response' => $data]);
+                return response('OK', 200);
+            }
+        }
+
         $status = $data['status'] ?? 'pending';
+
+        // Idempotent: skip if already processed with same status
+        $failureStatuses = ['cancelled', 'expired', 'failed', 'denied', 'void', 'gagal'];
+        $isFailure = in_array($status, $failureStatuses);
+        $isSuccess = $status === 'berhasil';
+
+        if ($payment->status === $status) {
+            return response('OK', 200);
+        }
+
         $payment->update(['status' => $status, 'raw_response' => $data]);
 
-        $payable = $payment->payable;
         if ($payable) {
-            $payable->update(['payment_status' => $status === 'berhasil' ? 'paid' : ($status === 'gagal' ? 'failed' : 'pending')]);
-            if ($status === 'berhasil' && $payable instanceof Order) {
-                $payable->update(['status' => 'processing']);
+            if ($isSuccess) {
+                $payable->update(['payment_status' => 'paid']);
+                if ($payable instanceof Order) {
+                    $payable->update(['status' => 'processing']);
+                }
+            } elseif ($isFailure) {
+                DB::transaction(function () use ($payable) {
+                    if ($payable instanceof Order && $payable->status === 'pending') {
+                        foreach ($payable->items as $item) {
+                            if ($item->itemable_type === 'App\Models\Product' && $item->itemable_id) {
+                                Product::where('id', $item->itemable_id)->increment('stock', $item->quantity);
+                            }
+                        }
+                        $payable->update(['status' => 'cancelled', 'payment_status' => 'failed']);
+                    } elseif ($payable instanceof RepairOrder && $payable->status === 'menunggu') {
+                        foreach ($payable->items as $item) {
+                            if (!empty($item->product_id)) {
+                                Product::where('id', $item->product_id)->increment('stock', $item->quantity);
+                            }
+                        }
+                        $payable->update(['status' => 'dibatalkan', 'payment_status' => 'failed']);
+                    }
+                });
+            } else {
+                $payable->update(['payment_status' => 'pending']);
             }
         }
 
@@ -122,6 +172,9 @@ class PaymentController extends Controller
     public function payRepair(\App\Models\RepairOrder $repairOrder)
     {
         if ($repairOrder->user_id !== Auth::id()) abort(403);
+        if ($repairOrder->status === 'dibatalkan') {
+            return redirect()->route('repairs.show', $repairOrder)->with('error', 'Pesanan telah dibatalkan dan tidak dapat dibayar lagi.');
+        }
 
         try {
             $ipaymu = new IpaymuService();

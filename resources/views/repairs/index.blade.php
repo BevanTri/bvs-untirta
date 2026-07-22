@@ -2,18 +2,18 @@
     <div class="max-w-4xl mx-auto">
         <div class="flex items-center justify-between mb-6">
             <h1 class="font-display font-bold text-2xl text-brand-ink">Servis Saya</h1>
-            <a href="{{ route('repairs.create') }}" class="btn-primary">+ Ajukan Servis</a>
+            <a href="{{ route('repairs.create') }}" class="btn-primary w-full md:w-auto">+ Ajukan Servis</a>
         </div>
 
         @if(session('success'))
-        <div class="card p-4 mb-4 border-l-4 border-brand-gold bg-brand-amber/5 text-brand-ink font-medium">{{ session('success') }}</div>
+        <x-card padding="p-4" class="mb-4 border-l-4 border-brand-gold bg-brand-gold/5 text-brand-ink font-medium">{{ session('success') }}</x-card>
         @endif
 
         @if($orders->isEmpty())
-        <div class="card p-10 text-center">
+        <x-card class="text-center">
             <p class="text-brand-ink-muted mb-4">Belum ada servis diajukan</p>
-            <a href="{{ route('repairs.create') }}" class="btn-primary">Ajukan Servis</a>
-        </div>
+            <a href="{{ route('repairs.create') }}" class="btn-primary w-full md:w-auto">Ajukan Servis</a>
+        </x-card>
         @else
         <div class="space-y-4">
             @foreach($orders as $o)

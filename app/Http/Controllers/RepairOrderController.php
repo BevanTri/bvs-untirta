@@ -11,6 +11,7 @@ use App\Models\Vehicle;
 use App\Services\IpaymuService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class RepairOrderController extends Controller
 {
@@ -57,7 +58,6 @@ class RepairOrderController extends Controller
             'plate_number' => 'required_without:vehicle_id|string',
             'brand' => 'required_without:vehicle_id|string',
             'model' => 'required_without:vehicle_id|string',
-            'year' => 'nullable|integer|min:1900|max:2099',
             'mechanic_id' => 'nullable|exists:mechanics,id',
             'complaint' => 'required|string',
             'items' => 'nullable|array',
@@ -77,7 +77,7 @@ class RepairOrderController extends Controller
         } else {
             $vehicle = Vehicle::firstOrCreate(
                 ['plate_number' => $data['plate_number']],
-                ['customer_id' => $customer->id, 'brand' => $data['brand'], 'model' => $data['model'], 'year' => $data['year'] ?? null]
+                ['customer_id' => $customer->id, 'brand' => $data['brand'], 'model' => $data['model']]
             );
         }
 
@@ -113,6 +113,10 @@ class RepairOrderController extends Controller
                     'price' => $item['price'],
                     'subtotal' => $subtotal,
                 ]);
+
+                if (!empty($item['product_id'])) {
+                    Product::where('id', $item['product_id'])->decrement('stock', $item['quantity']);
+                }
             }
         }
         $order->update(['total' => $serviceFee + $itemsTotal]);
@@ -141,6 +145,9 @@ class RepairOrderController extends Controller
     public function pay(RepairOrder $repairOrder)
     {
         if ($repairOrder->user_id !== Auth::id()) abort(403);
+        if ($repairOrder->status === 'dibatalkan') {
+            return redirect()->route('repairs.show', $repairOrder)->with('error', 'Pesanan telah dibatalkan dan tidak dapat dibayar lagi.');
+        }
         return view('repairs.pay', ['order' => $repairOrder]);
     }
 
@@ -153,6 +160,25 @@ class RepairOrderController extends Controller
         }
         $repairOrder->update(['payment_status' => 'paid']);
         return back()->with('success', 'Pembayaran dikonfirmasi!');
+    }
+
+    public function cancel(RepairOrder $repairOrder)
+    {
+        if ($repairOrder->user_id !== Auth::id() && !Auth::user()?->is_admin) abort(403);
+        if ($repairOrder->status !== 'menunggu') {
+            return back()->with('error', 'Hanya pesanan dengan status Menunggu yang dapat dibatalkan.');
+        }
+
+        DB::transaction(function () use ($repairOrder) {
+            foreach ($repairOrder->items as $item) {
+                if (!empty($item->product_id)) {
+                    Product::where('id', $item->product_id)->increment('stock', $item->quantity);
+                }
+            }
+            $repairOrder->update(['status' => 'dibatalkan', 'payment_status' => 'failed']);
+        });
+
+        return redirect()->route('orders.history')->with('success', 'Pesanan berhasil dibatalkan. Stok produk telah dikembalikan.');
     }
 
     public function invoice(RepairOrder $repairOrder)

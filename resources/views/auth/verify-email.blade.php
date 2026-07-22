@@ -6,7 +6,7 @@
     </div>
 
     @if (session('status') == 'verification-link-sent')
-        <div class="mb-4 font-medium text-sm text-green-600 bg-green-50 p-3 rounded-lg">
+        <div class="mb-4 font-medium text-sm bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl p-4">
             {{ __('Tautan verifikasi baru telah dikirim ke email Anda.') }}
         </div>
     @endif

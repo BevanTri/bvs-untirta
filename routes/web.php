@@ -29,6 +29,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/servis/{repairOrder}', [RepairOrderController::class, 'show'])->name('repairs.show');
     Route::get('/servis/{repairOrder}/bayar', [RepairOrderController::class, 'pay'])->name('repairs.pay');
     Route::post('/servis/{repairOrder}/check-payment', [RepairOrderController::class, 'checkPayment'])->name('repairs.check-payment');
+    Route::post('/servis/{repairOrder}/cancel', [RepairOrderController::class, 'cancel'])->name('repairs.cancel');
     Route::get('/servis/{repairOrder}/invoice', [RepairOrderController::class, 'invoice'])->name('repairs.invoice');
 });
 
@@ -38,7 +39,7 @@ Route::post('/payment/callback', [PaymentController::class, 'callback'])->name('
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
-    Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+    Route::match(['get', 'post'], '/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
     Route::post('/cart/{cartItem}', [CartController::class, 'update'])->name('cart.update');
     Route::delete('/cart/{cartItem}', [CartController::class, 'destroy'])->name('cart.destroy');
 
@@ -48,6 +49,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/pesanan', [OrderController::class, 'history'])->name('orders.history');
     Route::get('/pesanan/{order}', [OrderController::class, 'show'])->name('orders.show');
     Route::get('/pesanan/{order}/bayar', [OrderController::class, 'pay'])->name('orders.pay');
+    Route::post('/pesanan/{order}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');
     Route::post('/pesanan/{order}/check-payment', [OrderController::class, 'checkPayment'])->name('orders.check-payment');
     Route::get('/pesanan/{order}/invoice', [AdminController::class, 'invoice'])->name('orders.invoice');
 

@@ -17,14 +17,14 @@
 
 @once
 <style>
-.picker-overlay { transition: opacity 250ms ease; opacity: 0; pointer-events: none; }
-.picker-overlay.show { opacity: 1; pointer-events: auto; }
+.picker-overlay { transition: opacity 250ms ease; opacity: 0; pointer-events: none; display: none; }
+.picker-overlay.show { opacity: 1; pointer-events: auto; display: block; }
 .picker-sheet { position: fixed; bottom: 0; left: 0; right: 0; max-height: 90dvh; transform: translateY(100%); transition: transform 300ms cubic-bezier(0.32, 0.72, 0, 1); }
 .picker-sheet.show { transform: translateY(0); }
 .picker-option:active { background: #F3F4F6; }
 .picker-search::placeholder { color: #9CA3AF; }
 @media (min-width: 768px) {
-  .picker-overlay { display: flex; align-items: center; justify-content: center; }
+  .picker-overlay.show { display: flex; align-items: center; justify-content: center; }
   .picker-sheet { position: relative !important; bottom: auto !important; left: auto !important; right: auto !important; transform: none !important; width: 100%; max-width: 560px; max-height: 80vh; margin: 0 16px; border-radius: 16px; opacity: 0; transition: opacity 250ms ease; }
   .picker-sheet.show { opacity: 1; }
 }
@@ -32,8 +32,10 @@
 <script>
 window.Picker = window.Picker || (function() {
     function open(id) {
-        document.getElementById('picker-overlay-'+id).classList.add('show');
+        var ov = document.getElementById('picker-overlay-'+id);
+        ov.style.display = ''; if (ov.offsetHeight) {}
         document.getElementById('picker-sheet-'+id).classList.add('show');
+        ov.classList.add('show');
         document.body.dataset.scrollY = window.scrollY;
         document.body.style.overflow = 'hidden';
         document.body.style.position = 'fixed';
@@ -42,7 +44,8 @@ window.Picker = window.Picker || (function() {
     }
     function close(id) {
         var sy = parseFloat(document.body.dataset.scrollY || '0');
-        document.getElementById('picker-overlay-'+id).classList.remove('show');
+        var ov = document.getElementById('picker-overlay-'+id);
+        ov.classList.remove('show');
         document.getElementById('picker-sheet-'+id).classList.remove('show');
         document.body.style.overflow = '';
         document.body.style.position = '';
@@ -50,6 +53,7 @@ window.Picker = window.Picker || (function() {
         document.body.style.top = '';
         window.scrollTo(0, sy);
         delete document.body.dataset.scrollY;
+        setTimeout(function(){ if(!ov.classList.contains('show')) ov.style.display = 'none'; }, 300);
     }
     function select(id, btn) {
         var value = btn.dataset.value;
@@ -82,16 +86,20 @@ window.Picker = window.Picker || (function() {
         if (e.target.classList.contains('picker-overlay')) close(e.target.dataset.picker);
     });
     // init: copy data attrs from pre-selected options to hidden inputs
-    document.querySelectorAll('.picker-option.selected').forEach(function(btn) {
-        var cont = btn.closest('[data-picker]');
-        if (!cont) return;
-        var hidden = cont.querySelector('.picker-hidden');
-        Array.from(btn.attributes).forEach(function(a) {
-            if (a.name.startsWith('data-') && a.name !== 'data-value' && a.name !== 'data-label') {
-                hidden.setAttribute(a.name, a.value);
-            }
+    function initPickerData() {
+        document.querySelectorAll('.picker-option.selected').forEach(function(btn) {
+            var cont = btn.closest('[data-picker]');
+            if (!cont) return;
+            var hidden = cont.querySelector('.picker-hidden');
+            Array.from(btn.attributes).forEach(function(a) {
+                if (a.name.startsWith('data-') && a.name !== 'data-value' && a.name !== 'data-label') {
+                    hidden.setAttribute(a.name, a.value);
+                }
+            });
         });
-    });
+    }
+    initPickerData();
+    document.addEventListener('DOMContentLoaded', initPickerData);
     // form validation for required pickers
     document.addEventListener('submit', function(e) {
         var form = e.target;
@@ -113,7 +121,7 @@ window.Picker = window.Picker || (function() {
 
 <div class="bottom-sheet-picker" data-picker="{{ $pickerId }}" data-onselect="{{ $onselect }}">
     @if($label)
-    <label class="text-xs font-semibold text-brand-steel uppercase tracking-widest mb-1 block">{{ $label }}</label>
+    <label class="text-xs font-semibold text-brand-ink-muted uppercase tracking-widest mb-1 block">{{ $label }}</label>
     @endif
 
     <button type="button" class="picker-trigger input-field w-full flex items-center justify-between gap-2" onclick="Picker.open('{{ $pickerId }}')">
@@ -123,7 +131,7 @@ window.Picker = window.Picker || (function() {
 
     <input type="hidden" name="{{ $name }}" value="{{ $selected }}" class="picker-hidden" {{ $required ? 'required' : '' }}>
 
-    <div id="picker-overlay-{{ $pickerId }}" class="picker-overlay fixed inset-0 bg-black/50 z-[60]" data-picker="{{ $pickerId }}">
+    <div id="picker-overlay-{{ $pickerId }}" class="picker-overlay fixed inset-0 bg-black/50 z-[70]" data-picker="{{ $pickerId }}">
         <div id="picker-sheet-{{ $pickerId }}" class="picker-sheet bg-white rounded-t-2xl shadow-2xl flex flex-col" onclick="event.stopPropagation();">
             <div class="shrink-0 px-4 pt-3 pb-2 border-b border-brand-border/50">
                 <div class="flex justify-center mb-2 md:hidden">

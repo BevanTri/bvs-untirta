@@ -39,7 +39,7 @@ class CartController extends Controller
             $name .= ' + ' . $product->name;
         }
 
-        // Check if same item already in cart → increment qty instead
+        // Cek apakah item sudah ada di keranjang
         $existing = CartItem::where('user_id', Auth::id())
             ->where('itemable_type', $model::class)
             ->where('itemable_id', $model->id)
@@ -47,7 +47,8 @@ class CartController extends Controller
             ->first();
 
         if ($existing) {
-            $existing->increment('quantity', $data['quantity']);
+            // Update quantity sesuai pilihan user (bukan increment otomatis)
+            $existing->update(['quantity' => $data['quantity'], 'unit_price' => $unitPrice, 'name' => $name]);
             $itemId = $existing->id;
         } else {
             $item = CartItem::create([
@@ -64,9 +65,12 @@ class CartController extends Controller
 
         if ($request->has('buy_now')) {
             CartItem::where('user_id', Auth::id())->where('id', '!=', $itemId)->delete();
-            return redirect()->route('checkout.index')->with('toast', 'Barang ditambahkan ke keranjang');
+            if ($request->ajax() || $request->wantsJson()) {
+                return response()->json(['redirect' => route('checkout.index')]);
+            }
+            return redirect()->route('checkout.index');
         }
-        return back()->with('toast', 'Barang ditambahkan ke keranjang');
+        return back()->with('toast', 'Barang berhasil ditambahkan ke keranjang.');
     }
 
     public function update(Request $request, CartItem $cartItem)
@@ -92,7 +96,7 @@ class CartController extends Controller
     {
         $selectedIds = $request->input('selected', []);
         if (empty($selectedIds)) {
-            return redirect()->route('cart.index')->with('success', 'Pilih item yang ingin dibeli.');
+            return redirect()->route('cart.index')->with('warning', 'Pilih item yang ingin dibeli.');
         }
 
         $qtyInputs = $request->input('qty', []);
@@ -102,52 +106,6 @@ class CartController extends Controller
             $ci->update(['quantity' => $qty]);
         }
 
-        $items = CartItem::whereIn('id', $selectedIds)->where('user_id', Auth::id())->with('itemable', 'serviceProduct')->get();
-        if ($items->isEmpty()) {
-            return redirect()->route('cart.index')->with('success', 'Pilih item yang ingin dibeli.');
-        }
-
-        $data = $request->validate([
-            'customer_name' => 'required|string|max:255',
-            'notes' => 'nullable|string',
-        ]);
-
-        $order = Order::create([
-            'user_id' => Auth::id(),
-            'order_number' => 'INV-' . now()->format('Ymd') . '-' . str()->upper(str()->random(6)),
-            'customer_name' => $data['customer_name'],
-            'notes' => $data['notes'],
-            'subtotal' => 0,
-            'total' => 0,
-        ]);
-
-        $subtotal = 0;
-        foreach ($items as $ci) {
-            $price = $ci->unit_price;
-            $qty = $ci->quantity;
-            $lineTotal = $price * $qty;
-            $subtotal += $lineTotal;
-
-            if ($ci->itemable_type === 'App\Models\Product' && $ci->itemable) {
-                if ($ci->itemable->stock < $qty) {
-                    return redirect()->route('cart.index')->with('success', 'Stok ' . $ci->itemable->name . ' tidak mencukupi.');
-                }
-                $ci->itemable->decrement('stock', $qty);
-            }
-
-            $order->items()->create([
-                'itemable_id' => $ci->itemable_id,
-                'itemable_type' => $ci->itemable_type,
-                'name' => $ci->name,
-                'quantity' => $qty,
-                'price' => $price,
-                'subtotal' => $lineTotal,
-            ]);
-            $ci->delete();
-        }
-
-        $order->update(['subtotal' => $subtotal, 'total' => $subtotal]);
-
-        return redirect()->route('orders.pay', $order);
+        return redirect()->route('checkout.index');
     }
 }

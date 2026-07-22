@@ -10,9 +10,8 @@
     <link href="https://fonts.bunny.net/css?family=oswald:500,600,700&display=swap" rel="stylesheet" />
     <link href="https://fonts.bunny.net/css?family=jetbrains-mono:400,500,700&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/webp" href="{{ asset('images/logo-untirta.webp') }}">
-    <link rel="stylesheet" href="{{ asset('build/assets/app-BQw28aOk.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/assets/app-CgeNcYon.css') }}">
     <script type="module" src="{{ asset('build/assets/app-B9qO1Jfl.js') }}"></script>
-    <style>.main-content .card { overflow-x: auto; }</style>
 </head>
 <body class="font-sans antialiased bg-brand-warm text-brand-ink">
     <div class="flex md:h-screen flex-col md:flex-row">
@@ -96,7 +95,7 @@
         </div>
 
         {{-- Mobile Sidebar --}}
-        <div id="mobile-sidebar" class="md:hidden fixed inset-0 z-[60] bg-white/95 backdrop-blur-sm hidden">
+        <div id="mobile-sidebar" class="md:hidden fixed inset-0 z-[70] bg-white/95 backdrop-blur-sm hidden">
             <div class="flex items-center justify-between px-4 h-14 border-b border-brand-border">
                 <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2">
                     <img src="{{ asset('images/logo-untirta.webp') }}" alt="Untirta" class="h-6 w-auto">
@@ -142,12 +141,11 @@
             </header>
 
             <main class="flex-1 overflow-y-auto">
-                <div class="py-6 px-4 md:px-6 min-w-0 main-content">
+                <div class="py-6 px-4 md:px-6 min-w-0">
                     {{ $slot }}
                 </div>
             </main>
         </div>
     </div>
-
 </body>
 </html>

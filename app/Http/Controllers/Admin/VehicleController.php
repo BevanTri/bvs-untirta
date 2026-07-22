@@ -29,8 +29,6 @@ class VehicleController extends Controller
             'plate_number' => 'required|string|max:20',
             'brand' => 'required|string|max:100',
             'model' => 'required|string|max:100',
-            'year' => 'nullable|integer|min:1900|max:2099',
-            'color' => 'nullable|string|max:50',
         ]));
         return back()->with('success', 'Kendaraan ditambahkan');
     }
@@ -42,8 +40,6 @@ class VehicleController extends Controller
             'plate_number' => 'required|string|max:20',
             'brand' => 'required|string|max:100',
             'model' => 'required|string|max:100',
-            'year' => 'nullable|integer|min:1900|max:2099',
-            'color' => 'nullable|string|max:50',
         ]));
         return back()->with('success', 'Kendaraan diupdate');
     }

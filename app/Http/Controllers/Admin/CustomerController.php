@@ -21,7 +21,6 @@ class CustomerController extends Controller
     {
         Customer::create($r->validate([
             'name' => 'required|string|max:255',
-            'address' => 'nullable|string',
             'email' => 'nullable|email|max:255',
         ]));
         return back()->with('success', 'Pelanggan ditambahkan');
@@ -31,7 +30,6 @@ class CustomerController extends Controller
     {
         $customer->update($r->validate([
             'name' => 'required|string|max:255',
-            'address' => 'nullable|string',
             'email' => 'nullable|email|max:255',
         ]));
         return back()->with('success', 'Pelanggan diupdate');

@@ -24,7 +24,6 @@
                     <input type="email" name="email" placeholder="Email" class="input-field">
                     <button type="submit" class="btn-primary w-full md:w-auto">Tambah</button>
                 </div>
-                <textarea name="address" placeholder="Alamat (opsional)" class="input-field mt-4" rows="2"></textarea>
             </form>
         </div>
 
@@ -64,7 +63,6 @@
                                         <input type="email" name="email" value="{{ $c->email }}" class="input-field">
                                         <button type="submit" class="btn-primary w-full md:w-auto">Simpan</button>
                                     </div>
-                                    <textarea name="address" class="input-field mt-4" rows="2">{{ $c->address }}</textarea>
                                     <button type="button" onclick="document.getElementById('cst-edit-{{ $c->id }}').classList.add('hidden')" class="btn-outline mt-5 w-full md:w-auto">Batal</button>
                                 </form>
                             </td>

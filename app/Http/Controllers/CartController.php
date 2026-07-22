@@ -13,7 +13,7 @@ class CartController extends Controller
 {
     public function index()
     {
-        $items = CartItem::where('user_id', Auth::id())->with('itemable', 'serviceProduct')->latest()->get();
+        $items = CartItem::where('user_id', Auth::id())->with('itemable')->latest()->get();
         $total = $items->sum(fn($i) => $i->unit_price * $i->quantity);
         return view('cart.index', compact('items', 'total'));
     }
@@ -24,26 +24,17 @@ class CartController extends Controller
             'type' => 'required|in:product,service',
             'id' => 'required|integer',
             'quantity' => 'required|integer|min:1',
-            'service_product_id' => 'nullable|integer|exists:products,id',
         ]);
 
         $model = $data['type'] === 'product' ? Product::findOrFail($data['id']) : Service::findOrFail($data['id']);
-        $serviceProductId = $request->input('service_product_id');
 
         $unitPrice = $model->price;
         $name = $model->name;
-
-        if ($serviceProductId) {
-            $product = Product::findOrFail($serviceProductId);
-            $unitPrice += $product->price;
-            $name .= ' + ' . $product->name;
-        }
 
         // Cek apakah item sudah ada di keranjang
         $existing = CartItem::where('user_id', Auth::id())
             ->where('itemable_type', $model::class)
             ->where('itemable_id', $model->id)
-            ->where('service_product_id', $serviceProductId)
             ->first();
 
         if ($existing) {
@@ -55,7 +46,6 @@ class CartController extends Controller
                 'user_id' => Auth::id(),
                 'itemable_id' => $model->id,
                 'itemable_type' => $model::class,
-                'service_product_id' => $serviceProductId,
                 'quantity' => $data['quantity'],
                 'unit_price' => $unitPrice,
                 'name' => $name,

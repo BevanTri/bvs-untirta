@@ -18,7 +18,6 @@ class MechanicController extends Controller
         Mechanic::create($r->validate([
             'name' => 'required|string|max:255',
             'specialist' => 'nullable|string|max:255',
-            'phone' => 'nullable|string|max:20',
         ]));
         return back()->with('success', 'Mekanik ditambahkan');
     }
@@ -28,7 +27,6 @@ class MechanicController extends Controller
         $mechanic->update($r->validate([
             'name' => 'required|string|max:255',
             'specialist' => 'nullable|string|max:255',
-            'phone' => 'nullable|string|max:20',
         ]));
         return back()->with('success', 'Mekanik diupdate');
     }

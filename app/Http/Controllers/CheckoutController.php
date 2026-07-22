@@ -11,7 +11,7 @@ class CheckoutController extends Controller
 {
     public function index()
     {
-        $items = CartItem::where('user_id', Auth::id())->with('itemable', 'serviceProduct')->latest()->get();
+        $items = CartItem::where('user_id', Auth::id())->with('itemable')->latest()->get();
         if ($items->isEmpty()) {
             return redirect()->route('cart.index')->with('warning', 'Keranjang masih kosong.');
         }
@@ -21,7 +21,7 @@ class CheckoutController extends Controller
 
     public function process(Request $request)
     {
-        $items = CartItem::where('user_id', Auth::id())->with('itemable', 'serviceProduct')->get();
+        $items = CartItem::where('user_id', Auth::id())->with('itemable')->get();
         if ($items->isEmpty()) {
             return redirect()->route('cart.index')->with('warning', 'Keranjang masih kosong.');
         }

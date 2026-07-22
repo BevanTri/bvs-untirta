@@ -19,8 +19,6 @@ class CustomerSeeder extends Seeder
         foreach ($names as $i => $name) {
             Customer::create([
                 'name' => $name,
-                'phone' => '08' . rand(100000000, 999999999),
-                'address' => fake()->address(),
                 'email' => strtolower(str_replace(' ', '.', $name)) . '@email.com',
             ]);
         }

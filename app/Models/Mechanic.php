@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Mechanic extends Model
 {
-    protected $fillable = ['name', 'specialist', 'phone'];
+    protected $fillable = ['name', 'specialist'];
 
     public function repairOrders(): HasMany
     {

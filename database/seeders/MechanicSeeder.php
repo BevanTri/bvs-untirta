@@ -10,11 +10,11 @@ class MechanicSeeder extends Seeder
     public function run(): void
     {
         $mechanics = [
-            ['name' => 'Ahmad Rizki', 'specialist' => 'Mesin', 'phone' => '081234567890'],
-            ['name' => 'Bambang Sutejo', 'specialist' => 'Kelistrikan', 'phone' => '081234567891'],
-            ['name' => 'Cecep Hermawan', 'specialist' => 'Sasis & Transmisi', 'phone' => '081234567892'],
-            ['name' => 'Deni Gunawan', 'specialist' => 'AC & Pendingin', 'phone' => '081234567893'],
-            ['name' => 'Eko Prasetyo', 'specialist' => 'Umum', 'phone' => '081234567894'],
+            ['name' => 'Ahmad Rizki', 'specialist' => 'Mesin'],
+            ['name' => 'Bambang Sutejo', 'specialist' => 'Kelistrikan'],
+            ['name' => 'Cecep Hermawan', 'specialist' => 'Sasis & Transmisi'],
+            ['name' => 'Deni Gunawan', 'specialist' => 'AC & Pendingin'],
+            ['name' => 'Eko Prasetyo', 'specialist' => 'Umum'],
         ];
 
         foreach ($mechanics as $m) {

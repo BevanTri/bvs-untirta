@@ -80,8 +80,7 @@ class AdminController extends Controller
         if ($s = $r->search) {
             $q->where(function($query) use ($s) {
                 $query->where('order_number', 'like', "%$s%")
-                    ->orWhere('customer_name', 'like', "%$s%")
-                    ->orWhere('customer_phone', 'like', "%$s%");
+                    ->orWhere('customer_name', 'like', "%$s%");
             });
         }
         return view('admin.orders', ['orders' => $q->latest()->paginate(20), 'search' => $r->search]);

@@ -27,7 +27,7 @@
 
             {{-- Order Info Card --}}
             <div class="card p-5 rounded-xl">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
                     <div>
                         <p class="text-xs text-brand-ink-faint uppercase tracking-widest font-semibold">Tanggal</p>
                         <p class="font-medium mt-1 text-brand-ink">{{ $order->created_at->format('d M Y H:i') }}</p>
@@ -39,10 +39,6 @@
                     <div>
                         <p class="text-xs text-brand-ink-faint uppercase tracking-widest font-semibold">Pelanggan</p>
                         <p class="font-medium mt-1 text-brand-ink">{{ $order->customer_name }}</p>
-                    </div>
-                    <div>
-                        <p class="text-xs text-brand-ink-faint uppercase tracking-widest font-semibold">Telepon</p>
-                        <p class="font-medium mt-1 text-brand-ink">{{ $order->customer_phone }}</p>
                     </div>
                 </div>
             </div>

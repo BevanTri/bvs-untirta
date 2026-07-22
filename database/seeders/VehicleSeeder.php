@@ -12,8 +12,6 @@ class VehicleSeeder extends Seeder
     {
         $brands = ['Honda', 'Yamaha', 'Suzuki', 'Kawasaki', 'Toyota', 'Daihatsu', 'Mitsubishi'];
         $models = ['Vario', 'Nmax', 'Aerox', 'Beat', 'Scoopy', 'Supra', 'Jupiter', 'Mio', 'Satria', 'Shogun', 'Avanza', 'Xenia', 'Innova', 'Pajero', 'Rush'];
-        $colors = ['Hitam', 'Putih', 'Merah', 'Biru', 'Hijau', 'Abu-abu', 'Silver', 'Coklat'];
-
         $customers = Customer::all();
         foreach ($customers as $c) {
             $count = rand(1, 3);
@@ -23,8 +21,6 @@ class VehicleSeeder extends Seeder
                     'plate_number' => strtoupper(fake()->bothify('?? #### ??')),
                     'brand' => $brands[array_rand($brands)],
                     'model' => $models[array_rand($models)],
-                    'year' => rand(2015, 2025),
-                    'color' => $colors[array_rand($colors)],
                 ]);
             }
         }

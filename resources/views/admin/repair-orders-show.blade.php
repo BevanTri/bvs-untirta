@@ -25,7 +25,7 @@
             <div>
                 <p class="text-xs text-brand-ink-faint uppercase tracking-wide font-semibold mb-1">Kendaraan</p>
                 <p class="font-medium">{{ $order->vehicle->plate_number }}</p>
-                <p class="text-sm text-brand-ink-muted">{{ $order->vehicle->brand }} {{ $order->vehicle->model }} ({{ $order->vehicle->year ?? '-' }})</p>
+                <p class="text-sm text-brand-ink-muted">{{ $order->vehicle->brand }} {{ $order->vehicle->model }}</p>
             </div>
             <div>
                 <p class="text-xs text-brand-ink-faint uppercase tracking-wide font-semibold mb-1">Mekanik</p>

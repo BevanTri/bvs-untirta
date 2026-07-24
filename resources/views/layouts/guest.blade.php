@@ -18,22 +18,22 @@
     </style>
 </head>
 <body class="font-sans antialiased auth-bg min-h-screen flex flex-col overflow-x-hidden">
-    <div class="flex-1 flex flex-col items-center justify-center px-4 py-12 relative">
+    <div class="flex-1 flex flex-col items-center justify-center px-4 py-6 md:py-10 relative">
         <div class="auth-glow bg-brand-gold" style="top:-100px;right:-100px"></div>
         <div class="auth-glow bg-brand-blue" style="bottom:-100px;left:-100px"></div>
 
-        <a href="{{ url('/') }}" class="flex items-center gap-2.5 mb-8 relative">
-            <img src="{{ asset('images/logo-untirta.webp') }}" alt="Untirta" class="h-9 w-auto">
-            <span class="font-display font-bold text-white text-2xl tracking-[0.05em] uppercase">BVS Untirta</span>
+        <a href="{{ url('/') }}" class="flex items-center gap-2.5 mb-6 md:mb-8 relative">
+            <img src="{{ asset('images/logo-untirta.webp') }}" alt="Untirta" class="h-8 md:h-9 w-auto">
+            <span class="font-display font-bold text-white text-xl md:text-2xl tracking-[0.05em] uppercase">BVS Untirta</span>
         </a>
 
         <div class="w-full sm:max-w-md relative">
-            <div class="bg-white/95 backdrop-blur-sm rounded-2xl shadow-level-4 p-6 sm:p-8">
+            <div class="bg-white/95 backdrop-blur-sm rounded-2xl shadow-level-4 p-5 sm:p-8">
                 {{ $slot }}
             </div>
         </div>
 
-        <p class="text-zinc-500 text-xs mt-8 tracking-wide relative">&copy; {{ date('Y') }} Bengkel Vokasi &amp; Sains Untirta</p>
+        <p class="text-zinc-500 text-xs mt-6 md:mt-8 tracking-wide relative">&copy; {{ date('Y') }} Bengkel Vokasi &amp; Sains Untirta</p>
     </div>
 
     <x-toast />

@@ -11,17 +11,17 @@
         </div>
     @endif
 
-    <div class="mt-4 flex items-center justify-between gap-4">
-        <form method="POST" action="{{ route('verification.send') }}">
+    <div class="mt-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <form method="POST" action="{{ route('verification.send') }}" class="w-full sm:w-auto">
             @csrf
-            <x-primary-button>
+            <x-primary-button class="w-full justify-center">
                 {{ __('Kirim Ulang Email') }}
             </x-primary-button>
         </form>
 
-        <form method="POST" action="{{ route('logout') }}">
+        <form method="POST" action="{{ route('logout') }}" class="w-full sm:w-auto">
             @csrf
-            <button type="submit" class="text-sm text-brand-blue hover:text-brand-blue/80 font-medium">
+            <button type="submit" class="w-full justify-center btn-primary">
                 {{ __('Log Out') }}
             </button>
         </form>

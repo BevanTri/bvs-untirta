@@ -1,7 +1,7 @@
 @section('title', 'Daftar')
 
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}" class="card p-5 space-y-4">
+    <form method="POST" action="{{ route('register') }}" class="space-y-4">
         @csrf
 
         <div>

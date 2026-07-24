@@ -26,7 +26,7 @@ Route::post('/token', function (Request $request) {
     return $user->createToken($request->device_name)->plainTextToken;
 });
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('/services', [ApiServiceController::class, 'index']);
     Route::get('/customers', [ApiCustomerController::class, 'index']);
 });

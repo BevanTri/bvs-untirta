@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CustomerController as ApiCustomerController;
-use App\Http\Controllers\Api\RepairOrderController as ApiRepairOrderController;
+use App\Http\Controllers\Api\ServiceController as ApiServiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +27,6 @@ Route::post('/token', function (Request $request) {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/services', [ApiRepairOrderController::class, 'index']);
+    Route::get('/services', [ApiServiceController::class, 'index']);
     Route::get('/customers', [ApiCustomerController::class, 'index']);
 });

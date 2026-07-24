@@ -14,11 +14,11 @@
     <script type="module" src="{{ asset('build/assets/app-B9qO1Jfl.js') }}"></script>
     <style>
         .auth-bg { background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%); }
-        .auth-glow { position: absolute; width: 400px; height: 400px; border-radius: 50%; filter: blur(120px); opacity: 0.08; pointer-events: none; }
+        .auth-glow { position: fixed; width: 400px; height: 400px; border-radius: 50%; filter: blur(120px); opacity: 0.08; pointer-events: none; }
     </style>
 </head>
 <body class="font-sans antialiased auth-bg min-h-screen flex flex-col overflow-x-hidden">
-    <div class="flex-1 flex flex-col items-center justify-center px-4 py-6 md:py-10 relative">
+    <div class="flex-1 flex flex-col items-center justify-center px-4 py-6 md:py-10">
         <div class="auth-glow bg-brand-gold" style="top:-100px;right:-100px"></div>
         <div class="auth-glow bg-brand-blue" style="bottom:-100px;left:-100px"></div>
 

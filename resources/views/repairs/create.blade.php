@@ -243,6 +243,7 @@
             if (selectedItems.length === 0) {
                 container.innerHTML = '';
                 jsonInput.value = '[]';
+                updateSummary();
                 return;
             }
             container.innerHTML = selectedItems.map((item, i) => {

@@ -10,9 +10,16 @@
     <link href="https://fonts.bunny.net/css?family=oswald:500,600,700&display=swap" rel="stylesheet" />
     <link href="https://fonts.bunny.net/css?family=jetbrains-mono:400,500,700&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/webp" href="{{ asset('images/logo-untirta.webp') }}">
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="font-sans antialiased bg-brand-warm text-brand-ink">
+<body class="font-sans antialiased bg-brand-warm dark:bg-brand-navy text-brand-ink dark:text-zinc-100">
     <div class="flex md:h-screen flex-col md:flex-row">
         {{-- Sidebar --}}
         <aside class="hidden md:flex md:flex-col w-64 bg-brand-navy text-white shrink-0 md:min-h-screen">
@@ -83,24 +90,32 @@
         </aside>
 
         {{-- Mobile Header --}}
-        <div class="md:hidden fixed top-0 left-0 right-0 z-50 bg-white border-b border-brand-border flex items-center justify-between px-4 h-14">
-            <a href="{{ route('admin.dashboard') }}" class="font-display font-bold text-brand-navy text-lg tracking-[0.05em] uppercase">BVS Untirta</a>
+        <div class="md:hidden fixed top-0 left-0 right-0 z-50 bg-white dark:bg-brand-navy-2 border-b border-brand-border dark:border-brand-navy-3 flex items-center justify-between px-4 h-14">
+            <a href="{{ route('admin.dashboard') }}" class="font-display font-bold text-brand-navy dark:text-white text-lg tracking-[0.05em] uppercase">BVS Untirta</a>
             <div class="flex items-center gap-2">
-                <a href="{{ route('home') }}" class="text-xs text-brand-ink-muted hover:text-brand-blue transition-colors tracking-wide">&larr; Lihat Toko</a>
-                <button onclick="document.getElementById('mobile-sidebar').classList.toggle('hidden')" class="text-brand-ink-muted hover:text-brand-blue p-1 transition-colors">
+                <button type="button" class="theme-toggle text-brand-ink-muted hover:text-brand-blue dark:text-zinc-400 dark:hover:text-brand-gold p-1 transition-colors cursor-pointer touch-target flex items-center justify-center rounded-xl hover:bg-brand-warm-2 dark:hover:bg-brand-navy-3" title="Ubah Tema">
+                    <svg class="theme-toggle-dark-icon w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                    </svg>
+                    <svg class="theme-toggle-light-icon w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.364l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                </button>
+                <a href="{{ route('home') }}" class="text-xs text-brand-ink-muted dark:text-zinc-400 hover:text-brand-blue dark:hover:text-brand-blue-light transition-colors tracking-wide">&larr; Lihat Toko</a>
+                <button onclick="document.getElementById('mobile-sidebar').classList.toggle('hidden')" class="text-brand-ink-muted dark:text-zinc-400 hover:text-brand-blue dark:hover:text-brand-blue-light p-1 transition-colors">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                 </button>
             </div>
         </div>
 
         {{-- Mobile Sidebar --}}
-        <div id="mobile-sidebar" class="md:hidden fixed inset-0 z-[70] bg-white/95 backdrop-blur-sm hidden">
-            <div class="flex items-center justify-between px-4 h-14 border-b border-brand-border">
+        <div id="mobile-sidebar" class="md:hidden fixed inset-0 z-[70] bg-white/95 dark:bg-brand-navy-2/95 backdrop-blur-sm hidden">
+            <div class="flex items-center justify-between px-4 h-14 border-b border-brand-border dark:border-brand-navy-3">
                 <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2">
                     <img src="{{ asset('images/logo-untirta.webp') }}" alt="Untirta" class="h-6 w-auto">
-                    <span class="font-display font-bold text-brand-navy text-lg tracking-[0.05em] uppercase">BVS Untirta</span>
+                    <span class="font-display font-bold text-brand-navy dark:text-white text-lg tracking-[0.05em] uppercase">BVS Untirta</span>
                 </a>
-                <button onclick="document.getElementById('mobile-sidebar').classList.add('hidden')" class="text-brand-ink-muted hover:text-brand-blue p-1 transition-colors">
+                <button onclick="document.getElementById('mobile-sidebar').classList.add('hidden')" class="text-brand-ink-muted dark:text-zinc-400 hover:text-brand-blue dark:hover:text-brand-blue-light p-1 transition-colors">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                 </button>
             </div>
@@ -128,14 +143,22 @@
 
         {{-- Main Content --}}
         <div class="flex-1 flex flex-col min-h-screen md:min-h-0 md:pt-0 pt-14">
-            <header class="hidden md:flex h-16 items-center justify-between px-6 border-b border-brand-border bg-white">
+            <header class="hidden md:flex h-16 items-center justify-between px-6 border-b border-brand-border dark:border-brand-navy-3 bg-white dark:bg-brand-navy-2">
                 <div>
                     @isset($title)
-                    <h1 class="font-display font-bold text-xl text-brand-navy uppercase tracking-wide">{{ $title }}</h1>
+                    <h1 class="font-display font-bold text-xl text-brand-navy dark:text-white uppercase tracking-wide">{{ $title }}</h1>
                     @endisset
                 </div>
                 <div class="flex items-center gap-4">
-                    <a href="{{ route('home') }}" class="text-xs text-brand-ink-muted hover:text-brand-blue transition-colors tracking-wide">&larr; Lihat Toko</a>
+                    <button type="button" class="theme-toggle text-brand-ink-muted hover:text-brand-blue dark:text-zinc-400 dark:hover:text-brand-gold p-2 transition-colors cursor-pointer touch-target flex items-center justify-center rounded-xl hover:bg-brand-warm-2 dark:hover:bg-brand-navy-3" title="Ubah Tema">
+                        <svg class="theme-toggle-dark-icon w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                        </svg>
+                        <svg class="theme-toggle-light-icon w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.364l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </button>
+                    <a href="{{ route('home') }}" class="text-xs text-brand-ink-muted dark:text-zinc-400 hover:text-brand-blue dark:hover:text-brand-blue-light transition-colors tracking-wide">&larr; Lihat Toko</a>
                 </div>
             </header>
 

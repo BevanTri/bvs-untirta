@@ -10,14 +10,21 @@
     <link href="https://fonts.bunny.net/css?family=oswald:500,600,700&display=swap" rel="stylesheet" />
     <link href="https://fonts.bunny.net/css?family=jetbrains-mono:400,500,700&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/webp" href="{{ asset('images/logo-untirta.webp') }}">
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="font-sans antialiased text-brand-ink bg-brand-warm min-h-screen flex flex-col overflow-x-hidden">
+<body class="font-sans antialiased text-brand-ink dark:text-zinc-100 bg-brand-warm dark:bg-brand-navy min-h-screen flex flex-col overflow-x-hidden">
     <div class="min-h-screen flex flex-col">
         @include('layouts.navigation')
 
         @isset($header)
-            <header class="bg-white border-b border-brand-border/80">
+            <header class="bg-white dark:bg-brand-navy-2 border-b border-brand-border/80 dark:border-brand-navy-3">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>

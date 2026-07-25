@@ -19,7 +19,7 @@
         @apply bg-white dark:bg-brand-navy-2 border border-brand-border dark:border-brand-navy-3 shadow-level-1 rounded-2xl;
     }
     .card-hover {
-        @apply card transition-all duration-200 hover:border-brand-gold-light hover:shadow-card-hover hover:-translate-y-0.5;
+        @apply card transition-all duration-200 hover:border-brand-gold-light hover:shadow-card-hover hover:-translate-y-0.5 active:border-brand-gold dark:active:border-brand-gold-dark;
     }
     .card-accent {
         @apply card-hover border-l-4 border-l-brand-gold;

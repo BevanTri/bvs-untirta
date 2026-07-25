@@ -43,24 +43,24 @@
                 <x-bottom-sheet-picker name="mechanic_id" label="Mekanik" placeholder="Pilih Mekanik" :selected="isset($order) ? (string)$order->mechanic_id : ''" :options="$mechanicOptions" />
             </div>
             <div>
-                <label class="block text-sm font-medium text-brand-ink mb-1.5">Tanggal</label>
+                <label class="block text-sm font-medium text-brand-ink dark:text-zinc-100 mb-1.5">Tanggal</label>
                 <input type="date" name="date" value="{{ isset($order) ? $order->date->format('Y-m-d') : date('Y-m-d') }}" class="input-field w-full" required>
             </div>
         </div>
 
         <div class="mb-3">
-            <label class="block text-sm font-medium text-brand-ink mb-1.5">Keluhan</label>
+            <label class="block text-sm font-medium text-brand-ink dark:text-zinc-100 mb-1.5">Keluhan</label>
             <textarea name="complaint" class="input-field w-full" rows="3" required>{{ $order->complaint ?? '' }}</textarea>
         </div>
 
         <div class="mb-3">
-            <label class="block text-sm font-medium text-brand-ink mb-1.5">Tindakan</label>
+            <label class="block text-sm font-medium text-brand-ink dark:text-zinc-100 mb-1.5">Tindakan</label>
             <textarea name="action" class="input-field w-full" rows="3">{{ $order->action ?? '' }}</textarea>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-3">
             <div>
-                <label class="block text-sm font-medium text-brand-ink mb-1.5">Biaya Jasa</label>
+                <label class="block text-sm font-medium text-brand-ink dark:text-zinc-100 mb-1.5">Biaya Jasa</label>
                 <input type="number" name="service_fee" id="service-fee" value="{{ $order->service_fee ?? 0 }}" class="input-field w-full" min="0" step="0.01" required oninput="updateSummary()">
             </div>
             <div>
@@ -69,15 +69,15 @@
         </div>
 
         <div class="mb-3">
-            <label class="block text-sm font-medium text-brand-ink mb-1.5">Sparepart Dipakai</label>
+            <label class="block text-sm font-medium text-brand-ink dark:text-zinc-100 mb-1.5">Sparepart Dipakai</label>
             <div id="items-container">
                 @if(isset($order) && $order->items->count())
                     @foreach($order->items as $idx => $item)
-                    <div class="item-row inline-flex items-center gap-2 px-3 py-1.5 bg-brand-warm border border-brand-border rounded-xl text-sm mb-1.5 mr-1.5">
-                        <span class="font-medium text-brand-ink truncate max-w-[150px] sm:max-w-[200px]">{{ $item->name }}</span>
-                        <input type="number" name="items[{{ $idx }}][quantity]" value="{{ $item->quantity }}" min="1" class="w-14 text-center text-xs border border-brand-border rounded-md py-0.5" oninput="updateSummary()">
-                        <span class="text-xs text-brand-ink-muted tabular-nums">Rp{{ number_format($item->price,0,',','.') }}</span>
-                        <button type="button" onclick="this.closest('.item-row').remove(); updateSummary();" class="text-red-400 hover:text-red-600 text-lg leading-none ml-0.5">&times;</button>
+                    <div class="item-row inline-flex items-center gap-2 px-3 py-1.5 bg-brand-warm dark:bg-brand-navy-3/30 border border-brand-border dark:border-brand-navy-3 rounded-xl text-sm mb-1.5 mr-1.5">
+                        <span class="font-medium text-brand-ink dark:text-zinc-100 truncate max-w-[150px] sm:max-w-[200px]">{{ $item->name }}</span>
+                        <input type="number" name="items[{{ $idx }}][quantity]" value="{{ $item->quantity }}" min="1" class="w-14 text-center text-xs border border-brand-border dark:border-brand-navy-3 rounded-md py-0.5" oninput="updateSummary()">
+                        <span class="text-xs text-brand-ink-muted dark:text-zinc-400 tabular-nums">Rp{{ number_format($item->price,0,',','.') }}</span>
+                        <button type="button" onclick="this.closest('.item-row').remove(); updateSummary();" class="text-red-400 dark:text-red-400 hover:text-red-600 dark:hover:text-red-300 text-lg leading-none ml-0.5">&times;</button>
                         <input type="hidden" name="items[{{ $idx }}][product_id]" value="{{ $item->product_id }}">
                         <input type="hidden" name="items[{{ $idx }}][name]" value="{{ $item->name }}">
                         <input type="hidden" name="items[{{ $idx }}][price]" value="{{ $item->price }}">
@@ -85,22 +85,22 @@
                     @endforeach
                 @endif
             </div>
-            <button type="button" onclick="openBottomSheet()" class="btn-outline mt-2 !border-brand-border/30 !text-brand-ink-muted text-sm w-full justify-center">+ Pilih Sparepart</button>
+            <button type="button" onclick="openBottomSheet()" class="btn-outline mt-2 !border-brand-border/30 dark:!border-brand-navy-3/50 !text-brand-ink-muted dark:!text-zinc-400 text-sm w-full justify-center">+ Pilih Sparepart</button>
         </div>
 
-        <div id="payment-summary" class="border-t border-brand-border pt-3 mb-3">
-            <p class="font-display font-bold text-brand-ink text-sm mb-3">Ringkasan Pembayaran</p>
-            <div class="bg-brand-warm rounded-xl p-4 space-y-2">
+        <div id="payment-summary" class="border-t border-brand-border dark:border-brand-navy-3 pt-3 mb-3">
+            <p class="font-display font-bold text-brand-ink dark:text-zinc-100 text-sm mb-3">Ringkasan Pembayaran</p>
+            <div class="bg-brand-warm dark:bg-brand-navy-3/30 rounded-xl p-4 space-y-2">
                 <div class="flex justify-between text-sm">
-                    <span class="text-brand-ink-muted">Biaya Jasa</span>
-                    <span class="font-semibold text-brand-ink tabular-nums" id="summary-service">Rp0</span>
+                    <span class="text-brand-ink-muted dark:text-zinc-400">Biaya Jasa</span>
+                    <span class="font-semibold text-brand-ink dark:text-zinc-100 tabular-nums" id="summary-service">Rp0</span>
                 </div>
                 <div class="flex justify-between text-sm">
-                    <span class="text-brand-ink-muted">Total Sparepart</span>
-                    <span class="font-semibold text-brand-ink tabular-nums" id="summary-parts">Rp0</span>
+                    <span class="text-brand-ink-muted dark:text-zinc-400">Total Sparepart</span>
+                    <span class="font-semibold text-brand-ink dark:text-zinc-100 tabular-nums" id="summary-parts">Rp0</span>
                 </div>
-                <div class="border-t border-brand-border pt-2 flex justify-between text-base">
-                    <span class="font-bold text-brand-ink">Total Pembayaran</span>
+                <div class="border-t border-brand-border dark:border-brand-navy-3 pt-2 flex justify-between text-base">
+                    <span class="font-bold text-brand-ink dark:text-zinc-100">Total Pembayaran</span>
                     <span class="font-bold text-brand-gold tabular-nums" id="summary-total">Rp0</span>
                 </div>
             </div>
@@ -108,17 +108,17 @@
 
         <div class="flex gap-3">
             <button type="submit" class="btn-primary w-full md:w-auto">{{ isset($order) ? 'Simpan' : 'Buat Servis' }}</button>
-            <a href="{{ route('admin.repair-orders') }}" class="btn-outline !border-brand-border/30 !text-brand-ink-muted">Batal</a>
+            <a href="{{ route('admin.repair-orders') }}" class="btn-outline !border-brand-border/30 dark:!border-brand-navy-3/50 !text-brand-ink-muted dark:!text-zinc-400">Batal</a>
         </div>
     </form>
 
     <div id="bottom-sheet-overlay" class="fixed inset-0 bg-black/50 z-[70]" onclick="if(event.target===this)closeBottomSheet()">
-    <div id="bottom-sheet" class="bg-white rounded-t-2xl shadow-2xl flex flex-col" onclick="event.stopPropagation();">
-        <div class="shrink-0 px-4 pt-3 pb-2 border-b border-brand-border/50">
-            <div class="flex justify-center mb-2 md:hidden"><div class="w-10 h-1 rounded-full bg-brand-border"></div></div>
+    <div id="bottom-sheet" class="bg-white dark:bg-brand-navy-2 rounded-t-2xl shadow-2xl flex flex-col" onclick="event.stopPropagation();">
+        <div class="shrink-0 px-4 pt-3 pb-2 border-b border-brand-border/50 dark:border-brand-navy-3/50">
+            <div class="flex justify-center mb-2 md:hidden"><div class="w-10 h-1 rounded-full bg-brand-border dark:bg-brand-navy-3"></div></div>
             <div class="flex items-center justify-between mb-2">
-                <h3 class="font-display font-bold text-brand-ink text-lg">Pilih Sparepart</h3>
-                <button type="button" onclick="closeBottomSheet()" class="text-brand-ink-muted hover:text-brand-ink p-1">&times;</button>
+                <h3 class="font-display font-bold text-brand-ink dark:text-zinc-100 text-lg">Pilih Sparepart</h3>
+                <button type="button" onclick="closeBottomSheet()" class="text-brand-ink-muted dark:text-zinc-400 hover:text-brand-ink dark:hover:text-zinc-100 p-1">&times;</button>
             </div>
             <div class="flex gap-1.5 overflow-x-auto pb-2 scrollbar-hide -mx-1 px-1" id="category-filters">
                 <button type="button" class="cat-filter active shrink-0 px-3 py-1.5 text-xs font-semibold rounded-full border" data-cat="">Semua</button>
@@ -127,8 +127,8 @@
                 @endforeach
             </div>
             <div class="relative">
-                <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-ink-faint pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                <input type="text" id="product-search" placeholder="Cari sparepart..." class="w-full pl-9 pr-3 py-2 text-sm border border-brand-border rounded-xl focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/30 outline-none" oninput="filterProducts()">
+                <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-ink-faint dark:text-zinc-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <input type="text" id="product-search" placeholder="Cari sparepart..." class="w-full pl-9 pr-3 py-2 text-sm border border-brand-border dark:border-brand-navy-3 rounded-xl focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/30 outline-none" oninput="filterProducts()">
             </div>
         </div>
         <div class="flex-1 overflow-y-auto p-3 sm:p-4 pb-[calc(88px+env(safe-area-inset-bottom,0px))]" id="product-grid" style="overscroll-behavior:contain">
@@ -237,14 +237,14 @@
 
             list.innerHTML = filtered.map(p => {
                 const imgSrc = p.image || 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="%23ddd"><rect width="80" height="80"/><text x="50%" y="50%" text-anchor="middle" dy=".3em" font-size="10" fill="%23999">No Image</text></svg>';
-                return `<div class="product-card rounded-xl border border-brand-border bg-white overflow-hidden cursor-pointer transition-all hover:shadow-md active:scale-95" onclick="selectProduct(${p.id})">
-                    <div class="aspect-square bg-brand-warm flex items-center justify-center p-2">
+                return `<div class="product-card rounded-xl border border-brand-border dark:border-brand-navy-3 bg-white dark:bg-brand-navy-2 overflow-hidden cursor-pointer transition-all hover:shadow-md active:scale-95" onclick="selectProduct(${p.id})">
+                    <div class="aspect-square bg-brand-warm dark:bg-brand-navy-3/30 flex items-center justify-center p-2">
                         <img src="${imgSrc}" alt="${p.name}" class="w-full h-full object-contain" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22 fill=%22%23ddd%22><rect width=%2280%22 height=%2280%22/><text x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2210%22 fill=%22%23999%22>No Image</text></svg>'">
                     </div>
                     <div class="p-2 sm:p-2.5">
-                        <p class="text-[11px] sm:text-xs font-semibold text-brand-ink leading-tight line-clamp-2 min-h-[2em]">${p.name}</p>
+                        <p class="text-[11px] sm:text-xs font-semibold text-brand-ink dark:text-zinc-100 leading-tight line-clamp-2 min-h-[2em]">${p.name}</p>
                         <p class="text-[11px] sm:text-xs font-bold text-brand-gold mt-0.5">${p.price_fmt}</p>
-                        <p class="text-[10px] text-brand-ink-faint">Stok: ${p.stock ?? '~'}</p>
+                        <p class="text-[10px] text-brand-ink-faint dark:text-zinc-500">Stok: ${p.stock ?? '~'}</p>
                     </div>
                 </div>`;
             }).join('');
@@ -255,11 +255,11 @@
             if (!prod) return;
 
             const container = document.getElementById('items-container');
-            const html = `<div class="item-row inline-flex items-center gap-2 px-3 py-1.5 bg-brand-warm border border-brand-border rounded-xl text-sm mb-1.5 mr-1.5">
-                <span class="font-medium text-brand-ink truncate max-w-[150px] sm:max-w-[200px]">${prod.name}</span>
-                <input type="number" name="items[${itemIdx}][quantity]" value="1" min="1" class="w-14 text-center text-xs border border-brand-border rounded-md py-0.5" oninput="updateSummary()">
-                <span class="text-xs text-brand-ink-muted tabular-nums">${prod.price_fmt}</span>
-                <button type="button" onclick="this.closest('.item-row').remove(); updateSummary();" class="text-red-400 hover:text-red-600 text-lg leading-none ml-0.5">&times;</button>
+            const html = `<div class="item-row inline-flex items-center gap-2 px-3 py-1.5 bg-brand-warm dark:bg-brand-navy-3/30 border border-brand-border dark:border-brand-navy-3 rounded-xl text-sm mb-1.5 mr-1.5">
+                <span class="font-medium text-brand-ink dark:text-zinc-100 truncate max-w-[150px] sm:max-w-[200px]">${prod.name}</span>
+                <input type="number" name="items[${itemIdx}][quantity]" value="1" min="1" class="w-14 text-center text-xs border border-brand-border dark:border-brand-navy-3 rounded-md py-0.5" oninput="updateSummary()">
+                <span class="text-xs text-brand-ink-muted dark:text-zinc-400 tabular-nums">${prod.price_fmt}</span>
+                <button type="button" onclick="this.closest('.item-row').remove(); updateSummary();" class="text-red-400 dark:text-red-400 hover:text-red-600 dark:hover:text-red-300 text-lg leading-none ml-0.5">&times;</button>
                 <input type="hidden" name="items[${itemIdx}][product_id]" value="${prod.id}">
                 <input type="hidden" name="items[${itemIdx}][name]" value="${prod.name}">
                 <input type="hidden" name="items[${itemIdx}][price]" value="${prod.price}">

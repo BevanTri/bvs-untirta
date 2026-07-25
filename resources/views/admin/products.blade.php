@@ -2,7 +2,7 @@
     <x-slot name="title">Produk</x-slot>
 
     @if(session('success'))
-    <div class="card p-5 mb-8 border-l-4 border-brand-gold text-brand-ink font-medium">{{ session('success') }}</div>
+    <div class="card p-5 mb-8 border-l-4 border-brand-gold dark:border-brand-gold-dark text-brand-ink dark:text-zinc-100 font-medium">{{ session('success') }}</div>
     @endif
 
     {{-- Search & Filter --}}
@@ -54,10 +54,10 @@
                 <thead>
                     <tr>
                         <th class="text-left">Nama</th>
-                        <th class="text-left hidden lg:table-cell">Deskripsi</th>
-                        <th class="text-left hidden sm:table-cell">Kategori</th>
+                        <th class="text-left">Deskripsi</th>
+                        <th class="text-left">Kategori</th>
                         <th class="text-right">Harga</th>
-                        <th class="text-right hidden sm:table-cell">Stok</th>
+                        <th class="text-right">Stok</th>
                         <th class="text-center">Aktif</th>
                         <th class="text-center">Aksi</th>
                     </tr>
@@ -65,11 +65,11 @@
                 <tbody>
                     @foreach($products as $p)
                     <tr>
-                        <td class="font-medium break-words max-w-[160px] sm:max-w-none">{{ $p->name }}</td>
-                        <td class="text-brand-ink-muted text-xs hidden lg:table-cell max-w-[200px] truncate">{{ $p->description ?? '—' }}</td>
-                        <td class="text-brand-ink-muted hidden sm:table-cell whitespace-nowrap">{{ $p->category->name }}</td>
+                        <td class="text-left font-medium break-words max-w-[160px] sm:max-w-none">{{ $p->name }}</td>
+                        <td class="text-left text-brand-ink-muted text-xs max-w-[150px] truncate">{{ $p->description ?? '—' }}</td>
+                        <td class="text-left text-brand-ink-muted whitespace-nowrap">{{ $p->category->name }}</td>
                         <td class="text-right font-mono tabular-nums whitespace-nowrap">Rp{{ number_format($p->price,0,',','.') }}</td>
-                        <td class="text-right tabular-nums hidden sm:table-cell whitespace-nowrap">{{ $p->stock ?? '∞' }}</td>
+                        <td class="text-right tabular-nums whitespace-nowrap">{{ $p->stock ?? '∞' }}</td>
                         <td class="text-center">
                             <span class="badge {{ $p->is_active ? 'badge-success' : 'badge-danger' }}">{{ $p->is_active ? 'Aktif' : 'Nonaktif' }}</span>
                         </td>
@@ -82,7 +82,7 @@
                         </td>
                     </tr>
                     <tr id="prod-edit-{{ $p->id }}" class="hidden">
-                        <td colspan="7" class="p-4 bg-brand-warm">
+                        <td colspan="7" class="p-4 bg-brand-warm dark:bg-brand-navy-3/30">
                             <form method="POST" action="{{ route('admin.products.update', $p) }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
@@ -97,7 +97,7 @@
                                     <input type="number" name="stock" value="{{ $p->stock }}" class="input-field" placeholder="Stok">
                                     <div class="flex items-center gap-4">
                                         @if($p->image)
-                                        <img src="{{ url('uploads/'.$p->image) }}?v={{ $p->updated_at->timestamp }}" class="h-10 w-10 object-contain rounded border border-brand-border shrink-0">
+                                        <img src="{{ url('uploads/'.$p->image) }}?v={{ $p->updated_at->timestamp }}" class="h-10 w-10 object-contain rounded border border-brand-border dark:border-brand-navy-3 shrink-0">
                                         @endif
                                         <input type="file" name="image" accept="image/jpeg,image/png,image/webp" class="input-field flex-1">
                                     </div>

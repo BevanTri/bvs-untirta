@@ -75,13 +75,6 @@ Dibuat sebagai proyek **Ujian Akhir Semester** (UAS) Semester Antara 2025/2026 �
 
 ---
 
-## 🤝 Kontributor
-
-1. _Bevan Tri Ramadiyas_ (3337250063)
-2. _Fauzi Nur Ibrahim_ (3337250019)
-
----
-
 ## 📦 Instalasi Lokal
 
 ```bash
@@ -117,6 +110,7 @@ php artisan serve
 ## 🤝 Kontributor
 
 1. **Bevan Tri Ramadiyas** (3337250063)
+2. _Fauzi Nur Ibrahim_ (3337250019)
 
 ---
 

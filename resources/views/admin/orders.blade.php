@@ -2,7 +2,7 @@
     <x-slot name="title">Pesanan</x-slot>
 
     @if(session('success'))
-    <div class="card p-5 mb-8 border-l-4 border-emerald-500 text-brand-ink font-medium">{{ session('success') }}</div>
+    <div class="card p-5 mb-8 border-l-4 border-emerald-500 dark:border-emerald-400 text-brand-ink dark:text-zinc-100 font-medium">{{ session('success') }}</div>
     @endif
 
     <div class="card p-6 mb-8">
@@ -29,7 +29,7 @@
                         <th class="text-left">INV</th>
                         <th class="text-left">Pelanggan</th>
                         <th class="text-center">Status</th>
-                        <th class="text-center hidden sm:table-cell">Pembayaran</th>
+                        <th class="text-center">Pembayaran</th>
                         <th class="text-right">Total</th>
                         <th class="text-center">Invoice</th>
                     </tr>
@@ -37,8 +37,8 @@
                 <tbody>
                     @foreach($orders as $o)
                     <tr>
-                        <td class="font-medium text-brand-ink font-mono">{{ $o->order_number }}</td>
-                        <td class="text-brand-ink-muted">{{ $o->customer_name }}</td>
+                        <td class="text-left font-medium text-brand-ink dark:text-zinc-100 font-mono">{{ $o->order_number }}</td>
+                        <td class="text-left text-brand-ink-muted dark:text-zinc-400">{{ $o->customer_name }}</td>
                         <td class="text-center">
                             <form method="POST" action="{{ route('admin.orders.update', $o) }}" class="inline" onchange="this.submit()">
                                 @csrf
@@ -51,7 +51,7 @@
                                 <input type="hidden" name="payment_status" value="{{ $o->payment_status }}">
                             </form>
                         </td>
-                        <td class="text-center hidden sm:table-cell">
+                        <td class="text-center">
                             <form method="POST" action="{{ route('admin.orders.update', $o) }}" class="inline" onchange="this.submit()">
                                 @csrf
                                 <select name="payment_status" class="text-xs font-semibold rounded-xl px-2 py-1 border-0 cursor-pointer appearance-none {{ $o->payment_status === 'paid' ? 'badge badge-success' : ($o->payment_status === 'failed' ? 'badge badge-danger' : 'badge badge-warning') }}">
@@ -62,7 +62,7 @@
                                 <input type="hidden" name="status" value="{{ $o->status }}">
                             </form>
                         </td>
-                        <td class="text-right font-mono tabular-nums text-brand-ink">Rp{{ number_format($o->total,0,',','.') }}</td>
+                        <td class="text-right font-mono tabular-nums text-brand-ink dark:text-zinc-100">Rp{{ number_format($o->total,0,',','.') }}</td>
                         <td class="text-center"><a href="{{ route('admin.orders.invoice', $o) }}" class="btn-ghost btn-xs" target="_blank">PDF</a></td>
                     </tr>
                     @endforeach

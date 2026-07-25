@@ -112,8 +112,8 @@
                 <div class="flex flex-col items-start">
                     <div class="font-semibold text-white text-xs mb-4 uppercase tracking-[0.2em] font-display">Jam Operasional</div>
                     <ul class="space-y-2.5 w-full">
-                        <li class="grid grid-cols-[1fr_auto] gap-x-2 text-sm"><span class="text-zinc-400">Senin - Sabtu</span><span class="font-medium text-white">08:00 - 17:00</span></li>
-                        <li class="grid grid-cols-[1fr_auto] gap-x-2 text-sm"><span class="text-zinc-400">Minggu & Hari Besar</span><span class="text-zinc-500">Tutup</span></li>
+                        <li class="grid grid-cols-[max-content_auto] gap-x-3 text-sm"><span class="text-zinc-400">Senin - Sabtu</span><span class="font-medium text-white">08:00 - 17:00</span></li>
+                        <li class="grid grid-cols-[max-content_auto] gap-x-3 text-sm"><span class="text-zinc-400">Minggu & Hari Besar</span><span class="text-zinc-500">Tutup</span></li>
                     </ul>
                 </div>
             </div>

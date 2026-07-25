@@ -2,7 +2,7 @@
     <x-slot name="title">Servis Workshop</x-slot>
 
     @if(session('success'))
-    <div class="card p-5 mb-8 border-l-4 border-brand-gold text-brand-ink font-medium">{{ session('success') }}</div>
+    <div class="card p-5 mb-8 border-l-4 border-brand-gold dark:border-brand-gold-dark text-brand-ink dark:text-zinc-100 font-medium">{{ session('success') }}</div>
     @endif
 
     <div class="card p-6 mb-8">
@@ -45,7 +45,7 @@
                     <tr>
                         <td class="font-medium font-mono">{{ $o->order_number }}</td>
                         <td>{{ $o->customer->name }}</td>
-                        <td class="hidden sm:table-cell text-brand-ink-muted">{{ $o->vehicle->plate_number }} ({{ $o->vehicle->brand }})</td>
+                        <td class="hidden sm:table-cell text-brand-ink-muted dark:text-zinc-400">{{ $o->vehicle->plate_number }} ({{ $o->vehicle->brand }})</td>
                         <td class="text-right hidden sm:table-cell font-mono tabular-nums">Rp{{ number_format($o->total,0,',','.') }}</td>
                         <td class="text-center">
                             <span class="badge {{ $o->status === 'selesai' ? 'badge-success' : ($o->status === 'dibatalkan' ? 'badge-danger' : ($o->status === 'proses' ? 'badge-info' : 'badge-warning')) }}">
@@ -71,7 +71,7 @@
             </table>
         </div>
         @if($orders instanceof \Illuminate\Pagination\LengthAwarePaginator)
-        <div class="p-4 border-t border-brand-border pagination-wrap">{{ $orders->links() }}</div>
+        <div class="p-4 border-t border-brand-border dark:border-brand-navy-3 pagination-wrap">{{ $orders->links() }}</div>
         @endif
     </div>
 </x-admin-layout>

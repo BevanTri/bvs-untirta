@@ -1,4 +1,4 @@
-<nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-t border-brand-border h-16 safe-area-bottom shadow-[0_-4px_20px_rgba(0,0,0,0.06)] flex items-center justify-around">
+<nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 dark:bg-brand-navy-2/95 backdrop-blur-lg border-t border-brand-border dark:border-brand-navy-3 h-16 safe-area-bottom shadow-[0_-4px_20px_rgba(0,0,0,0.06)] dark:shadow-[0_-4px_20px_rgba(0,0,0,0.3)] flex items-center justify-around">
     @php
         $navItems = [
             ['route' => 'home', 'label' => 'Beranda', 'icon' => 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'],
@@ -7,7 +7,7 @@
         ];
     @endphp
     @foreach($navItems as $item)
-    <button type="button" onclick="window.location.href='{{ route($item['route']) }}'" class="flex flex-col items-center justify-center gap-0.5 min-w-0 h-full relative transition-colors duration-150 {{ request()->routeIs($item['route'] . '*') ? 'text-brand-blue' : 'text-brand-ink-muted' }}">
+    <button type="button" onclick="window.location.href='{{ route($item['route']) }}'" class="flex flex-col items-center justify-center gap-0.5 min-w-0 h-full relative transition-colors duration-150 {{ request()->routeIs($item['route'] . '*') ? 'text-brand-blue dark:text-brand-blue-light' : 'text-brand-ink-muted dark:text-zinc-400' }}">
         @if(request()->routeIs($item['route'] . '*'))
         <span class="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-brand-blue rounded-b"></span>
         @endif
@@ -16,7 +16,7 @@
     </button>
     @endforeach
     @auth
-    <button type="button" onclick="window.location.href='{{ route('cart.index') }}'" class="flex flex-col items-center justify-center gap-0.5 min-w-0 h-full relative transition-colors duration-150 {{ request()->routeIs('cart*') ? 'text-brand-blue' : 'text-brand-ink-muted' }}">
+    <button type="button" onclick="window.location.href='{{ route('cart.index') }}'" class="flex flex-col items-center justify-center gap-0.5 min-w-0 h-full relative transition-colors duration-150 {{ request()->routeIs('cart*') ? 'text-brand-blue dark:text-brand-blue-light' : 'text-brand-ink-muted dark:text-zinc-400' }}">
         @if(request()->routeIs('cart*'))
         <span class="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-brand-blue rounded-b"></span>
         @endif
@@ -24,7 +24,7 @@
         <span class="text-[10px] font-display font-semibold uppercase tracking-wider leading-none truncate max-w-full">Keranjang</span>
     </button>
     @if(Auth::user()->is_admin ?? false)
-    <button type="button" onclick="window.location.href='{{ route('admin.dashboard') }}'" class="flex flex-col items-center justify-center gap-0.5 min-w-0 h-full relative transition-colors duration-150 {{ request()->routeIs('admin.*') ? 'text-brand-gold' : 'text-brand-ink-muted' }}">
+    <button type="button" onclick="window.location.href='{{ route('admin.dashboard') }}'" class="flex flex-col items-center justify-center gap-0.5 min-w-0 h-full relative transition-colors duration-150 {{ request()->routeIs('admin.*') ? 'text-brand-gold' : 'text-brand-ink-muted dark:text-zinc-400' }}">
         @if(request()->routeIs('admin.*'))
         <span class="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-brand-gold rounded-b"></span>
         @endif
@@ -33,7 +33,7 @@
     </button>
     @endif
     @else
-    <button type="button" onclick="window.location.href='{{ route('login') }}'" class="flex flex-col items-center justify-center gap-0.5 min-w-0 h-full text-brand-ink-muted hover:text-brand-blue transition-colors duration-150">
+    <button type="button" onclick="window.location.href='{{ route('login') }}'" class="flex flex-col items-center justify-center gap-0.5 min-w-0 h-full text-brand-ink-muted dark:text-zinc-400 hover:text-brand-blue dark:hover:text-brand-blue-light transition-colors duration-150">
         <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
         <span class="text-[10px] font-display font-semibold uppercase tracking-wider leading-none truncate max-w-full">Login</span>
     </button>

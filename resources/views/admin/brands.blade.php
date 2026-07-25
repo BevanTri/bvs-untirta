@@ -15,7 +15,7 @@
             <div class="table-wrap overflow-x-auto">
                 <table class="table-base">
                     <thead>
-                        <tr class="border-b border-brand-border/20 bg-brand-warm">
+                        <tr class="border-b border-brand-border/20 dark:border-brand-navy-3/50 bg-brand-warm dark:bg-brand-navy-3/30">
                             <th class="p-3 text-left font-semibold text-brand-ink-muted text-xs uppercase tracking-widest whitespace-nowrap">Nama</th>
                             <th class="p-3 text-center font-semibold text-brand-ink-muted text-xs uppercase tracking-widest whitespace-nowrap">Logo</th>
                             <th class="p-3 text-center font-semibold text-brand-ink-muted text-xs uppercase tracking-widest whitespace-nowrap">Aktif</th>
@@ -24,13 +24,13 @@
                     </thead>
                     <tbody>
                         @foreach($brands as $b)
-                        <tr class="border-b border-brand-border/10">
-                            <td class="p-3 font-medium">{{ $b->name }}</td>
+                        <tr class="border-b border-brand-border/10 dark:border-brand-navy-3/50">
+                            <td class="p-3 text-left font-medium">{{ $b->name }}</td>
                             <td class="p-3 text-center">
                                 @if($b->logo)
                                 <img src="{{ url('uploads/'.$b->logo) }}" alt="{{ $b->name }}" class="h-8 mx-auto object-contain rounded">
                                 @else
-                                <span class="text-brand-ink-muted text-xs">—</span>
+                                <span class="text-brand-ink-muted dark:text-zinc-400 text-xs">—</span>
                                 @endif
                             </td>
                             <td class="p-3 text-center">
@@ -49,14 +49,14 @@
                             </td>
                         </tr>
                         <tr id="brand-edit-{{ $b->id }}" class="hidden">
-                            <td colspan="4" class="p-4 bg-brand-warm">
+                            <td colspan="4" class="p-4 bg-brand-warm dark:bg-brand-navy-3/30">
                                 <form method="POST" action="{{ route('admin.brands.update', $b) }}" class="grid grid-cols-1 md:grid-cols-3 gap-3" enctype="multipart/form-data">
                                     @csrf @method('PATCH')
                                     <input type="text" name="name" value="{{ $b->name }}" class="input-field" required>
                                     <div class="flex items-center gap-3">
                                         @if($b->logo)
                                         <img src="{{ url('uploads/'.$b->logo) }}" class="h-8 object-contain rounded">
-                                        <span class="text-xs text-brand-ink-muted">Ganti:</span>
+                                        <span class="text-xs text-brand-ink-muted dark:text-zinc-400">Ganti:</span>
                                         @endif
                                         <input type="file" name="logo" accept="image/jpeg,image/png,image/webp" class="input-field">
                                     </div>

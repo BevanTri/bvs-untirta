@@ -12,29 +12,29 @@
 
     <x-card padding="p-0">
         <div class="overflow-x-auto"><table class="w-full text-sm">
-            <thead><tr class="border-b border-brand-border/20 bg-brand-warm"><th class="p-3 text-left font-semibold text-brand-ink-muted text-xs uppercase tracking-widest whitespace-nowrap">Nama</th><th class="p-3 text-right font-semibold text-brand-ink-muted text-xs uppercase tracking-widest whitespace-nowrap">Harga</th><th class="p-3 text-center font-semibold text-brand-ink-muted text-xs uppercase tracking-widest whitespace-nowrap">Aktif</th><th class="p-3 text-center font-semibold text-brand-ink-muted text-xs uppercase tracking-widest whitespace-nowrap">Aksi</th></tr></thead>
+            <thead><tr class="border-b border-brand-border/20 dark:border-brand-navy-3/50 bg-brand-warm dark:bg-brand-navy-3/30"><th class="p-3 text-left font-semibold text-brand-ink-muted text-xs uppercase tracking-widest whitespace-nowrap">Nama</th><th class="p-3 text-right font-semibold text-brand-ink-muted text-xs uppercase tracking-widest whitespace-nowrap">Harga</th><th class="p-3 text-center font-semibold text-brand-ink-muted text-xs uppercase tracking-widest whitespace-nowrap">Aktif</th><th class="p-3 text-center font-semibold text-brand-ink-muted text-xs uppercase tracking-widest whitespace-nowrap">Aksi</th></tr></thead>
             <tbody>
                 @foreach($services as $s)
-                <tr class="border-b border-brand-border/10">
-                    <td class="p-3 font-medium">{{ $s->name }}</td>
+                <tr class="border-b border-brand-border/10 dark:border-brand-navy-3/50">
+                    <td class="p-3 text-left font-medium">{{ $s->name }}</td>
                     <td class="p-3 text-right font-medium tabular-nums">Rp{{ number_format($s->price,0,',','.') }}</td>
                     <td class="p-3 text-center">{{ $s->is_active ? '✓' : '✗' }}</td>
                     <td class="p-3 text-center whitespace-nowrap">
                         <button onclick="document.getElementById('svc-edit-{{ $s->id }}').classList.toggle('hidden')" class="text-brand-gold text-sm font-medium hover:underline min-h-[44px] px-2">Edit</button>
                         <form method="POST" action="{{ route('admin.services.destroy', $s) }}" class="inline" onsubmit="return confirm('Yakin hapus?')">
                             @csrf @method('DELETE')
-                            <button type="submit" class="text-red-400 hover:text-red-600 text-sm font-medium ml-2 hover:underline min-h-[44px] px-2">Hapus</button>
+                            <button type="submit" class="text-red-400 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 text-sm font-medium ml-2 hover:underline min-h-[44px] px-2">Hapus</button>
                         </form>
                     </td>
                 </tr>
                 <tr id="svc-edit-{{ $s->id }}" class="hidden">
-                    <td colspan="4" class="p-3 bg-brand-warm">
+                    <td colspan="4" class="p-3 bg-brand-warm dark:bg-brand-navy-3/30">
                         <form method="POST" action="{{ route('admin.services.update', $s) }}" class="flex gap-2 flex-wrap">
                             @csrf @method('PATCH')
                             <input type="text" name="name" value="{{ $s->name }}" class="input-field w-full sm:flex-1 sm:w-auto" required>
                             <input type="number" name="price" value="{{ $s->price }}" class="input-field w-full sm:w-32" step="0.01" required>
                             <button type="submit" class="btn-primary shrink-0 w-full md:w-auto">Simpan</button>
-                            <button type="button" onclick="document.getElementById('svc-edit-{{ $s->id }}').classList.add('hidden')" class="btn-outline shrink-0 w-full md:w-auto !border-brand-border/30 !text-brand-ink-muted">Batal</button>
+                            <button type="button" onclick="document.getElementById('svc-edit-{{ $s->id }}').classList.add('hidden')" class="btn-outline shrink-0 w-full md:w-auto !border-brand-border/30 dark:!border-brand-navy-3/50 !text-brand-ink-muted dark:!text-zinc-400">Batal</button>
                         </form>
                     </td>
                 </tr>

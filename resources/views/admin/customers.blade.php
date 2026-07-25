@@ -2,7 +2,7 @@
     <x-slot name="title">Pelanggan</x-slot>
 
     @if(session('success'))
-    <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl p-4 text-sm mb-6">{{ session('success') }}</div>
+    <div class="bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/50 text-emerald-800 dark:text-emerald-400 rounded-xl p-4 text-sm mb-6">{{ session('success') }}</div>
     @endif
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
@@ -31,9 +31,9 @@
             <div class="table-wrap overflow-x-auto">
                 <table class="table-base">
                     <thead>
-                        <tr class="border-b border-brand-border/20 bg-brand-warm">
+                        <tr class="border-b border-brand-border/20 dark:border-brand-navy-3/50 bg-brand-warm dark:bg-brand-navy-3/30">
                             <th class="p-3 text-left font-semibold text-brand-ink-muted text-xs uppercase tracking-widest whitespace-nowrap">Nama</th>
-                            <th class="p-3 text-left font-semibold text-brand-ink-muted text-xs uppercase tracking-widest hidden lg:table-cell whitespace-nowrap">Email</th>
+                            <th class="p-3 text-left font-semibold text-brand-ink-muted text-xs uppercase tracking-widest whitespace-nowrap">Email</th>
                             <th class="p-3 text-center font-semibold text-brand-ink-muted text-xs uppercase tracking-widest whitespace-nowrap">Kendaraan</th>
                             <th class="p-3 text-center font-semibold text-brand-ink-muted text-xs uppercase tracking-widest whitespace-nowrap">Servis</th>
                             <th class="p-3 text-center font-semibold text-brand-ink-muted text-xs uppercase tracking-widest whitespace-nowrap">Aksi</th>
@@ -41,9 +41,9 @@
                     </thead>
                     <tbody>
                         @foreach($customers as $c)
-                        <tr class="border-b border-brand-border/10">
-                            <td class="p-3 font-medium break-words max-w-[160px] sm:max-w-none">{{ $c->name }}</td>
-                            <td class="p-3 hidden lg:table-cell text-brand-ink-muted">{{ $c->email ?? '—' }}</td>
+                        <tr class="border-b border-brand-border/10 dark:border-brand-navy-3/50">
+                            <td class="p-3 text-left font-medium break-words max-w-[160px] sm:max-w-none">{{ $c->name }}</td>
+                            <td class="p-3 text-left text-brand-ink-muted whitespace-nowrap">{{ $c->email ?? '—' }}</td>
                             <td class="p-3 text-center font-mono tabular-nums">{{ $c->vehicles_count }}</td>
                             <td class="p-3 text-center font-mono tabular-nums">{{ $c->repair_orders_count }}</td>
                             <td class="p-3 text-center whitespace-nowrap">
@@ -55,7 +55,7 @@
                             </td>
                         </tr>
                         <tr id="cst-edit-{{ $c->id }}" class="hidden">
-                            <td colspan="5" class="p-4 bg-brand-warm">
+                            <td colspan="5" class="p-4 bg-brand-warm dark:bg-brand-navy-3/30">
                                 <form method="POST" action="{{ route('admin.customers.update', $c) }}">
                                     @csrf
                                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -72,7 +72,7 @@
                 </table>
             </div>
             @if($customers instanceof \Illuminate\Pagination\LengthAwarePaginator)
-            <div class="p-4 border-t border-brand-border"> {{ $customers->links() }} </div>
+            <div class="p-4 border-t border-brand-border dark:border-brand-navy-3"> {{ $customers->links() }} </div>
             @endif
         </div>
     </div>

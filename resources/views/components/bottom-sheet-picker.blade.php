@@ -121,40 +121,40 @@ window.Picker = window.Picker || (function() {
 
 <div class="bottom-sheet-picker" data-picker="{{ $pickerId }}" data-onselect="{{ $onselect }}">
     @if($label)
-    <label class="text-xs font-semibold text-brand-ink-muted uppercase tracking-widest mb-1 block">{{ $label }}</label>
+    <label class="text-xs font-semibold text-brand-ink-muted dark:text-zinc-400 uppercase tracking-widest mb-1 block">{{ $label }}</label>
     @endif
 
     <button type="button" class="picker-trigger input-field w-full flex items-center justify-between gap-2" onclick="Picker.open('{{ $pickerId }}')">
-        <span class="picker-value truncate {{ $selectedLabel ? '' : 'text-brand-ink-faint' }}">{{ $selectedLabel ?: $placeholder }}</span>
-        <svg class="w-4 h-4 shrink-0 text-brand-ink-faint" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        <span class="picker-value truncate {{ $selectedLabel ? '' : 'text-brand-ink-faint dark:text-zinc-500' }}">{{ $selectedLabel ?: $placeholder }}</span>
+        <svg class="w-4 h-4 shrink-0 text-brand-ink-faint dark:text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
     </button>
 
     <input type="hidden" name="{{ $name }}" value="{{ $selected }}" class="picker-hidden" {{ $required ? 'required' : '' }}>
 
     <div id="picker-overlay-{{ $pickerId }}" class="picker-overlay fixed inset-0 bg-black/50 z-[70]" data-picker="{{ $pickerId }}">
-        <div id="picker-sheet-{{ $pickerId }}" class="picker-sheet bg-white rounded-t-2xl shadow-2xl flex flex-col" onclick="event.stopPropagation();">
-            <div class="shrink-0 px-4 pt-3 pb-2 border-b border-brand-border/50">
+        <div id="picker-sheet-{{ $pickerId }}" class="picker-sheet bg-white dark:bg-brand-navy-2 rounded-t-2xl shadow-2xl flex flex-col" onclick="event.stopPropagation();">
+            <div class="shrink-0 px-4 pt-3 pb-2 border-b border-brand-border/50 dark:border-brand-navy-3/50">
                 <div class="flex justify-center mb-2 md:hidden">
-                    <div class="w-10 h-1 rounded-full bg-brand-border"></div>
+                    <div class="w-10 h-1 rounded-full bg-brand-border dark:bg-brand-navy-3"></div>
                 </div>
                 <div class="flex items-center justify-between mb-2">
-                    <h3 class="font-display font-semibold text-brand-ink">{{ $label ?: $placeholder }}</h3>
-                    <button type="button" onclick="Picker.close('{{ $pickerId }}')" class="text-brand-ink-muted hover:text-brand-ink p-1 text-xl leading-none">&times;</button>
+                    <h3 class="font-display font-semibold text-brand-ink dark:text-zinc-100">{{ $label ?: $placeholder }}</h3>
+                    <button type="button" onclick="Picker.close('{{ $pickerId }}')" class="text-brand-ink-muted dark:text-zinc-400 hover:text-brand-ink dark:hover:text-zinc-100 p-1 text-xl leading-none">&times;</button>
                 </div>
                 @if(count($options) > 5)
                 <div class="relative mt-1">
-                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-ink-faint pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                    <input type="text" class="picker-search w-full pl-9 pr-3 py-2 text-sm border border-brand-border rounded-lg focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/30 outline-none" placeholder="Cari..." oninput="Picker.filter('{{ $pickerId }}', this.value)">
+                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-ink-faint dark:text-zinc-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    <input type="text" class="picker-search w-full pl-9 pr-3 py-2 text-sm border border-brand-border dark:border-brand-navy-3 rounded-lg focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/30 outline-none" placeholder="Cari..." oninput="Picker.filter('{{ $pickerId }}', this.value)">
                 </div>
                 @endif
             </div>
             <div class="flex-1 overflow-y-auto p-3 sm:p-4 pb-[calc(88px+env(safe-area-inset-bottom,0px))]" style="overscroll-behavior:contain">
                 @foreach($options as $opt)
-                <button type="button" class="picker-option flex items-center justify-between w-full px-3 py-3 text-sm text-left rounded-xl hover:bg-brand-warm transition-colors duration-150 {{ $selected == $opt['value'] ? 'selected bg-brand-warm' : '' }}"
+                <button type="button" class="picker-option flex items-center justify-between w-full px-3 py-3 text-sm text-left rounded-xl hover:bg-brand-warm dark:hover:bg-brand-navy-3/30 transition-colors duration-150 {{ $selected == $opt['value'] ? 'selected bg-brand-warm dark:bg-brand-navy-3/30' : '' }}"
                     data-value="{{ $opt['value'] }}" data-label="{{ $opt['label'] }}"
                     @foreach($opt as $k => $v) @if(!in_array($k, ['value','label'])) {{ $k }}="{{ $v }}" @endif @endforeach
                     onclick="Picker.select('{{ $pickerId }}', this)">
-                    <span class="font-medium text-brand-ink">{{ $opt['label'] }}</span>
+                    <span class="font-medium text-brand-ink dark:text-zinc-100">{{ $opt['label'] }}</span>
                     <svg class="picker-check w-5 h-5 text-brand-gold {{ $selected == $opt['value'] ? '' : 'hidden' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
                 </button>
                 @endforeach

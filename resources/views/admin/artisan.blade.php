@@ -20,7 +20,7 @@
                 </select>
                 <button type="submit" class="btn-primary shrink-0 w-full md:w-auto">Jalankan</button>
             </form>
-            <p class="text-xs text-brand-ink-faint mt-4">Pilih perintah lalu klik Jalankan. Hasil akan tampil di halaman baru.</p>
+            <p class="text-xs text-brand-ink-faint dark:text-zinc-500 mt-4">Pilih perintah lalu klik Jalankan. Hasil akan tampil di halaman baru.</p>
         </div>
     </div>
 </x-admin-layout>

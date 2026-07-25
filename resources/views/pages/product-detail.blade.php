@@ -28,11 +28,11 @@
             </div>
         </x-card>
         <x-card>
-            <p class="text-brand-ink-muted leading-relaxed text-sm">{{ $product->description ?? 'Deskripsi belum tersedia untuk produk ini.' }}</p>
-            <div class="mt-6 pt-6 border-t border-brand-border">
-                <p class="text-xs text-brand-ink-faint uppercase tracking-[0.15em] font-display font-semibold">Harga</p>
+            <p class="text-brand-ink-muted dark:text-zinc-300 leading-relaxed text-sm">{{ $product->description ?? 'Deskripsi belum tersedia untuk produk ini.' }}</p>
+            <div class="mt-6 pt-6 border-t border-brand-border dark:border-brand-navy-3">
+                <p class="text-xs text-brand-ink-faint dark:text-zinc-500 uppercase tracking-[0.15em] font-display font-semibold">Harga</p>
                 <p class="font-display text-4xl font-bold mt-1 text-brand-gold font-mono tabular-nums">Rp{{ number_format($product->price, 0, ',', '.') }}</p>
-                <p class="text-sm text-brand-ink-muted mt-1 font-mono">Stok: {{ $product->stock ?? 'Tidak terbatas' }}</p>
+                <p class="text-sm text-brand-ink-muted dark:text-zinc-400 mt-1 font-mono">Stok: {{ $product->stock ?? 'Tidak terbatas' }}</p>
             </div>
             @auth
             @php

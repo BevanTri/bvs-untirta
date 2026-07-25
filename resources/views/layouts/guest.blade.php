@@ -10,6 +10,13 @@
     <link href="https://fonts.bunny.net/css?family=oswald:500,600,700&display=swap" rel="stylesheet" />
     <link href="https://fonts.bunny.net/css?family=jetbrains-mono:400,500,700&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/webp" href="{{ asset('images/logo-untirta.webp') }}">
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         .auth-bg { background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%); }
@@ -27,7 +34,7 @@
         </a>
 
         <div class="w-full sm:max-w-md relative">
-            <div class="bg-white/95 backdrop-blur-sm rounded-2xl shadow-level-4 p-5 sm:p-8">
+            <div class="bg-white/95 dark:bg-brand-navy-2/95 backdrop-blur-sm rounded-2xl shadow-level-4 p-5 sm:p-8 border border-transparent dark:border-brand-navy-3">
                 {{ $slot }}
             </div>
         </div>

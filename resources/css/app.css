@@ -16,7 +16,7 @@
 @layer components {
     /* ─── Card ─── */
     .card {
-        @apply bg-white border border-brand-border shadow-level-1 rounded-2xl;
+        @apply bg-white dark:bg-brand-navy-2 border border-brand-border dark:border-brand-navy-3 shadow-level-1 rounded-2xl;
     }
     .card-hover {
         @apply card transition-all duration-200 hover:border-brand-gold-light hover:shadow-card-hover hover:-translate-y-0.5;
@@ -28,7 +28,7 @@
         @apply card-hover hover:shadow-[0_0_20px_-5px_rgba(245,158,11,0.15)];
     }
     .card-flat {
-        @apply bg-brand-warm border border-brand-border/60 rounded-2xl;
+        @apply bg-brand-warm dark:bg-brand-navy-3/30 border border-brand-border/60 dark:border-brand-navy-3/50 rounded-2xl;
     }
 
     /* ─── Button ─── */
@@ -46,10 +46,10 @@
         @apply btn bg-brand-navy text-white px-6 py-3 hover:bg-brand-navy-2 shadow-level-1 hover:shadow-level-3;
     }
     .btn-outline {
-        @apply btn border-2 border-brand-border text-brand-ink-muted px-6 py-3 hover:border-brand-gold hover:text-brand-gold bg-white hover:bg-brand-gold/5;
+        @apply btn border-2 border-brand-border dark:border-brand-navy-3 text-brand-ink-muted dark:text-zinc-300 px-6 py-3 hover:border-brand-gold hover:text-brand-gold bg-white dark:bg-brand-navy-2 hover:bg-brand-gold/5 dark:hover:bg-brand-gold/10;
     }
     .btn-ghost {
-        @apply btn text-brand-ink-muted px-4 py-2 hover:bg-brand-warm-2 hover:text-brand-ink;
+        @apply btn text-brand-ink-muted dark:text-zinc-400 px-4 py-2 hover:bg-brand-warm-2 dark:hover:bg-brand-navy-3 hover:text-brand-ink dark:hover:text-zinc-100;
     }
     .btn-danger {
         @apply btn bg-red-600 text-white px-6 py-3 hover:bg-red-500 shadow-level-1;
@@ -69,14 +69,14 @@
 
     /* ─── Input ─── */
     .input-field {
-        @apply border border-brand-border bg-white px-4 py-3 text-sm focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20 w-full text-brand-ink placeholder-brand-ink-faint rounded-xl transition-all duration-200;
+        @apply border border-brand-border dark:border-brand-navy-3 bg-white dark:bg-brand-navy-2 px-4 py-3 text-sm focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20 w-full text-brand-ink dark:text-zinc-100 placeholder-brand-ink-faint dark:placeholder-zinc-500 rounded-xl transition-all duration-200;
         min-height: 48px;
     }
     .input-field.input-error {
         @apply border-red-400 focus:border-red-500 focus:ring-red-500/20;
     }
     .input-field:disabled {
-        @apply bg-brand-warm-2 text-brand-ink-faint cursor-not-allowed;
+        @apply bg-brand-warm-2 dark:bg-brand-navy-3/50 text-brand-ink-faint dark:text-zinc-500 cursor-not-allowed;
     }
     textarea.input-field {
         min-height: 100px;
@@ -93,19 +93,19 @@
         @apply inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold uppercase tracking-wider border rounded-full;
     }
     .badge-success {
-        @apply badge border-emerald-300 text-emerald-700 bg-emerald-50;
+        @apply badge border-emerald-300 dark:border-emerald-800/80 text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/30;
     }
     .badge-warning {
-        @apply badge border-amber-300 text-amber-700 bg-amber-50;
+        @apply badge border-amber-300 dark:border-amber-800/80 text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/30;
     }
     .badge-danger {
-        @apply badge border-red-300 text-red-700 bg-red-50;
+        @apply badge border-red-300 dark:border-red-800/80 text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-950/30;
     }
     .badge-info {
-        @apply badge border-blue-300 text-blue-700 bg-blue-50;
+        @apply badge border-blue-300 dark:border-blue-800/80 text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30;
     }
     .badge-neutral {
-        @apply badge border-zinc-300 text-zinc-600 bg-zinc-50;
+        @apply badge border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 bg-zinc-50 dark:bg-zinc-800/50;
     }
 
     /* ─── Typography ─── */
@@ -113,7 +113,7 @@
         @apply text-brand-gold font-display text-xs font-semibold uppercase tracking-[0.2em] mb-2;
     }
     .section-heading {
-        @apply font-display text-3xl md:text-4xl font-bold tracking-wide text-brand-ink;
+        @apply font-display text-3xl md:text-4xl font-bold tracking-wide text-brand-ink dark:text-zinc-100;
     }
     .section-heading::after {
         content: '';
@@ -124,27 +124,27 @@
         margin-top: 0.75rem;
     }
     .text-muted {
-        @apply text-brand-ink-muted;
+        @apply text-brand-ink-muted dark:text-zinc-400;
     }
 
     /* ─── Table ─── */
     .table-wrap {
-        @apply w-full overflow-x-auto rounded-xl border border-brand-border;
+        @apply w-full overflow-x-auto rounded-xl border border-brand-border dark:border-brand-navy-3;
     }
     .table-base {
         @apply w-full text-sm;
     }
     .table-base thead {
-        @apply bg-brand-warm-2 border-b border-brand-border;
+        @apply bg-brand-warm-2 dark:bg-brand-navy-3/50 border-b border-brand-border dark:border-brand-navy-3;
     }
     .table-base th {
-        @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-brand-ink-muted;
+        @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-brand-ink-muted dark:text-zinc-400;
     }
     .table-base td {
-        @apply px-4 py-3 text-brand-ink border-b border-brand-border/50;
+        @apply px-4 py-3 text-brand-ink dark:text-zinc-200 border-b border-brand-border/50 dark:border-brand-navy-3/50;
     }
     .table-base tbody tr {
-        @apply transition-colors hover:bg-brand-warm;
+        @apply transition-colors hover:bg-brand-warm dark:hover:bg-brand-navy-3/30;
     }
     .table-base tbody tr:last-child td {
         @apply border-b-0;
@@ -155,7 +155,7 @@
         @apply flex items-center justify-between gap-4 mt-6;
     }
     .pagination-info {
-        @apply text-sm text-brand-ink-muted;
+        @apply text-sm text-brand-ink-muted dark:text-zinc-400;
     }
     .pagination-links {
         @apply inline-flex items-center gap-1;
@@ -164,7 +164,7 @@
         @apply inline-flex items-center justify-center min-w-[36px] h-9 px-3 text-sm font-medium rounded-xl transition-colors;
     }
     .pagination-links a {
-        @apply text-brand-ink-muted hover:bg-brand-warm-2 hover:text-brand-ink border border-brand-border;
+        @apply text-brand-ink-muted dark:text-zinc-400 hover:bg-brand-warm-2 dark:hover:bg-brand-navy-3 hover:text-brand-ink dark:hover:text-zinc-100 border border-brand-border dark:border-brand-navy-3;
     }
     .pagination-links span[aria-current="page"] {
         @apply bg-brand-gold text-white border border-brand-gold;
@@ -175,18 +175,18 @@
         @apply flex flex-col items-center justify-center py-16 px-4 text-center;
     }
     .empty-state-icon {
-        @apply w-16 h-16 text-brand-ink-faint mb-4;
+        @apply w-16 h-16 text-brand-ink-faint dark:text-zinc-500 mb-4;
     }
     .empty-state-title {
-        @apply text-lg font-display font-bold text-brand-ink mb-1;
+        @apply text-lg font-display font-bold text-brand-ink dark:text-zinc-200 mb-1;
     }
     .empty-state-desc {
-        @apply text-sm text-brand-ink-muted max-w-xs;
+        @apply text-sm text-brand-ink-muted dark:text-zinc-400 max-w-xs;
     }
 
     /* ─── Skeleton ─── */
     .skeleton {
-        @apply bg-brand-warm-2 rounded-xl animate-pulse;
+        @apply bg-brand-warm-2 dark:bg-brand-navy-3/40 rounded-xl animate-pulse;
     }
 
     /* ─── Loading ─── */
@@ -229,6 +229,11 @@
         border: 1px solid #e2e8f0;
         color: #1e293b;
     }
+    .dark .toast {
+        background: #1e293b;
+        border-color: #334155;
+        color: #f8fafc;
+    }
     .toast.show {
         transform: translateY(0);
         opacity: 1;
@@ -259,4 +264,26 @@
     .scrollbar-hide::-webkit-scrollbar { display: none; }
     .touch-target { min-height: 44px; min-width: 44px; }
     .text-balance { text-wrap: balance; }
+    
+    .theme-transition,
+    .theme-transition *,
+    .theme-transition *:before,
+    .theme-transition *:after {
+        transition: background-color 300ms ease, border-color 300ms ease, color 300ms ease, fill 300ms ease, stroke 300ms ease !important;
+    }
+}
+
+/* View Transitions API Circular Ripple Animation */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+    z-index: 1;
+}
+
+::view-transition-new(root) {
+    z-index: 9999;
 }

@@ -18,9 +18,9 @@
     {{-- Category Tabs --}}
     <div class="overflow-x-auto scrollbar-hide -mx-4 px-4 mb-8">
         <div class="flex gap-2">
-            <a href="{{ route('products') }}" class="px-4 sm:px-5 py-2.5 text-xs sm:text-sm font-display font-semibold uppercase tracking-wide transition-all border-2 rounded-xl whitespace-nowrap {{ !$category ? 'bg-brand-gold text-white border-brand-gold shadow-level-2' : 'text-brand-ink-muted border-brand-border hover:border-brand-gold hover:text-brand-gold' }}">Semua</a>
+            <a href="{{ route('products') }}" class="px-4 sm:px-5 py-2.5 text-xs sm:text-sm font-display font-semibold uppercase tracking-wide transition-all border-2 rounded-xl whitespace-nowrap {{ !$category ? 'bg-brand-gold text-white border-brand-gold shadow-level-2' : 'text-brand-ink-muted dark:text-zinc-400 border-brand-border dark:border-brand-navy-3 hover:border-brand-gold hover:text-brand-gold' }}">Semua</a>
             @foreach($categories as $cat)
-            <a href="{{ route('products.category', $cat) }}" class="px-4 sm:px-5 py-2.5 text-xs sm:text-sm font-display font-semibold uppercase tracking-wide transition-all border-2 rounded-xl whitespace-nowrap {{ $category && $category->id === $cat->id ? 'bg-brand-gold text-white border-brand-gold shadow-level-2' : 'text-brand-ink-muted border-brand-border hover:border-brand-gold hover:text-brand-gold' }}">{{ $cat->name }}</a>
+            <a href="{{ route('products.category', $cat) }}" class="px-4 sm:px-5 py-2.5 text-xs sm:text-sm font-display font-semibold uppercase tracking-wide transition-all border-2 rounded-xl whitespace-nowrap {{ $category && $category->id === $cat->id ? 'bg-brand-gold text-white border-brand-gold shadow-level-2' : 'text-brand-ink-muted dark:text-zinc-400 border-brand-border dark:border-brand-navy-3 hover:border-brand-gold hover:text-brand-gold' }}">{{ $cat->name }}</a>
             @endforeach
         </div>
     </div>
@@ -35,9 +35,9 @@
         <script>window._productData = window._productData || {}; window._productData[{{ $product->id }}] = {id:{{ $product->id }},name:'{{ $product->name }}',price:{{ $product->price }},stock:{{ $product->stock ?? 'null' }},cartQty:{{ $existingCart ? $existingCart->quantity : 0 }},image:'{{ $hasRealImage ? url('uploads/'.$product->image) : '' }}'};</script>
         <div class="card-hover group active:scale-[0.98] transition-all duration-200">
             <a href="{{ route('product.detail', $product) }}">
-                <div class="aspect-[4/3] bg-white flex items-center justify-center p-4 border-b border-brand-border rounded-t-2xl overflow-hidden">
+                <div class="aspect-[4/3] bg-white dark:bg-brand-navy-3/20 flex items-center justify-center p-4 border-b border-brand-border dark:border-brand-navy-3 rounded-t-2xl overflow-hidden">
                     @if($hasRealImage)
-                    <img src="{{ url('uploads/'.$product->image) }}" alt="{{ $product->name }}" class="w-full h-full object-contain" loading="lazy" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'w-full h-full flex flex-col items-center justify-center bg-brand-warm text-brand-ink-faint\'><svg class=\'w-8 h-8 mb-1\' fill=\'none\' stroke=\'currentColor\' viewBox=\'0 0 24 24\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z\'/><\/svg><span class=\'text-xs font-medium\'>Foto tidak tersedia<\/span><\/div>'">
+                    <img src="{{ url('uploads/'.$product->image) }}" alt="{{ $product->name }}" class="w-full h-full object-contain" loading="lazy" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'w-full h-full flex flex-col items-center justify-center bg-brand-warm dark:bg-brand-navy-3/30 text-brand-ink-faint dark:text-zinc-500\'><svg class=\'w-8 h-8 mb-1\' fill=\'none\' stroke=\'currentColor\' viewBox=\'0 0 24 24\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z\'/><\/svg><span class=\'text-xs font-medium\'>Foto tidak tersedia<\/span><\/div>'">
                     @else
                     @php $colors = ['#1E3A5F','#92400E','#065F46','#991B1B','#5B21B6','#9D174D','#0F766E','#9A3412']; $c = $colors[$product->category_id % 8]; @endphp
                     <div class="w-full h-full rounded-lg flex items-center justify-center" style="background:linear-gradient(135deg,{{ $c }},#0008);box-shadow:inset 0 -40px 60px #0002">
@@ -47,9 +47,9 @@
                 </div>
             </a>
             <div class="p-4">
-                <p class="text-xs text-brand-blue font-display uppercase tracking-[0.15em] font-semibold">{{ $product->category->name }}</p>
+                <p class="text-xs text-brand-blue dark:text-brand-blue-light font-display uppercase tracking-[0.15em] font-semibold">{{ $product->category->name }}</p>
                 <a href="{{ route('product.detail', $product) }}">
-                    <h3 class="text-sm font-medium mt-1 leading-snug line-clamp-2 text-brand-ink group-hover:text-brand-blue transition-colors">{{ $product->name }}</h3>
+                    <h3 class="text-sm font-medium mt-1 leading-snug line-clamp-2 text-brand-ink dark:text-zinc-200 group-hover:text-brand-blue dark:group-hover:text-brand-blue-light transition-colors">{{ $product->name }}</h3>
                 </a>
                 <div class="flex items-center justify-between mt-3">
                     <p class="font-bold text-brand-gold tabular-nums font-mono text-base">Rp{{ number_format($product->price, 0, ',', '.') }}</p>
@@ -63,7 +63,7 @@
                     <button type="button" onclick="ProductSheet.open({{ $product->id }})" class="btn-outline btn-xs">Beli</button>
                 </div>
                 @else
-                <a href="{{ route('login') }}" class="mt-3 block text-center btn-xs text-brand-ink-muted border-2 border-brand-border py-2 uppercase tracking-wider font-display rounded-xl hover:border-brand-gold hover:text-brand-gold transition-colors">Login untuk Membeli</a>
+                <a href="{{ route('login') }}" class="mt-3 block text-center btn-xs text-brand-ink-muted dark:text-zinc-400 border-2 border-brand-border dark:border-brand-navy-3 py-2 uppercase tracking-wider font-display rounded-xl hover:border-brand-gold hover:text-brand-gold transition-colors">Login untuk Membeli</a>
                 @endauth
             </div>
         </div>

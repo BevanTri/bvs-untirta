@@ -82,7 +82,6 @@ cp .env.example .env
 # konfigurasi DB di .env (MySQL atau SQLite)
 php artisan key:generate
 php artisan migrate --seed
-npm install && npm run build
 php artisan serve
 ```
 

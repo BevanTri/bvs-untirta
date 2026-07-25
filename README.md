@@ -26,6 +26,7 @@ Dibuat sebagai proyek **Ujian Akhir Semester** (UAS) Semester Antara 2025/2026 �
 ## ✨ Fitur
 
 ### 🛒 E-Commerce
+
 - **Katalog Produk** — Ban, Aki, Oli, Shock Absorber (265+ produk)
 - **Layanan Servis** — 9 jasa bengkel dengan harga tetap
 - **Keranjang Belanja** — Add/remove/qty via vanilla JS
@@ -34,6 +35,7 @@ Dibuat sebagai proyek **Ujian Akhir Semester** (UAS) Semester Antara 2025/2026 �
 - **Export CSV** — Export data order ke Excel (separator `;`, BOM untuk Excel Indonesia)
 
 ### 🔧 Workshop Management
+
 - **Data Pelanggan** — Riwayat kendaraan & servis per customer
 - **Data Kendaraan** — Multi-vehicle per customer (plat, merk, model), form ringkas tanpa tahun/warna
 - **Data Mekanik** — Manajemen mekanik dengan spesialisasi
@@ -44,6 +46,7 @@ Dibuat sebagai proyek **Ujian Akhir Semester** (UAS) Semester Antara 2025/2026 �
 - **Laporan** — Filter per period (harian/mingguan/bulanan/tahunan)
 
 ### 📱 Lainnya
+
 - **🔐 Auth** — Login/register, role admin & customer
 - **📱 Mobile-First Responsive** — Tailwind CSS, touch-friendly (min 44px), overflow-safe di semua HP
 - **📡 REST API** — Sanctum token auth untuk integrasi eksternal
@@ -55,20 +58,27 @@ Dibuat sebagai proyek **Ujian Akhir Semester** (UAS) Semester Antara 2025/2026 �
 
 ## 🛠️ Tech Stack
 
-| Bagian     | Teknologi                                          |
-| ---------- | --------------------------------------------------- |
-| Backend    | PHP 8.3, Laravel 13, MySQL                          |
-| Frontend   | Tailwind CSS, Vanilla JS, Vite                      |
-| Payment    | iPaymu (Virtual Account via raw cURL)               |
-| Hosting    | InfinityFree (Free hosting)                         |
-| Auth       | Laravel Breeze, Laravel Sanctum (API tokens)        |
-| API        | RESTful, Sanctum token auth, JSON Resources         |
+| Bagian   | Teknologi                                    |
+| -------- | -------------------------------------------- |
+| Backend  | PHP 8.3, Laravel 13, MySQL                   |
+| Frontend | Tailwind CSS, Vanilla JS, Vite               |
+| Payment  | iPaymu (Virtual Account via raw cURL)        |
+| Hosting  | InfinityFree (Free hosting)                  |
+| Auth     | Laravel Breeze, Laravel Sanctum (API tokens) |
+| API      | RESTful, Sanctum token auth, JSON Resources  |
 
 ---
 
 ## 🚀 Live URL
 
 [http://bvsuntirta.rf.gd/](http://bvsuntirta.rf.gd/)
+
+---
+
+## 🤝 Kontributor
+
+1. _Bevan Tri Ramadiyas_ (3337250063)
+2. _Fauzi Nur Ibrahim_ (3337250019)
 
 ---
 
@@ -89,18 +99,18 @@ php artisan serve
 
 ## 📡 API Endpoints
 
-| Method | Endpoint           | Auth         | Deskripsi                      |
-| ------ | ------------------ | ------------ | ------------------------------ |
-| POST   | `/api/token`       | —            | Dapatkan token (email/password/device_name) |
-| GET    | `/api/services`    | Bearer Token | Daftar layanan servis          |
-| GET    | `/api/customers`   | Bearer Token | Daftar pelanggan               |
+| Method | Endpoint         | Auth         | Deskripsi                                   |
+| ------ | ---------------- | ------------ | ------------------------------------------- |
+| POST   | `/api/token`     | —            | Dapatkan token (email/password/device_name) |
+| GET    | `/api/services`  | Bearer Token | Daftar layanan servis                       |
+| GET    | `/api/customers` | Bearer Token | Daftar pelanggan                            |
 
 ## 🔑 Test Credentials
 
-| Role    | Email                  | Password   |
-| ------- | ---------------------- | ---------- |
-| Admin   | admin@bengkel.test     | password   |
-| Customer| customer@bengkel.test  | password   |
+| Role     | Email                 | Password |
+| -------- | --------------------- | -------- |
+| Admin    | admin@bengkel.test    | password |
+| Customer | customer@bengkel.test | password |
 
 ---
 

@@ -10,8 +10,7 @@
     <link href="https://fonts.bunny.net/css?family=oswald:500,600,700&display=swap" rel="stylesheet" />
     <link href="https://fonts.bunny.net/css?family=jetbrains-mono:400,500,700&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/webp" href="{{ asset('images/logo-untirta.webp') }}">
-    <link rel="stylesheet" href="{{ asset('build/assets/app-CgeNcYon.css') }}">
-    <script type="module" src="{{ asset('build/assets/app-B9qO1Jfl.js') }}"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-sans antialiased bg-brand-warm text-brand-ink">
     <div class="flex md:h-screen flex-col md:flex-row">

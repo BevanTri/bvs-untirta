@@ -105,6 +105,12 @@ php artisan serve
 
 ---
 
+## 🤝 Kontributor
+
+1. **Bevan Tri Ramadiyas** (3337250063)
+
+---
+
 ## 📄 Lisensi
 
 Proyek ini dibuat untuk keperluan akademik — Universitas Tirtayasa.

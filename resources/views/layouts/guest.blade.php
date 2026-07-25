@@ -10,7 +10,7 @@
     <link href="https://fonts.bunny.net/css?family=oswald:500,600,700&display=swap" rel="stylesheet" />
     <link href="https://fonts.bunny.net/css?family=jetbrains-mono:400,500,700&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/webp" href="{{ asset('images/logo-untirta.webp') }}">
-    <link rel="stylesheet" href="{{ asset('build/assets/app-CgeNcYon.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/assets/app-BmPsvYpI.css') }}">
     <script type="module" src="{{ asset('build/assets/app-B9qO1Jfl.js') }}"></script>
     <style>
         .auth-bg { background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%); }

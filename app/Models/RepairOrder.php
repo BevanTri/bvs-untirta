@@ -13,6 +13,7 @@ class RepairOrder extends Model
         'customer_id', 'vehicle_id', 'mechanic_id', 'user_id',
         'order_number', 'date', 'complaint', 'action',
         'service_fee', 'total', 'status', 'payment_status',
+        'converted_at',
     ];
 
     protected function casts(): array
@@ -21,6 +22,7 @@ class RepairOrder extends Model
             'date' => 'date',
             'service_fee' => 'decimal:2',
             'total' => 'decimal:2',
+            'converted_at' => 'datetime',
         ];
     }
 

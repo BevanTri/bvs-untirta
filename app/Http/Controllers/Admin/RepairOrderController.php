@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Mechanic;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\RepairOrder;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RepairOrderController extends Controller
 {
@@ -160,20 +162,72 @@ class RepairOrderController extends Controller
         if ($data['status'] === 'dibatalkan') {
             $data['payment_status'] = 'failed';
         }
-        $repair_order->update($data);
 
-        $repair_order->items()->delete();
-        if (!empty($data['items'])) {
-            foreach ($data['items'] as $item) {
-                $repair_order->items()->create([
-                    'product_id' => $item['product_id'] ?? null,
-                    'name' => $item['name'],
-                    'quantity' => $item['quantity'],
-                    'price' => $item['price'],
-                    'subtotal' => $item['price'] * $item['quantity'],
-                ]);
+        DB::transaction(function () use ($repair_order, $data) {
+            $oldItems = $repair_order->items()->get();
+
+            // restore stock for removed/unchanged old items
+            foreach ($oldItems as $old) {
+                if ($old->product_id) {
+                    Product::where('id', $old->product_id)->increment('stock', $old->quantity);
+                }
             }
-        }
+
+            $repair_order->update($data);
+
+            $repair_order->items()->delete();
+            if (!empty($data['items'])) {
+                foreach ($data['items'] as $item) {
+                    $repair_order->items()->create([
+                        'product_id' => $item['product_id'] ?? null,
+                        'name' => $item['name'],
+                        'quantity' => $item['quantity'],
+                        'price' => $item['price'],
+                        'subtotal' => $item['price'] * $item['quantity'],
+                    ]);
+                    if (!empty($item['product_id'])) {
+                        Product::where('id', $item['product_id'])->decrement('stock', $item['quantity']);
+                    }
+                }
+            }
+
+            // convert spareparts → sales transaction
+            if (
+                in_array($data['status'], ['proses', 'selesai'])
+                && $repair_order->payment_status === 'paid'
+                && is_null($repair_order->converted_at)
+            ) {
+                $sparepartItems = $repair_order->items()->whereNotNull('product_id')->get();
+
+                if ($sparepartItems->isNotEmpty()) {
+                    $subtotal = $sparepartItems->sum('subtotal');
+
+                    $order = Order::create([
+                        'user_id' => $repair_order->user_id ?? auth()->id(),
+                        'order_number' => 'INV-' . now()->format('Ymd') . '-' . str()->upper(str()->random(6)),
+                        'customer_name' => $repair_order->customer->name,
+                        'subtotal' => $subtotal,
+                        'total' => $subtotal,
+                        'status' => 'completed',
+                        'payment_status' => 'paid',
+                        'notes' => 'Sparepart dari servis ' . $repair_order->order_number,
+                    ]);
+
+                    foreach ($sparepartItems as $spItem) {
+                        $order->items()->create([
+                            'itemable_id' => $spItem->product_id,
+                            'itemable_type' => Product::class,
+                            'name' => $spItem->name,
+                            'quantity' => $spItem->quantity,
+                            'price' => $spItem->price,
+                            'subtotal' => $spItem->subtotal,
+                        ]);
+                    }
+
+                    $repair_order->update(['converted_at' => now()]);
+                }
+            }
+        });
 
         return redirect()->route('admin.repair-orders')->with('success', 'Servis diupdate');
     }

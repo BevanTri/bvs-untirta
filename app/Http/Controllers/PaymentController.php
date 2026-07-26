@@ -117,6 +117,32 @@ class PaymentController extends Controller
                 $payable->update(['payment_status' => 'paid']);
                 if ($payable instanceof Order) {
                     $payable->update(['status' => 'processing']);
+                } elseif ($payable instanceof RepairOrder && is_null($payable->converted_at)) {
+                    $sparepartItems = $payable->items()->whereNotNull('product_id')->get();
+                    if ($sparepartItems->isNotEmpty()) {
+                        $subtotal = $sparepartItems->sum('subtotal');
+                        $order = Order::create([
+                            'user_id' => $payable->user_id,
+                            'order_number' => 'INV-' . now()->format('Ymd') . '-' . str()->upper(str()->random(6)),
+                            'customer_name' => $payable->customer->name,
+                            'subtotal' => $subtotal,
+                            'total' => $subtotal,
+                            'status' => 'completed',
+                            'payment_status' => 'paid',
+                            'notes' => 'Sparepart dari servis ' . $payable->order_number,
+                        ]);
+                        foreach ($sparepartItems as $spItem) {
+                            $order->items()->create([
+                                'itemable_id' => $spItem->product_id,
+                                'itemable_type' => Product::class,
+                                'name' => $spItem->name,
+                                'quantity' => $spItem->quantity,
+                                'price' => $spItem->price,
+                                'subtotal' => $spItem->subtotal,
+                            ]);
+                        }
+                        $payable->update(['converted_at' => now()]);
+                    }
                 }
             } elseif ($isFailure) {
                 DB::transaction(function () use ($payable) {

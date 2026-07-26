@@ -182,129 +182,29 @@ Dokumen teknis, arsitektur, dan panduan presentasi tersedia di folder `docs/`:
 ```
 bvs-untirta/
 ├── app/
-│   ├── Console/
-│   │   └── Commands/
-│   │       ├── FetchProductImages.php
-│   │       └── ScrapeBrandPartners.php
 │   ├── Http/
-│   │   ├── Controllers/
-│   │   │   ├── AdminController.php
-│   │   │   ├── CartController.php
-│   │   │   ├── CheckoutController.php
-│   │   │   ├── OrderController.php
-│   │   │   ├── PageController.php
-│   │   │   ├── PaymentController.php
-│   │   │   ├── ProfileController.php
-│   │   │   ├── RepairOrderController.php
-│   │   │   ├── Admin/
-│   │   │   │   ├── CustomerController.php
-│   │   │   │   ├── MechanicController.php
-│   │   │   │   ├── RepairOrderController.php
-│   │   │   │   ├── ReportController.php
-│   │   │   │   └── VehicleController.php
-│   │   │   ├── Api/
-│   │   │   │   ├── CustomerController.php
-│   │   │   │   ├── RepairOrderController.php
-│   │   │   │   └── ServiceController.php
-│   │   │   └── Auth/
-│   │   │       ├── AuthenticatedSessionController.php
-│   │   │       ├── ConfirmablePasswordController.php
-│   │   │       ├── EmailVerificationNotificationController.php
-│   │   │       ├── EmailVerificationPromptController.php
-│   │   │       ├── NewPasswordController.php
-│   │   │       ├── PasswordController.php
-│   │   │       ├── PasswordResetLinkController.php
-│   │   │       ├── RegisteredUserController.php
-│   │   │       └── VerifyEmailController.php
-│   │   ├── Middleware/
-│   │   │   ├── AdminMiddleware.php
-│   │   │   └── DetectAppUrl.php
-│   │   ├── Requests/
-│   │   │   ├── ProfileUpdateRequest.php
-│   │   │   └── Auth/
-│   │   │       └── LoginRequest.php
-│   │   └── Resources/
-│   │       ├── CustomerResource.php
-│   │       ├── RepairOrderResource.php
-│   │       └── ServiceResource.php
-│   ├── Models/
-│   │   ├── BrandPartner.php
-│   │   ├── CartItem.php
-│   │   ├── Category.php
-│   │   ├── Customer.php
-│   │   ├── Mechanic.php
-│   │   ├── Order.php
-│   │   ├── OrderItem.php
-│   │   ├── Payment.php
-│   │   ├── Product.php
-│   │   ├── RepairOrder.php
-│   │   ├── RepairOrderItem.php
-│   │   ├── Service.php
-│   │   ├── User.php
-│   │   └── Vehicle.php
-│   ├── Providers/
-│   │   └── AppServiceProvider.php
-│   ├── Services/
-│   │   └── IpaymuService.php
-│   └── View/Components/
-│       ├── AdminLayout.php
-│       ├── AppLayout.php
-│       └── GuestLayout.php
-├── bootstrap/
-│   ├── app.php
-│   └── providers.php
-├── config/
-│   ├── app.php, auth.php, cache.php, database.php
-│   ├── filesystems.php, logging.php, mail.php
-│   ├── queue.php, sanctum.php, services.php, session.php
+│   │   ├── Controllers/       # Controller Web, Admin, dan API
+│   │   │   ├── Admin/         # Admin-specific Controllers
+│   │   │   └── Api/           # API Controllers (JSON Response)
+│   │   └── Middleware/        # Middleware RBAC & Auth Guard
+│   ├── Models/                # Eloquent Models (14 model + relasi)
+│   └── Services/              # Business Logic (iPaymu, dll.)
+├── config/                    # Konfigurasi Aplikasi
 ├── database/
-│   ├── factories/
-│   │   └── UserFactory.php
-│   ├── migrations/           (27 file migrasi terstruktur)
-│   └── seeders/
-│       ├── BrandPartnerSeeder.php
-│       ├── CategorySeeder.php
-│       ├── CustomerSeeder.php
-│       ├── DatabaseSeeder.php
-│       ├── MechanicSeeder.php
-│       ├── ProductSeeder.php
-│       ├── RepairOrderSeeder.php
-│       ├── ServiceSeeder.php
-│       └── VehicleSeeder.php
-├── docs/                     # PRD, Design System, ERD, Testing
-│   ├── PRD_BVS_Bengkel_Untirta.md
-│   ├── DESIGN.md
-│   ├── erd.md
-│   ├── penjelasan.md
-│   ├── blackbox.md
-│   └── guidebook.md
-├── lang/
-│   ├── en.json, id.json
-│   └── en/, id/
-├── public/
-│   ├── build/assets/
+│   ├── migrations/            # 27 File Migrasi Terstruktur
+│   └── seeders/               # Data Awal & Default Seeder
+├── docs/                      # PRD, Design System, ERD, Testing
+├── public/                    # Public Assets & Logo
 │   ├── images/
-│   ├── uploads/products/
-│   ├── .htaccess, favicon.ico
-│   ├── index.php, robots.txt
-│   └── storage.php
+│   └── uploads/products/
 ├── resources/
-│   ├── css/app.css
-│   ├── js/app.js
-│   └── views/
-│       ├── admin/            (15 file)
-│       ├── auth/             (6 file)
-│       ├── cart/, checkout/
-│       ├── components/       (17 file)
-│       ├── layouts/          (5 file + partials/)
-│       ├── orders/, pages/, profile/
-│       ├── repairs/
-│       └── welcome.blade.php
+│   ├── css/                   # Tailwind CSS Styles
+│   ├── js/                    # Vanilla JavaScript
+│   └── views/                 # Template Blade (Admin, Customer, Public)
 ├── routes/
-│   ├── api.php
-│   ├── auth.php
-│   ├── console.php
-│   └── web.php
+│   ├── api.php                # Rute RESTful API (Sanctum)
+│   ├── auth.php               # Rute Autentikasi
+│   └── web.php                # Rute Navigasi Web Utama
 └── storage/app/public/
     ├── brands/
     └── products/

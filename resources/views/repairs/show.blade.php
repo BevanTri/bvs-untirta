@@ -218,22 +218,5 @@
         :action="route('repairs.cancel', $order)"
     />
 
-    @if($order->payments->count())
-    <div class="max-w-4xl mx-auto px-4 pb-8">
-        <div class="card p-5 rounded-xl">
-            <h3 class="font-display font-bold text-brand-ink dark:text-zinc-100 uppercase tracking-wide mb-4">Riwayat Pembayaran</h3>
-            @foreach($order->payments as $p)
-            <div class="flex items-center justify-between border-b border-brand-border/50 dark:border-brand-navy-3/50 py-3 last:border-b-0">
-                <div>
-                    <p class="text-sm font-medium text-brand-ink dark:text-zinc-100">{{ ucfirst($p->method) }}</p>
-                    <p class="text-xs text-brand-ink-muted dark:text-zinc-400">{{ $p->reference_id }} &middot; {{ $p->created_at->format('d M Y H:i') }}</p>
-                </div>
-                <span class="badge {{ $p->status === 'berhasil' ? 'badge-success' : ($p->status === 'gagal' ? 'badge-danger' : 'badge-warning') }}">
-                    {{ $p->status === 'berhasil' ? 'Lunas' : ($p->status === 'gagal' ? 'Gagal' : 'Pending') }}
-                </span>
-            </div>
-            @endforeach
-        </div>
-    </div>
-    @endif
+
 </x-app-layout>

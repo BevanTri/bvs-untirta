@@ -7,8 +7,8 @@
                 </svg>
             </div>
             <div class="flex-1 min-w-0">
-                <h2 class="font-display font-bold text-xl text-white tracking-tight">Detail Pesanan</h2>
-                <p class="text-sm text-white/70 truncate">{{ $order->order_number }}</p>
+                <h2 class="font-display font-bold text-xl text-brand-ink dark:text-white tracking-tight">Detail Pesanan</h2>
+                <p class="text-sm text-brand-ink-muted dark:text-white/70 truncate">{{ $order->order_number }}</p>
             </div>
             @if($order->status === 'cancelled')
                 <span class="badge badge-danger">Dibatalkan</span>

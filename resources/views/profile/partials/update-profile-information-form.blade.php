@@ -1,10 +1,10 @@
 <section>
     <header>
-        <h2 class="font-display text-lg font-medium text-brand-ink">
+        <h2 class="font-display text-lg font-medium text-brand-ink dark:text-zinc-100">
             {{ __('Profile Information') }}
         </h2>
 
-        <p class="mt-1 text-sm text-brand-ink-muted">
+        <p class="mt-1 text-sm text-brand-ink-muted dark:text-zinc-400">
             {{ __("Update your account's profile information and email address.") }}
         </p>
     </header>
@@ -30,16 +30,16 @@
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
-                    <p class="text-sm mt-2 text-brand-ink">
+                    <p class="text-sm mt-2 text-brand-ink dark:text-zinc-100">
                         {{ __('Your email address is unverified.') }}
 
-                        <button form="send-verification" class="underline text-sm text-brand-blue hover:text-brand-blue/80 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-gold">
+                        <button form="send-verification" class="underline text-sm text-brand-blue hover:text-brand-blue/80 dark:text-brand-blue-light rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-gold">
                             {{ __('Click here to re-send the verification email.') }}
                         </button>
                     </p>
 
                     @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl p-4">
+                        <p class="mt-2 font-medium text-sm bg-emerald-50 border border-emerald-200 text-emerald-800 dark:bg-emerald-950/30 dark:border-emerald-800/50 dark:text-emerald-400 rounded-xl p-4">
                             {{ __('A new verification link has been sent to your email address.') }}
                         </p>
                     @endif
@@ -56,7 +56,7 @@
                     x-show="show"
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-brand-ink-muted"
+                    class="text-sm text-brand-ink-muted dark:text-zinc-400"
                 >{{ __('Saved.') }}</p>
             @endif
         </div>

@@ -34,10 +34,10 @@
             </button>
         </div>
 
-        <div class="pt-4 border-t border-brand-border text-center">
-            <p class="text-sm text-brand-ink-muted">
+        <div class="pt-4 border-t border-brand-border dark:border-brand-navy-3 text-center">
+            <p class="text-sm text-brand-ink-muted dark:text-zinc-400">
                 Sudah punya akun?
-                <a href="{{ route('login') }}" class="text-brand-blue hover:text-brand-blue/80 font-medium">Login</a>
+                <a href="{{ route('login') }}" class="text-brand-blue hover:text-brand-blue/80 dark:text-brand-blue-light font-medium">Login</a>
             </p>
         </div>
     </form>

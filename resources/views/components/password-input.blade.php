@@ -5,11 +5,11 @@
         id="{{ $id }}"
         name="{{ $name }}"
         :type="show ? 'text' : 'password'"
-        {{ $attributes->merge(['class' => 'block mt-1 w-full border border-brand-border bg-white px-4 py-3 text-sm focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20 text-brand-ink placeholder-brand-ink-faint rounded-xl transition-all duration-200', 'style' => 'padding-right: 3rem; min-height: 48px']) }}
+        {{ $attributes->merge(['class' => 'input-field block mt-1 w-full', 'style' => 'padding-right: 3rem']) }}
     />
     <button type="button"
         @click="show = !show"
-        class="absolute right-3 bottom-0 top-0 my-auto flex items-center text-zinc-400 hover:text-zinc-600 transition-colors cursor-pointer focus:outline-none"
+        class="absolute right-3 bottom-0 top-0 my-auto flex items-center text-zinc-400 hover:text-zinc-600 dark:text-zinc-500 dark:hover:text-zinc-300 transition-colors cursor-pointer focus:outline-none"
         tabindex="-1"
         :aria-label="show ? 'Sembunyikan password' : 'Tampilkan password'"
     >

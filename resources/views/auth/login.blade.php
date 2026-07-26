@@ -20,14 +20,14 @@
 
         <div class="block">
             <label for="remember_me" class="inline-flex items-center gap-2">
-                <input id="remember_me" type="checkbox" class="rounded border-brand-border text-brand-blue focus:ring-brand-blue" name="remember">
-                <span class="text-sm text-brand-ink-muted">{{ __('Remember me') }}</span>
+                <input id="remember_me" type="checkbox" class="rounded border-brand-border dark:border-brand-navy-3 text-brand-blue dark:text-brand-blue-light focus:ring-brand-blue" name="remember">
+                <span class="text-sm text-brand-ink-muted dark:text-zinc-400">{{ __('Remember me') }}</span>
             </label>
         </div>
 
         <div class="flex flex-col sm:flex-row items-center justify-end gap-3">
             @if (Route::has('password.request'))
-                <a class="text-sm text-brand-blue hover:text-brand-blue/80 font-medium" href="{{ route('password.request') }}">
+                <a class="text-sm text-brand-blue hover:text-brand-blue/80 dark:text-brand-blue-light font-medium" href="{{ route('password.request') }}">
                     {{ __('Forgot your password?') }}
                 </a>
             @endif
@@ -36,10 +36,10 @@
             </button>
         </div>
 
-        <div class="pt-4 border-t border-brand-border text-center">
-            <p class="text-sm text-brand-ink-muted">
+            <div class="pt-4 border-t border-brand-border dark:border-brand-navy-3 text-center">
+            <p class="text-sm text-brand-ink-muted dark:text-zinc-400">
                 Belum punya akun?
-                <a href="{{ route('register') }}" class="text-brand-blue hover:text-brand-blue/80 font-medium">Daftar</a>
+                <a href="{{ route('register') }}" class="text-brand-blue hover:text-brand-blue/80 dark:text-brand-blue-light font-medium">Daftar</a>
             </p>
         </div>
     </form>

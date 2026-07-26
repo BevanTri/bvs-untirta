@@ -1,7 +1,7 @@
 @section('title', 'Konfirmasi Password')
 
 <x-guest-layout>
-    <div class="mb-4 text-sm text-brand-ink-muted leading-relaxed">
+    <div class="mb-4 text-sm text-brand-ink-muted dark:text-zinc-400 leading-relaxed">
         {{ __('Konfirmasi password Anda untuk melanjutkan.') }}
     </div>
 

@@ -1,7 +1,7 @@
 @section('title', 'Lupa Password')
 
 <x-guest-layout>
-    <div class="mb-4 text-sm text-brand-ink-muted leading-relaxed">
+    <div class="mb-4 text-sm text-brand-ink-muted dark:text-zinc-400 leading-relaxed">
         {{ __('Lupa password? Masukkan email Anda dan kami akan kirim tautan reset password.') }}
     </div>
 
@@ -22,8 +22,8 @@
             </x-primary-button>
         </div>
 
-        <div class="mt-6 pt-6 border-t border-brand-border text-center">
-            <a href="{{ route('login') }}" class="text-sm text-brand-blue hover:text-brand-blue/80 font-medium">Kembali ke Login</a>
+        <div class="mt-6 pt-6 border-t border-brand-border dark:border-brand-navy-3 text-center">
+            <a href="{{ route('login') }}" class="text-sm text-brand-blue hover:text-brand-blue/80 dark:text-brand-blue-light font-medium">Kembali ke Login</a>
         </div>
     </form>
 </x-guest-layout>

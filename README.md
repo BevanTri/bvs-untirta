@@ -220,7 +220,7 @@ Disusun untuk Mata Kuliah **Pemrograman Web & Sistem Basis Data** — UAS Semest
 |:---|:---:|:---|
 | **Bevan Tri Ramadiyas** | 3337250063 | Fullstack Developer & Software Architect |
 | **Fauzi Nur Ibrahim** | 3337250019 | Frontend & Dark Mode Implementation |
-
+| **Muhammad Rizal Chaerul Syahputra** | 3337250103 | Bug checker & frontend designer |
 ---
 
 <div align="center">

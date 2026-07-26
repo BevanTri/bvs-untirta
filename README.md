@@ -319,7 +319,7 @@ Disusun untuk Mata Kuliah **Pemrograman Web & Sistem Basis Data** — UAS Semest
 | Anggota | NPM | Peran |
 |:---|:---:|:---|
 | **Bevan Tri Ramadiyas** | 3337250063 | Fullstack Developer & Software Architect |
-| **Fauzi Nur Ibrahim** | 3337250019 | Backend & Database Engineer |
+| **Fauzi Nur Ibrahim** | 3337250019 | Frontend & Dark Mode Implementation |
 
 ---
 

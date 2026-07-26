@@ -215,4 +215,4 @@ Total: **137 test cases** — lihat [blackbox.md](blackbox.md)
 | Anggota | NPM | Peran |
 |:---|:---:|:---|
 | Bevan Tri Ramadiyas | 3337250063 | Fullstack Developer |
-| Fauzi Nur Ibrahim | 3337250019 | Backend & Database Engineer |
+| Fauzi Nur Ibrahim | 3337250019 | Frontend & Dark Mode Implementation |

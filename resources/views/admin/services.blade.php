@@ -12,7 +12,7 @@
 
     <x-card padding="p-0">
         <div class="overflow-x-auto"><table class="w-full text-sm">
-            <thead><tr class="border-b border-brand-border/20 dark:border-brand-navy-3/50 bg-brand-warm dark:bg-brand-navy-3/30"><th class="p-3 text-left font-semibold text-brand-ink-muted text-xs uppercase tracking-widest whitespace-nowrap">Nama</th><th class="p-3 text-right font-semibold text-brand-ink-muted text-xs uppercase tracking-widest whitespace-nowrap">Harga</th><th class="p-3 text-center font-semibold text-brand-ink-muted text-xs uppercase tracking-widest whitespace-nowrap">Aktif</th><th class="p-3 text-center font-semibold text-brand-ink-muted text-xs uppercase tracking-widest whitespace-nowrap">Aksi</th></tr></thead>
+            <thead><tr class="border-b border-brand-border/20 dark:border-brand-navy-3/50 bg-brand-warm dark:bg-brand-navy-3/30"><th class="p-3 text-left font-semibold text-brand-ink-muted dark:text-zinc-400 text-xs uppercase tracking-widest whitespace-nowrap">Nama</th><th class="p-3 text-right font-semibold text-brand-ink-muted dark:text-zinc-400 text-xs uppercase tracking-widest whitespace-nowrap">Harga</th><th class="p-3 text-center font-semibold text-brand-ink-muted dark:text-zinc-400 text-xs uppercase tracking-widest whitespace-nowrap">Aktif</th><th class="p-3 text-center font-semibold text-brand-ink-muted dark:text-zinc-400 text-xs uppercase tracking-widest whitespace-nowrap">Aksi</th></tr></thead>
             <tbody>
                 @foreach($services as $s)
                 <tr class="border-b border-brand-border/10 dark:border-brand-navy-3/50">

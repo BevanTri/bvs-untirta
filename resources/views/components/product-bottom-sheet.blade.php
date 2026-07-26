@@ -13,8 +13,8 @@
 <script>
 window.ProductSheet = {
   imageMarkup: function(p) {
-    if (!p.image) return '<div class="w-full h-full flex flex-col items-center justify-center bg-brand-warm rounded-xl text-brand-ink-faint"><svg class="w-8 h-8 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg><span class="text-xs font-medium">Foto tidak tersedia</span></div>';
-    return '<img src="' + p.image + '" alt="' + (p.name||'Produk') + '" class="w-full h-full object-cover" onerror="this.onerror=null;this.parentElement.innerHTML=\'<div class=\\\'w-full h-full flex flex-col items-center justify-center bg-brand-warm rounded-xl text-brand-ink-faint\\\'><svg class=\\\'w-8 h-8 mb-1\\\' fill=\\\'none\\\' stroke=\\\'currentColor\\\' viewBox=\\\'0 0 24 24\\\'><path stroke-linecap=\\\'round\\\' stroke-linejoin=\\\'round\\\' stroke-width=\\\'1.5\\\' d=\\\'M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z\\\'/><\\\/svg><span class=\\\'text-xs font-medium\\\'>Foto tidak tersedia<\\\/span><\\\/div>\'">';
+    if (!p.image) return '<div class="w-full h-full flex flex-col items-center justify-center bg-brand-warm dark:bg-brand-navy-3/30 rounded-xl text-brand-ink-faint dark:text-zinc-500"><svg class="w-8 h-8 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg><span class="text-xs font-medium">Foto tidak tersedia</span></div>';
+    return '<img src="' + p.image + '" alt="' + (p.name||'Produk') + '" class="w-full h-full object-cover" onerror="this.onerror=null;this.parentElement.innerHTML=\'<div class=\\\'w-full h-full flex flex-col items-center justify-center bg-brand-warm dark:bg-brand-navy-3/30 rounded-xl text-brand-ink-faint dark:text-zinc-500\\\'><svg class=\\\'w-8 h-8 mb-1\\\' fill=\\\'none\\\' stroke=\\\'currentColor\\\' viewBox=\\\'0 0 24 24\\\'><path stroke-linecap=\\\'round\\\' stroke-linejoin=\\\'round\\\' stroke-width=\\\'1.5\\\' d=\\\'M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z\\\'/><\\\/svg><span class=\\\'text-xs font-medium\\\'>Foto tidak tersedia<\\\/span><\\\/div>\'">';
   },
   addToCart: function() {
     document.getElementById('ps-form').submit();
@@ -93,12 +93,12 @@ document.addEventListener('click', function(e) {
 @endonce
 
 <div id="product-sheet-overlay" class="product-sheet-overlay fixed inset-0 bg-black/50" onclick="ProductSheet.close()">
-  <div id="product-sheet" class="product-sheet-panel bg-white shadow-2xl flex flex-col" onclick="event.stopPropagation()">
+  <div id="product-sheet" class="product-sheet-panel bg-white dark:bg-brand-navy-2 shadow-2xl flex flex-col" onclick="event.stopPropagation()">
     <div class="shrink-0 px-4 pt-3 pb-2 border-b border-brand-border/50">
       <div class="flex justify-center mb-2 md:hidden"><div class="w-10 h-1 rounded-full bg-brand-border"></div></div>
       <div class="flex items-center justify-between">
-        <h3 class="font-display font-semibold text-brand-ink">Detail Produk</h3>
-        <button type="button" onclick="ProductSheet.close()" class="text-brand-ink-muted hover:text-brand-ink p-1 text-xl leading-none">&times;</button>
+        <h3 class="font-display font-semibold text-brand-ink dark:text-zinc-100">Detail Produk</h3>
+        <button type="button" onclick="ProductSheet.close()" class="text-brand-ink-muted dark:text-zinc-400 hover:text-brand-ink dark:hover:text-zinc-100 p-1 text-xl leading-none">&times;</button>
       </div>
     </div>
     <div class="flex-1 overflow-y-auto p-4" style="overscroll-behavior:contain">
@@ -107,30 +107,30 @@ document.addEventListener('click', function(e) {
         <input type="hidden" name="type" value="product" id="ps-type">
         <input type="hidden" name="id" value="" id="ps-product-id">
         <div class="flex gap-4 mb-4">
-          <div id="ps-image" class="w-24 h-24 shrink-0 rounded-xl overflow-hidden bg-brand-warm flex items-center justify-center"></div>
+          <div id="ps-image" class="w-24 h-24 shrink-0 rounded-xl overflow-hidden bg-brand-warm dark:bg-brand-navy-3/30 flex items-center justify-center"></div>
           <div class="flex-1 min-w-0">
-            <p id="ps-name" class="font-medium text-brand-ink text-sm"></p>
+            <p id="ps-name" class="font-medium text-brand-ink dark:text-zinc-100 text-sm"></p>
             <p id="ps-price" class="font-bold text-brand-gold text-lg font-mono mt-1"></p>
-            <p id="ps-stock" class="text-xs text-brand-ink-muted font-mono mt-0.5"></p>
+            <p id="ps-stock" class="text-xs text-brand-ink-muted dark:text-zinc-400 font-mono mt-0.5"></p>
           </div>
         </div>
 
-        <div id="ps-cart-hint" class="hidden bg-brand-warm rounded-xl p-3 mb-4 text-sm text-brand-ink-muted">
-          Produk ini sudah ada di keranjang. Jumlah saat ini: <strong id="ps-cart-hint-qty" class="text-brand-ink"></strong>
+        <div id="ps-cart-hint" class="hidden bg-brand-warm dark:bg-brand-navy-3/30 rounded-xl p-3 mb-4 text-sm text-brand-ink-muted dark:text-zinc-400">
+          Produk ini sudah ada di keranjang. Jumlah saat ini: <strong id="ps-cart-hint-qty" class="text-brand-ink dark:text-zinc-100"></strong>
         </div>
 
         <div class="mb-4">
-          <p class="text-xs text-brand-ink-faint uppercase tracking-wider font-semibold mb-2">Jumlah</p>
+          <p class="text-xs text-brand-ink-faint dark:text-zinc-500 uppercase tracking-wider font-semibold mb-2">Jumlah</p>
           <div class="flex items-center gap-3">
-            <button type="button" onclick="ProductSheet.qtyChange(-1)" class="w-10 h-10 border-2 border-brand-border rounded-xl flex items-center justify-center text-lg font-bold text-brand-ink-muted hover:border-brand-gold hover:text-brand-gold transition-colors">&minus;</button>
+            <button type="button" onclick="ProductSheet.qtyChange(-1)" class="w-10 h-10 border-2 border-brand-border dark:border-brand-navy-3 rounded-xl flex items-center justify-center text-lg font-bold text-brand-ink-muted dark:text-zinc-400 hover:border-brand-gold hover:text-brand-gold transition-colors">&minus;</button>
             <input type="number" id="ps-quantity" name="quantity" value="1" min="1" class="w-16 input-field text-center font-mono text-base font-bold" oninput="ProductSheet.updateSubtotal()">
-            <button type="button" onclick="ProductSheet.qtyChange(1)" class="w-10 h-10 border-2 border-brand-border rounded-xl flex items-center justify-center text-lg font-bold text-brand-ink-muted hover:border-brand-gold hover:text-brand-gold transition-colors">+</button>
+            <button type="button" onclick="ProductSheet.qtyChange(1)" class="w-10 h-10 border-2 border-brand-border dark:border-brand-navy-3 rounded-xl flex items-center justify-center text-lg font-bold text-brand-ink-muted dark:text-zinc-400 hover:border-brand-gold hover:text-brand-gold transition-colors">+</button>
           </div>
         </div>
 
-        <div class="border-t border-brand-border pt-4 mb-4">
+        <div class="border-t border-brand-border dark:border-brand-navy-3 pt-4 mb-4">
           <div class="flex items-center justify-between">
-            <p class="text-sm text-brand-ink-muted">Subtotal</p>
+            <p class="text-sm text-brand-ink-muted dark:text-zinc-400">Subtotal</p>
             <p id="ps-subtotal" class="font-display font-bold text-xl text-brand-gold font-mono"></p>
           </div>
         </div>

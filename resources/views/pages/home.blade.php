@@ -34,9 +34,9 @@
         <div class="grid grid-cols-2 gap-6 md:gap-8 max-w-lg mx-auto">
             <div class="text-center">
                 <div class="inline-flex items-center justify-center w-12 h-12 bg-brand-blue/10 rounded-xl mb-3">
-                    <svg class="w-6 h-6 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                    <svg class="w-6 h-6 text-brand-blue dark:text-brand-blue-light" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
                 </div>
-                <div class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-brand-blue leading-none">{{ $totalProducts }}+</div>
+                <div class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-brand-blue dark:text-brand-blue-light leading-none">{{ $totalProducts }}+</div>
                 <div class="text-brand-ink-faint dark:text-zinc-500 text-xs uppercase tracking-[0.15em] mt-2 font-display">Produk Tersedia</div>
             </div>
             <div class="text-center">

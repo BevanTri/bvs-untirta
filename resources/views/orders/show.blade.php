@@ -29,16 +29,16 @@
             <div class="card p-5 rounded-xl">
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
                     <div>
-                        <p class="text-xs text-brand-ink-faint uppercase tracking-widest font-semibold">Tanggal</p>
-                        <p class="font-medium mt-1 text-brand-ink">{{ $order->created_at->format('d M Y H:i') }}</p>
+                        <p class="text-xs text-brand-ink-faint dark:text-zinc-500 uppercase tracking-widest font-semibold">Tanggal</p>
+                        <p class="font-medium mt-1 text-brand-ink dark:text-zinc-100">{{ $order->created_at->format('d M Y H:i') }}</p>
                     </div>
                     <div>
-                        <p class="text-xs text-brand-ink-faint uppercase tracking-widest font-semibold">Status</p>
+                        <p class="text-xs text-brand-ink-faint dark:text-zinc-500 uppercase tracking-widest font-semibold">Status</p>
                         <p class="mt-1">{{ ucfirst($order->status) }}</p>
                     </div>
                     <div>
-                        <p class="text-xs text-brand-ink-faint uppercase tracking-widest font-semibold">Pelanggan</p>
-                        <p class="font-medium mt-1 text-brand-ink">{{ $order->customer_name }}</p>
+                        <p class="text-xs text-brand-ink-faint dark:text-zinc-500 uppercase tracking-widest font-semibold">Pelanggan</p>
+                        <p class="font-medium mt-1 text-brand-ink dark:text-zinc-100">{{ $order->customer_name }}</p>
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
             {{-- Timeline / Status History --}}
             @if($order->status === 'cancelled')
                 <div class="card p-5 rounded-xl">
-                    <h3 class="font-display font-semibold text-base text-brand-ink mb-4">Riwayat Status</h3>
+                    <h3 class="font-display font-semibold text-base text-brand-ink dark:text-zinc-100 mb-4">Riwayat Status</h3>
                     <div class="flex items-center gap-3">
                         <div class="flex items-center gap-2 text-sm">
                             <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center shrink-0">
@@ -56,7 +56,7 @@
                             </div>
                             <div>
                                 <p class="font-medium text-red-600">Dibatalkan</p>
-                                <p class="text-xs text-brand-ink-faint">{{ $order->created_at->format('d M Y H:i') }}</p>
+                                <p class="text-xs text-brand-ink-faint dark:text-zinc-500">{{ $order->created_at->format('d M Y H:i') }}</p>
                             </div>
                         </div>
                     </div>
@@ -72,12 +72,12 @@
                     ];
                 @endphp
                 <div class="card p-5 rounded-xl">
-                    <h3 class="font-display font-semibold text-base text-brand-ink mb-4">Riwayat Status</h3>
+                    <h3 class="font-display font-semibold text-base text-brand-ink dark:text-zinc-100 mb-4">Riwayat Status</h3>
                     <div class="flex items-start gap-0 relative">
                         <div class="absolute top-[18px] left-0 right-0 h-0.5 bg-gray-200"></div>
                         @foreach($steps as $i => $step)
                             <div class="flex-1 flex flex-col items-center text-center relative z-10">
-                                <div class="w-9 h-9 rounded-full flex items-center justify-center {{ $step['done'] ? 'bg-brand-gold text-white shadow-sm' : 'bg-gray-100 text-brand-ink-faint' }}">
+                                <div class="w-9 h-9 rounded-full flex items-center justify-center {{ $step['done'] ? 'bg-brand-gold text-white shadow-sm' : 'bg-gray-100 text-brand-ink-faint dark:text-zinc-500' }}">
                                     @if($step['done'])
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
@@ -86,9 +86,9 @@
                                         <span class="text-xs font-semibold">{{ $i + 1 }}</span>
                                     @endif
                                 </div>
-                                <p class="text-xs mt-2 font-medium {{ $step['done'] ? 'text-brand-ink' : 'text-brand-ink-faint' }}">{{ $step['label'] }}</p>
+                                <p class="text-xs mt-2 font-medium {{ $step['done'] ? 'text-brand-ink dark:text-zinc-100' : 'text-brand-ink-faint dark:text-zinc-500' }}">{{ $step['label'] }}</p>
                                 @if($i === 0)
-                                    <p class="text-[10px] text-brand-ink-faint mt-0.5">{{ $order->created_at->format('d M Y') }}</p>
+                                    <p class="text-[10px] text-brand-ink-faint dark:text-zinc-500 mt-0.5">{{ $order->created_at->format('d M Y') }}</p>
                                 @endif
                             </div>
                         @endforeach
@@ -100,7 +100,7 @@
             {{-- Products List --}}
             <div class="card rounded-xl overflow-hidden">
                 <div class="px-5 py-4 border-b border-gray-100">
-                    <h3 class="font-display font-bold text-base text-brand-ink">Item Pesanan</h3>
+                    <h3 class="font-display font-bold text-base text-brand-ink dark:text-zinc-100">Item Pesanan</h3>
                 </div>
                 <div class="divide-y divide-gray-50">
                     @foreach($order->items as $item)
@@ -109,10 +109,10 @@
                                 <span class="font-display font-bold text-sm text-brand-gold">{{ strtoupper(substr($item->name, 0, 1)) }}</span>
                             </div>
                             <div class="flex-1 min-w-0">
-                                <p class="font-medium text-sm text-brand-ink truncate">{{ $item->name }}</p>
-                                <p class="text-xs text-brand-ink-faint">{{ $item->quantity }}x</p>
+                                <p class="font-medium text-sm text-brand-ink dark:text-zinc-100 truncate">{{ $item->name }}</p>
+                                <p class="text-xs text-brand-ink-faint dark:text-zinc-500">{{ $item->quantity }}x</p>
                             </div>
-                            <p class="font-mono text-sm text-brand-ink font-medium">Rp{{ number_format($item->subtotal, 0, ',', '.') }}</p>
+                            <p class="font-mono text-sm text-brand-ink dark:text-zinc-100 font-medium">Rp{{ number_format($item->subtotal, 0, ',', '.') }}</p>
                         </div>
                     @endforeach
                 </div>
@@ -121,12 +121,12 @@
             {{-- Payment Summary --}}
             <div class="card p-5 rounded-xl">
                 <div class="flex items-center justify-between py-2">
-                    <p class="text-sm text-brand-ink-muted">Subtotal</p>
-                    <p class="font-mono text-sm text-brand-ink">Rp{{ number_format($order->total, 0, ',', '.') }}</p>
+                    <p class="text-sm text-brand-ink-muted dark:text-zinc-400">Subtotal</p>
+                    <p class="font-mono text-sm text-brand-ink dark:text-zinc-100">Rp{{ number_format($order->total, 0, ',', '.') }}</p>
                 </div>
                 <hr class="border-gray-100 my-2">
                 <div class="flex items-center justify-between py-2">
-                    <p class="font-display font-semibold text-brand-ink">Total</p>
+                    <p class="font-display font-semibold text-brand-ink dark:text-zinc-100">Total</p>
                     <p class="font-mono font-bold text-lg text-brand-gold">Rp{{ number_format($order->total, 0, ',', '.') }}</p>
                 </div>
             </div>

@@ -27,8 +27,8 @@
 
 ## MODUL 1 — AUTENTIKASI (Login, Register, Forgot Password)
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
-| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--: |
 | 1 | TC-AUTH-001 | Login berhasil | User sudah terdaftar | Email: admin@test.com, Password: password | 1. Buka halaman login<br>2. Isi email & password valid<br>3. Klik Login | Redirect ke dashboard/beranda | Sesuai | Pass |
 | 2 | TC-AUTH-002 | Login email tidak terdaftar | User belum terdaftar | Email: tidakada@test.com, Password: password123 | 1. Buka halaman login<br>2. Isi email tidak terdaftar<br>3. Klik Login | Muncul pesan error "Email tidak terdaftar" | Sesuai | Pass |
 | 3 | TC-AUTH-003 | Login password salah | User sudah terdaftar | Email: admin@test.com, Password: salah123 | 1. Buka halaman login<br>2. Isi password salah<br>3. Klik Login | Muncul pesan "Password salah" | Sesuai | Pass |
@@ -53,8 +53,8 @@
 
 ## MODUL 2 — MANAJEMEN PRODUK (Products CRUD)
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
-| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--: |
 | 20 | TC-PROD-001 | Tambah produk - semua field valid | Admin sudah login | Kategori: Oli, Nama: Oli Motor 10W-40, Harga: 50000, Stok: 10, Gambar: file.jpg | 1. Buka halaman produk<br>2. Isi semua field valid<br>3. Klik Tambah Produk | Produk berhasil ditambahkan, muncul di tabel | Sesuai | Pass |
 | 21 | TC-PROD-002 | Tambah produk - nama kosong | Admin sudah login | Nama: (kosong) | 1. Buka halaman produk<br>2. Kosongkan nama<br>3. Klik Tambah Produk | Muncul validasi "Nama produk wajib diisi" | Sesuai | Pass |
 | 22 | TC-PROD-003 | Tambah produk - harga kosong | Admin sudah login | Harga: (kosong) | 1. Buka halaman produk<br>2. Kosongkan harga<br>3. Klik Tambah Produk | Muncul validasi "Harga wajib diisi" | Sesuai | Pass |
@@ -78,8 +78,8 @@
 
 ## MODUL 3 — MANAJEMEN BRAND (Brand Partners CRUD)
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
-| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--: |
 | 38 | TC-BRAND-001 | Tambah brand berhasil | Admin sudah login | Nama: Honda, Logo: file.jpg | 1. Buka halaman brand<br>2. Isi nama & upload logo<br>3. Klik Tambah | Brand berhasil ditambahkan | Sesuai | Pass |
 | 39 | TC-BRAND-002 | Tambah brand - nama kosong | Admin sudah login | Nama: (kosong) | 1. Buka halaman brand<br>2. Kosongkan nama<br>3. Klik Tambah | Muncul validasi "Nama brand wajib diisi" | Sesuai | Pass |
 | 40 | TC-BRAND-003 | Edit brand | Admin sudah login, ada brand | Nama baru, logo baru | 1. Klik Edit<br>2. Ubah data<br>3. Simpan | Brand berhasil diupdate | Sesuai | Pass |
@@ -89,8 +89,8 @@
 
 ## MODUL 4 — MANAJEMEN KATEGORI (Category CRUD)
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
-| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--: |
 | 42 | TC-CAT-001 | Tambah kategori berhasil | Admin sudah login | Nama: Oli, Deskripsi: Kategori oli motor | 1. Buka halaman kategori<br>2. Isi nama & deskripsi<br>3. Klik Tambah | Kategori berhasil ditambahkan | Sesuai | Pass |
 | 43 | TC-CAT-002 | Tambah kategori - nama kosong | Admin sudah login | Nama: (kosong) | 1. Buka halaman kategori<br>2. Kosongkan nama<br>3. Klik Tambah | Muncul validasi "Nama kategori wajib diisi" | Sesuai | Pass |
 | 44 | TC-CAT-003 | Tambah kategori - nama duplikat | Admin sudah login | Nama sudah ada | 1. Buka halaman kategori<br>2. Isi nama yang sudah ada<br>3. Klik Tambah | Slug otomatis dibuat unik (nama-1) | Sesuai | Pass |
@@ -102,8 +102,8 @@
 
 ## MODUL 5 — MANAJEMEN PELANGGAN (Customers CRUD)
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
-| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--: |
 | 48 | TC-CUST-001 | Tambah pelanggan berhasil | Admin sudah login | Nama: Budi, Telepon: 08123456789, Alamat: Jl. Merdeka | 1. Buka halaman pelanggan<br>2. Isi data valid<br>3. Klik Tambah | Pelanggan berhasil ditambahkan | Sesuai | Pass |
 | 49 | TC-CUST-002 | Tambah pelanggan - nama kosong | Admin sudah login | Nama: (kosong) | 1. Buka halaman pelanggan<br>2. Kosongkan nama<br>3. Klik Tambah | Muncul validasi | Sesuai | Pass |
 | 50 | TC-CUST-003 | Edit pelanggan | Admin sudah login, ada pelanggan | Nama baru, telepon baru | 1. Klik Edit<br>2. Ubah data<br>3. Simpan | Data pelanggan berhasil diupdate | Sesuai | Pass |
@@ -113,8 +113,8 @@
 
 ## MODUL 6 — MANAJEMEN KENDARAAN (Vehicles CRUD)
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
-| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--: |
 | 52 | TC-VEH-001 | Tambah kendaraan berhasil | Admin sudah login, ada pelanggan | Plat: B 1234 CD, Merk: Honda, Model: Vario, Pelanggan: Budi | 1. Buka halaman kendaraan<br>2. Isi data valid<br>3. Klik Tambah | Kendaraan berhasil ditambahkan | Sesuai | Pass |
 | 53 | TC-VEH-002 | Tambah kendaraan - plat kosong | Admin sudah login | Plat: (kosong) | 1. Buka halaman kendaraan<br>2. Kosongkan plat nomor<br>3. Klik Tambah | Muncul validasi | Sesuai | Pass |
 | 54 | TC-VEH-003 | Edit kendaraan | Admin sudah login, ada kendaraan | Merk baru, model baru | 1. Klik Edit<br>2. Ubah data<br>3. Simpan | Data kendaraan berhasil diupdate | Sesuai | Pass |
@@ -125,8 +125,8 @@
 
 ## MODUL 7 — MANAJEMEN MEKANIK (Mechanics CRUD)
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
-| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--: |
 | 57 | TC-MECH-001 | Tambah mekanik berhasil | Admin sudah login | Nama: Agus, Telepon: 0812345, Spesialis: Mesin | 1. Buka halaman mekanik<br>2. Isi data valid<br>3. Klik Tambah | Mekanik berhasil ditambahkan | Sesuai | Pass |
 | 58 | TC-MECH-002 | Tambah mekanik - nama kosong | Admin sudah login | Nama: (kosong) | 1. Buka halaman mekanik<br>2. Kosongkan nama<br>3. Klik Tambah | Muncul validasi | Sesuai | Pass |
 | 59 | TC-MECH-003 | Edit mekanik | Admin sudah login, ada mekanik | Spesialis baru: Kelistrikan | 1. Klik Edit<br>2. Ubah data<br>3. Simpan | Data mekanik berhasil diupdate | Sesuai | Pass |
@@ -136,8 +136,8 @@
 
 ## MODUL 8 — KERANJANG BELANJA (Cart)
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
-| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--: |
 | 61 | TC-CART-001 | Tambah produk ke keranjang | User sudah login, stok tersedia | Produk: Oli Motor 10W-40, qty: 1 | 1. Buka detail produk<br>2. Klik Tambah ke Keranjang | Item masuk keranjang, counter bertambah | Sesuai | Pass |
 | 62 | TC-CART-002 | Tambah produk ke keranjang - stok habis | User sudah login, stok = 0 | Produk dengan stok 0 | 1. Buka produk stok habis<br>2. Cek tombol | Tombol "Tambah ke Keranjang" disabled atau tidak ada | Sesuai | Pass |
 | 63 | TC-CART-003 | Tambah produk ke keranjang tanpa login | User belum login | Produk: Oli Motor 10W-40 | 1. Klik Tambah ke Keranjang | Redirect ke halaman login | Sesuai | Pass |
@@ -149,8 +149,8 @@
 
 ## MODUL 9 — CHECKOUT & PEMBAYARAN PRODUK
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
-| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--: |
 | 67 | TC-CHK-001 | Checkout berhasil | User sudah login, ada item di cart | Alamat pengiriman | 1. Buka checkout<br>2. Isi alamat<br>3. Klik Checkout | Order terbuat, redirect ke halaman bayar | Sesuai | Pass |
 | 68 | TC-CHK-002 | Checkout - stok habis saat proses | User sudah login, stok = 0 | - | 1. Buka checkout untuk produk stok habis | Muncul pesan "Stok tidak mencukupi" | Sesuai | Pass |
 | 69 | TC-CHK-003 | Checkout tanpa login | User belum login | - | 1. Akses halaman checkout langsung via URL | Redirect ke halaman login | Sesuai | Pass |
@@ -171,8 +171,8 @@
 
 ## MODUL 10 — BOOKING SERVIS (Customer)
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
-| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--: |
 | 82 | TC-SRV-001 | Booking servis berhasil | User sudah login, pilih service | Service: Tune Up, Kendaraan: B 1234 CD, Keluhan: "Mesin brebet" | 1. Buka Buat Servis<br>2. Pilih service & kendaraan<br>3. Isi keluhan<br>4. Klik Ajukan | Servis berhasil dibuat dengan nomor SRV-xxx | Sesuai | Pass |
 | 83 | TC-SRV-002 | Booking servis - tanpa service (jasa saja) | User sudah login | Service: (tidak dipilih) | 1. Buka Buat Servis<br>2. Tidak pilih service<br>3. Isi data lain valid<br>4. Submit | Servis tetap berhasil (biaya jasa Rp0) | Sesuai | Pass |
 | 84 | TC-SRV-003 | Booking servis - kendaraan baru | User sudah login | Plat, Merk, Model diisi manual | 1. Pilih "Kendaraan Baru"<br>2. Isi data kendaraan baru<br>3. Submit | Kendaraan baru tersimpan, servis berhasil | Sesuai | Pass |
@@ -191,8 +191,8 @@
 
 ## MODUL 11 — PEMBAYARAN SERVIS
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
-| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--: |
 | 95 | TC-PAYSRV-001 | Pembayaran servis - redirect ke iPaymu | User sudah login, repair order baru | - | 1. Klik Bayar pada servis | Redirect ke halaman pembayaran iPaymu | Sesuai | Pass |
 | 96 | TC-PAYSRV-002 | Pembayaran servis - sukses | User sudah login, repair order pending | - | 1. Bayar via iPaymu sukses | Status "paid", redirect ke halaman sukses | Sesuai | Pass |
 | 97 | TC-PAYSRV-003 | Pembayaran servis - gagal | User sudah login, repair order pending | - | 1. Bayar via iPaymu gagal | Status "failed", stok sparepart dikembalikan | Sesuai | Pass |
@@ -203,8 +203,8 @@
 
 ## MODUL 12 — ADMIN SERVIS (Repair Order Management)
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
-| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--: |
 | 100 | TC-ADMSRV-001 | Admin terima servis (ubah status ke proses) | Admin sudah login, repair order menunggu | - | 1. Buka detail servis<br>2. Klik "Terima Proses" | Status berubah "proses", sparepart tetap ada | Sesuai | Pass |
 | 101 | TC-ADMSRV-002 | Admin selesai servis (ubah status ke selesai) | Admin sudah login, repair order proses | - | 1. Buka detail servis<br>2. Klik "Selesai" | Status berubah "selesai" | Sesuai | Pass |
 | 102 | TC-ADMSRV-003 | Admin edit servis - tambah sparepart | Admin sudah login, ada repair order | Sparepart baru | 1. Buka edit servis<br>2. Tambah sparepart baru<br>3. Simpan | Sparepart baru tercatat, stok berkurang | Sesuai | Pass |
@@ -218,8 +218,8 @@
 
 ## MODUL 13 — DASHBOARD & LAPORAN
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
-| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--: |
 | 108 | TC-DASH-001 | Dashboard - statistik tampil | Admin sudah login | - | 1. Buka dashboard admin | Total order, revenue, pelanggan tampil | Sesuai | Pass |
 | 109 | TC-DASH-002 | Dashboard - grafik mingguan tampil | Admin sudah login | - | 1. Buka dashboard admin | Grafik revenue & jumlah transaksi 7 hari tampil | Sesuai | Pass |
 | 110 | TC-DASH-003 | Dashboard - recent order tampil | Admin sudah login | - | 1. Buka dashboard admin | 10 order terbaru tampil | Sesuai | Pass |
@@ -238,8 +238,8 @@
 
 ## MODUL 14 — REST API (Laravel Sanctum)
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
-| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--: |
 | 121 | TC-API-001 | API - login dapat token | - | Email & password valid | 1. POST /api/token dengan credentials valid | Return token Sanctum | Sesuai | Pass |
 | 122 | TC-API-002 | API - login dengan credentials salah | - | Email & password salah | 1. POST /api/token dengan credentials salah | Return error 422 | Sesuai | Pass |
 | 123 | TC-API-003 | API - akses services tanpa token | - | - | 1. GET /api/services tanpa Authorization header | Return 401 Unauthenticated | Sesuai | Pass |
@@ -252,8 +252,8 @@
 
 ## MODUL 15 — KEAMANAN & VALIDASI
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
-| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--: |
 | 128 | TC-VAL-001 | Field input terlalu panjang (XSS) | - | Input: `<script>alert('xss')</script>` | 1. Isi field dengan script XSS<br>2. Submit | Script tidak dieksekusi, tersimpan sebagai teks biasa | Sesuai | Pass |
 | 129 | TC-VAL-002 | SQL Injection pada search | - | Input: `' OR 1=1 --` | 1. Isi search dengan SQL injection<br>2. Submit | Query aman, tidak terjadi SQL injection | Sesuai | Pass |
 | 130 | TC-VAL-003 | Upload file ekstensi tidak diizinkan | - | File: script.php | 1. Upload file .php | Ditolak validasi | Sesuai | Pass |
@@ -267,8 +267,8 @@
 
 ## MODUL 16 — END-TO-END FLOW
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
-| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--: |
 | 136 | TC-FLOW-001 | End-to-end: register - login - beli produk - bayar | User baru | Data register, produk, pembayaran | 1. Register akun baru<br>2. Login<br>3. Cari produk<br>4. Add to cart<br>5. Checkout<br>6. Bayar | Semua langkah berhasil, order terbuat dengan status paid | Sesuai | Pass |
 | 137 | TC-FLOW-002 | End-to-end: booking servis - admin proses - selesai | User dan admin | Kendaraan, keluhan, sparepart | 1. User booking servis<br>2. Admin terima proses<br>3. Admin selesai<br>4. User bayar | Servis selesai, sparepart tercatat sebagai penjualan | Sesuai | Pass |
 | 138 | TC-FLOW-003 | End-to-end: admin tambah produk - tampil di halaman publik | Admin | Produk baru | 1. Admin tambah produk<br>2. Buka halaman publik | Produk baru tampil di halaman publik | Sesuai | Pass |

@@ -26,9 +26,9 @@ class VehicleController extends Controller
     {
         Vehicle::create($r->validate([
             'customer_id' => 'required|exists:customers,id',
-            'plate_number' => 'required|string|max:20',
-            'brand' => 'required|string|max:100',
-            'model' => 'required|string|max:100',
+            'plate_number' => 'required|string|max:20|unique:vehicles,plate_number',
+            'brand' => 'required|string|max:100|not_regex:/^\s+$/',
+            'model' => 'required|string|max:100|not_regex:/^\s+$/',
         ]));
         return back()->with('success', 'Kendaraan ditambahkan');
     }
@@ -37,9 +37,9 @@ class VehicleController extends Controller
     {
         $vehicle->update($r->validate([
             'customer_id' => 'required|exists:customers,id',
-            'plate_number' => 'required|string|max:20',
-            'brand' => 'required|string|max:100',
-            'model' => 'required|string|max:100',
+            'plate_number' => 'required|string|max:20|unique:vehicles,plate_number,'.$vehicle->id,
+            'brand' => 'required|string|max:100|not_regex:/^\s+$/',
+            'model' => 'required|string|max:100|not_regex:/^\s+$/',
         ]));
         return back()->with('success', 'Kendaraan diupdate');
     }

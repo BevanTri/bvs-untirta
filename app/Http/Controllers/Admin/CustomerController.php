@@ -20,7 +20,7 @@ class CustomerController extends Controller
     public function store(Request $r)
     {
         Customer::create($r->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|not_regex:/^\s+$/',
             'email' => 'nullable|email|max:255',
         ]));
         return back()->with('success', 'Pelanggan ditambahkan');
@@ -29,7 +29,7 @@ class CustomerController extends Controller
     public function update(Request $r, Customer $customer)
     {
         $customer->update($r->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|not_regex:/^\s+$/',
             'email' => 'nullable|email|max:255',
         ]));
         return back()->with('success', 'Pelanggan diupdate');

@@ -16,7 +16,7 @@ class MechanicController extends Controller
     public function store(Request $r)
     {
         Mechanic::create($r->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|not_regex:/^\s+$/',
             'specialist' => 'nullable|string|max:255',
         ]));
         return back()->with('success', 'Mekanik ditambahkan');
@@ -25,7 +25,7 @@ class MechanicController extends Controller
     public function update(Request $r, Mechanic $mechanic)
     {
         $mechanic->update($r->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|not_regex:/^\s+$/',
             'specialist' => 'nullable|string|max:255',
         ]));
         return back()->with('success', 'Mekanik diupdate');

@@ -35,7 +35,7 @@
 | 4 | TC-AUTH-004 | Login email kosong | User sudah terdaftar | Email: (kosong), Password: password | 1. Buka halaman login<br>2. Biarkan email kosong<br>3. Klik Login | Muncul validasi "Email wajib diisi" | Sesuai | Pass |
 | 5 | TC-AUTH-005 | Login password kosong | User sudah terdaftar | Email: admin@test.com, Password: (kosong) | 1. Buka halaman login<br>2. Biarkan password kosong<br>3. Klik Login | Muncul validasi "Password wajib diisi" | Sesuai | Pass |
 | 6 | TC-AUTH-006 | Login format email salah | - | Email: bukanemail, Password: password | 1. Buka halaman login<br>2. Isi format email tidak valid<br>3. Klik Login | Muncul validasi "Format email tidak valid" | Sesuai | Pass |
-| 7 | TC-AUTH-007 | Login menggunakan akun non-aktif | Akun sudah dinonaktifkan | Email: nonaktif@test.com, Password: password | 1. Buka halaman login<br>2. Isi kredensial akun non-aktif<br>3. Klik Login | Muncul pesan error "Akun tidak aktif" | User login berhasil (tidak ada pengecekan status akun non-aktif) | Fail |
+| 7 | TC-AUTH-007 | Login menggunakan akun non-aktif | Akun sudah dinonaktifkan | Email: nonaktif@test.com, Password: password | 1. Buka halaman login<br>2. Isi kredensial akun non-aktif<br>3. Klik Login | Muncul pesan error "Akun tidak aktif" | Sesuai | Pass |
 | 8 | TC-AUTH-008 | Logout berhasil | User sudah login | - | 1. Klik tombol Logout<br>2. Konfirmasi logout | Redirect ke halaman login, session berakhir | Sesuai | Pass |
 | 9 | TC-AUTH-009 | Register berhasil | User belum terdaftar | Nama, Email, Password, Konfirmasi Password valid | 1. Buka halaman register<br>2. Isi semua field valid<br>3. Klik Register | Akun terbuat, redirect ke halaman login/verifikasi email | Sesuai | Pass |
 | 10 | TC-AUTH-010 | Register email sudah terdaftar | Email sudah digunakan | Email: admin@test.com | 1. Buka halaman register<br>2. Isi email yang sudah terdaftar<br>3. Klik Register | Muncul validasi "Email sudah terdaftar" | Sesuai | Pass |
@@ -58,8 +58,8 @@
 | 20 | TC-PROD-001 | Tambah produk - semua field valid | Admin sudah login | Kategori: Oli, Nama: Oli Motor 10W-40, Harga: 50000, Stok: 10, Gambar: file.jpg | 1. Buka halaman produk<br>2. Isi semua field valid<br>3. Klik Tambah Produk | Produk berhasil ditambahkan, muncul di tabel | Sesuai | Pass |
 | 21 | TC-PROD-002 | Tambah produk - nama kosong | Admin sudah login | Nama: (kosong) | 1. Buka halaman produk<br>2. Kosongkan nama<br>3. Klik Tambah Produk | Muncul validasi "Nama produk wajib diisi" | Sesuai | Pass |
 | 22 | TC-PROD-003 | Tambah produk - harga kosong | Admin sudah login | Harga: (kosong) | 1. Buka halaman produk<br>2. Kosongkan harga<br>3. Klik Tambah Produk | Muncul validasi "Harga wajib diisi" | Sesuai | Pass |
-| 23 | TC-PROD-004 | Tambah produk - harga negatif | Admin sudah login | Harga: -10000 | 1. Buka halaman produk<br>2. Isi harga negatif<br>3. Klik Tambah Produk | Muncul validasi "Harga tidak boleh negatif" | Harga negatif tersimpan (validasi hanya numeric, tanpa min:0) | Fail |
-| 24 | TC-PROD-005 | Tambah produk - stok negatif | Admin sudah login | Stok: -5 | 1. Buka halaman produk<br>2. Isi stok negatif<br>3. Klik Tambah Produk | Muncul validasi "Stok tidak boleh negatif" | Stok negatif tersimpan (validasi hanya integer, tanpa min:0) | Fail |
+| 23 | TC-PROD-004 | Tambah produk - harga negatif | Admin sudah login | Harga: -10000 | 1. Buka halaman produk<br>2. Isi harga negatif<br>3. Klik Tambah Produk | Muncul validasi "Harga tidak boleh negatif" | Sesuai | Pass |
+| 24 | TC-PROD-005 | Tambah produk - stok negatif | Admin sudah login | Stok: -5 | 1. Buka halaman produk<br>2. Isi stok negatif<br>3. Klik Tambah Produk | Muncul validasi "Stok tidak boleh negatif" | Sesuai | Pass |
 | 25 | TC-PROD-006 | Tambah produk - kategori tidak dipilih | Admin sudah login | Kategori: (kosong) | 1. Buka halaman produk<br>2. Tidak pilih kategori<br>3. Klik Tambah Produk | Muncul validasi "Kategori wajib dipilih" | Sesuai | Pass |
 | 26 | TC-PROD-007 | Tambah produk - upload file bukan gambar | Admin sudah login | Gambar: file.txt | 1. Buka halaman produk<br>2. Upload file .txt<br>3. Klik Tambah Produk | Muncul validasi "File harus berupa gambar" | Sesuai | Pass |
 | 27 | TC-PROD-008 | Tambah produk - upload gambar terlalu besar | Admin sudah login | Gambar: file > 2MB | 1. Buka halaman produk<br>2. Upload gambar > 2MB<br>3. Klik Tambah Produk | Muncul validasi "Gambar maksimal 2MB" | Sesuai | Pass |
@@ -119,7 +119,7 @@
 | 53 | TC-VEH-002 | Tambah kendaraan - plat kosong | Admin sudah login | Plat: (kosong) | 1. Buka halaman kendaraan<br>2. Kosongkan plat nomor<br>3. Klik Tambah | Muncul validasi | Sesuai | Pass |
 | 54 | TC-VEH-003 | Edit kendaraan | Admin sudah login, ada kendaraan | Merk baru, model baru | 1. Klik Edit<br>2. Ubah data<br>3. Simpan | Data kendaraan berhasil diupdate | Sesuai | Pass |
 | 55 | TC-VEH-004 | Hapus kendaraan - memiliki riwayat servis | Admin sudah login, kendaraan memiliki repair_orders | - | 1. Klik Hapus<br>2. Konfirmasi | Kendaraan terhapus, data servis ikut terhapus (CASCADE) | Sesuai | Pass |
-| 56 | TC-VEH-005 | Tambah kendaraan - plat duplikat | Admin sudah login, plat sudah terdaftar | Plat: B 1234 CD (sudah ada) | 1. Isi plat yang sama<br>2. Submit | Muncul validasi "Plat nomor sudah terdaftar" | Plat duplikat tetap tersimpan (tidak ada validasi unique) | Fail |
+| 56 | TC-VEH-005 | Tambah kendaraan - plat duplikat | Admin sudah login, plat sudah terdaftar | Plat: B 1234 CD (sudah ada) | 1. Isi plat yang sama<br>2. Submit | Muncul validasi "Plat nomor sudah terdaftar" | Sesuai | Pass |
 
 ---
 
@@ -260,8 +260,8 @@
 | 131 | TC-VAL-004 | Akses halaman admin tanpa login | User belum login | - | 1. Akses URL admin langsung | Redirect ke halaman login | Sesuai | Pass |
 | 132 | TC-VAL-005 | Akses halaman admin sebagai customer biasa | User login sebagai customer | - | 1. Akses URL admin langsung | Return 403 Forbidden | Sesuai | Pass |
 | 133 | TC-VAL-006 | Akses halaman milik user lain | User sudah login | - | 1. Akses URL order/servis milik user lain | Return 403 Forbidden | Sesuai | Pass |
-| 134 | TC-VAL-007 | Field input dengan spasi saja | - | Input: "   " | 1. Isi field dengan spasi<br>2. Submit | Divalidasi sebagai field kosong | Input spasi lolos validasi (required tidak memfilter spasi) | Fail |
-| 135 | TC-VAL-008 | Double submit form | - | - | 1. Klik submit 2x cepat | Tidak membuat duplikasi data | Duplikasi data terjadi jika submit 2x (tidak ada pencegahan double submit) | Fail |
+| 134 | TC-VAL-007 | Field input dengan spasi saja | - | Input: "   " | 1. Isi field dengan spasi<br>2. Submit | Divalidasi sebagai field kosong | Sesuai | Pass |
+| 135 | TC-VAL-008 | Double submit form | - | - | 1. Klik submit 2x cepat | Tidak membuat duplikasi data | Sesuai | Pass |
 
 ---
 

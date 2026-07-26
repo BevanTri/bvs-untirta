@@ -74,6 +74,15 @@
     <x-toast />
     <x-product-bottom-sheet />
 
+    <script>
+        document.addEventListener('submit', function(e) {
+            const btn = e.submitter || e.target.querySelector('button[type="submit"]');
+            if (btn && !btn.dataset.noPrevent) {
+                btn.disabled = true;
+                btn.textContent = btn.dataset.loading || 'Menyimpan...';
+            }
+        });
+    </script>
     @stack('scripts')
 </body>
 </html>

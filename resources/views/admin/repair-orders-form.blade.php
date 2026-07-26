@@ -75,7 +75,7 @@
                     @foreach($order->items as $idx => $item)
                     <div class="item-row inline-flex items-center gap-2 px-3 py-1.5 bg-brand-warm dark:bg-brand-navy-3/30 border border-brand-border dark:border-brand-navy-3 rounded-xl text-sm mb-1.5 mr-1.5">
                         <span class="font-medium text-brand-ink dark:text-zinc-100 truncate max-w-[150px] sm:max-w-[200px]">{{ $item->name }}</span>
-                        <input type="number" name="items[{{ $idx }}][quantity]" value="{{ $item->quantity }}" min="1" class="w-14 text-center text-xs border border-brand-border dark:border-brand-navy-3 rounded-md py-0.5" oninput="updateSummary()">
+                        <input type="number" name="items[{{ $idx }}][quantity]" value="{{ $item->quantity }}" min="1" class="w-14 text-center text-xs border border-brand-border dark:border-brand-navy-3 bg-white dark:bg-brand-navy text-brand-ink dark:text-zinc-100 rounded-md py-0.5" oninput="updateSummary()">
                         <span class="text-xs text-brand-ink-muted dark:text-zinc-400 tabular-nums">Rp{{ number_format($item->price,0,',','.') }}</span>
                         <button type="button" onclick="this.closest('.item-row').remove(); updateSummary();" class="text-red-400 dark:text-red-400 hover:text-red-600 dark:hover:text-red-300 text-lg leading-none ml-0.5">&times;</button>
                         <input type="hidden" name="items[{{ $idx }}][product_id]" value="{{ $item->product_id }}">
@@ -257,7 +257,7 @@
             const container = document.getElementById('items-container');
             const html = `<div class="item-row inline-flex items-center gap-2 px-3 py-1.5 bg-brand-warm dark:bg-brand-navy-3/30 border border-brand-border dark:border-brand-navy-3 rounded-xl text-sm mb-1.5 mr-1.5">
                 <span class="font-medium text-brand-ink dark:text-zinc-100 truncate max-w-[150px] sm:max-w-[200px]">${prod.name}</span>
-                <input type="number" name="items[${itemIdx}][quantity]" value="1" min="1" class="w-14 text-center text-xs border border-brand-border dark:border-brand-navy-3 rounded-md py-0.5" oninput="updateSummary()">
+                <input type="number" name="items[${itemIdx}][quantity]" value="1" min="1" class="w-14 text-center text-xs border border-brand-border dark:border-brand-navy-3 bg-white dark:bg-brand-navy text-brand-ink dark:text-zinc-100 rounded-md py-0.5" oninput="updateSummary()">
                 <span class="text-xs text-brand-ink-muted dark:text-zinc-400 tabular-nums">${prod.price_fmt}</span>
                 <button type="button" onclick="this.closest('.item-row').remove(); updateSummary();" class="text-red-400 dark:text-red-400 hover:text-red-600 dark:hover:text-red-300 text-lg leading-none ml-0.5">&times;</button>
                 <input type="hidden" name="items[${itemIdx}][product_id]" value="${prod.id}">

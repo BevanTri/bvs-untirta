@@ -249,7 +249,7 @@
             container.innerHTML = selectedItems.map((item, i) => {
                 return `<div class="selected-tag inline-flex items-center gap-2 px-3 py-1.5 bg-brand-warm dark:bg-brand-navy-3/30 border border-brand-border dark:border-brand-navy-3 rounded-xl text-sm mb-1.5 mr-1.5">
                     <span class="font-medium text-brand-ink dark:text-zinc-100 truncate max-w-[150px] sm:max-w-[200px]">${item.name}</span>
-                    <input type="number" value="${item.qty}" min="1" class="w-14 text-center text-xs border border-brand-border dark:border-brand-navy-3 rounded-md py-0.5" onchange="updateQty(${i}, this.value)" onfocus="this.select()">
+                    <input type="number" value="${item.qty}" min="1" class="w-14 text-center text-xs border border-brand-border dark:border-brand-navy-3 bg-white dark:bg-brand-navy text-brand-ink dark:text-zinc-100 rounded-md py-0.5" onchange="updateQty(${i}, this.value)" onfocus="this.select()">
                     <span class="text-xs text-brand-ink-muted font-mono tabular-nums">${item.price_fmt}</span>
                     <button type="button" onclick="removeItem(${i})" class="text-red-400 hover:text-red-600 text-lg leading-none ml-0.5">&times;</button>
                     <input type="hidden" name="items[${i}][product_id]" value="${item.id}">

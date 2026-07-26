@@ -31,6 +31,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/servis/{repairOrder}/check-payment', [RepairOrderController::class, 'checkPayment'])->name('repairs.check-payment');
     Route::post('/servis/{repairOrder}/cancel', [RepairOrderController::class, 'cancel'])->name('repairs.cancel');
     Route::get('/servis/{repairOrder}/invoice', [RepairOrderController::class, 'invoice'])->name('repairs.invoice');
+    Route::get('/servis/{repairOrder}/sukses', [PaymentController::class, 'successRepair'])->name('repairs.success');
 });
 
 

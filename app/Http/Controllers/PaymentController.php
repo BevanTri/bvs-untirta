@@ -195,6 +195,24 @@ class PaymentController extends Controller
         return view('orders.success', compact('order'));
     }
 
+    public function successRepair(Request $request, \App\Models\RepairOrder $repairOrder)
+    {
+        $payment = $repairOrder->payments()->latest()->first();
+        if ($repairOrder->payment_status !== 'paid') {
+            $data = $request->all();
+            Log::info('Payment success page accessed (repair)', ['repair_id' => $repairOrder->id, 'data' => $data]);
+
+            if (isset($data['status']) && $data['status'] === 'berhasil') {
+                if ($payment) $payment->update(['status' => 'berhasil', 'raw_response' => $data]);
+                $repairOrder->update(['payment_status' => 'paid']);
+            } elseif (isset($data['trx_id'])) {
+                if ($payment) $payment->update(['status' => 'berhasil', 'raw_response' => $data]);
+                $repairOrder->update(['payment_status' => 'paid']);
+            }
+        }
+        return view('repairs.success', compact('repairOrder'));
+    }
+
     public function payRepair(\App\Models\RepairOrder $repairOrder)
     {
         if ($repairOrder->user_id !== Auth::id()) abort(403);
@@ -204,7 +222,7 @@ class PaymentController extends Controller
 
         try {
             $ipaymu = new IpaymuService();
-            $result = $ipaymu->createTransaction($repairOrder, 'repairs.show', 'repairs.pay');
+            $result = $ipaymu->createTransaction($repairOrder, 'repairs.success', 'repairs.pay');
         } catch (\Exception $e) {
             return back()->with('error', 'Gagal menghubungi gateway pembayaran: ' . $e->getMessage());
         }

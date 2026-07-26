@@ -151,32 +151,32 @@ class RepairOrderController extends Controller
             'items.*.price' => 'required|numeric|min:0',
         ]);
 
-        $itemsTotal = 0;
-        if (!empty($data['items'])) {
+        if (array_key_exists('items', $data)) {
+            $itemsTotal = 0;
             foreach ($data['items'] as $item) {
                 $itemsTotal += $item['price'] * $item['quantity'];
             }
+            $data['total'] = $data['service_fee'] + $itemsTotal;
         }
-        $data['total'] = $data['service_fee'] + $itemsTotal;
 
         if ($data['status'] === 'dibatalkan') {
             $data['payment_status'] = 'failed';
         }
 
         DB::transaction(function () use ($repair_order, $data) {
-            $oldItems = $repair_order->items()->get();
-
-            // restore stock for removed/unchanged old items
-            foreach ($oldItems as $old) {
-                if ($old->product_id) {
-                    Product::where('id', $old->product_id)->increment('stock', $old->quantity);
-                }
-            }
-
             $repair_order->update($data);
 
-            $repair_order->items()->delete();
-            if (!empty($data['items'])) {
+            if (array_key_exists('items', $data)) {
+                $oldItems = $repair_order->items()->get();
+
+                foreach ($oldItems as $old) {
+                    if ($old->product_id) {
+                        Product::where('id', $old->product_id)->increment('stock', $old->quantity);
+                    }
+                }
+
+                $repair_order->items()->delete();
+
                 foreach ($data['items'] as $item) {
                     $repair_order->items()->create([
                         'product_id' => $item['product_id'] ?? null,

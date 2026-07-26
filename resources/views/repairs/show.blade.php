@@ -22,8 +22,6 @@
 
     <div class="py-8">
         <div class="max-w-4xl mx-auto px-4 space-y-6">
-            <a href="{{ route('orders.history') }}" class="text-brand-blue dark:text-brand-blue-light hover:underline text-sm font-medium inline-block">&larr; Kembali</a>
-
             {{-- Info Card --}}
             <div class="card p-5 rounded-xl">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">

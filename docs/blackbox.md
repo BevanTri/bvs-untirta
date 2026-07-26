@@ -27,251 +27,251 @@
 
 ## MODUL 1 — AUTENTIKASI (Login, Register, Forgot Password)
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
-|:--:|:---|:---|:---|:---|:---|:---|:---|:--:|
-| 1 | TC-AUTH-001 | Login berhasil | User sudah terdaftar | Email: admin@test.com, Password: password | 1. Buka halaman login<br>2. Isi email & password valid<br>3. Klik Login | Redirect ke dashboard/beranda | | |
-| 2 | TC-AUTH-002 | Login email tidak terdaftar | User belum terdaftar | Email: tidakada@test.com, Password: password123 | 1. Buka halaman login<br>2. Isi email tidak terdaftar<br>3. Klik Login | Muncul pesan error "Email tidak terdaftar" | | |
-| 3 | TC-AUTH-003 | Login password salah | User sudah terdaftar | Email: admin@test.com, Password: salah123 | 1. Buka halaman login<br>2. Isi password salah<br>3. Klik Login | Muncul pesan "Password salah" | | |
-| 4 | TC-AUTH-004 | Login email kosong | User sudah terdaftar | Email: (kosong), Password: password | 1. Buka halaman login<br>2. Biarkan email kosong<br>3. Klik Login | Muncul validasi "Email wajib diisi" | | |
-| 5 | TC-AUTH-005 | Login password kosong | User sudah terdaftar | Email: admin@test.com, Password: (kosong) | 1. Buka halaman login<br>2. Biarkan password kosong<br>3. Klik Login | Muncul validasi "Password wajib diisi" | | |
-| 6 | TC-AUTH-006 | Login format email salah | - | Email: bukanemail, Password: password | 1. Buka halaman login<br>2. Isi format email tidak valid<br>3. Klik Login | Muncul validasi "Format email tidak valid" | | |
-| 7 | TC-AUTH-007 | Login menggunakan akun non-aktif | Akun sudah dinonaktifkan | Email: nonaktif@test.com, Password: password | 1. Buka halaman login<br>2. Isi kredensial akun non-aktif<br>3. Klik Login | Muncul pesan error "Akun tidak aktif" | | |
-| 8 | TC-AUTH-008 | Logout berhasil | User sudah login | - | 1. Klik tombol Logout<br>2. Konfirmasi logout | Redirect ke halaman login, session berakhir | | |
-| 9 | TC-AUTH-009 | Register berhasil | User belum terdaftar | Nama, Email, Password, Konfirmasi Password valid | 1. Buka halaman register<br>2. Isi semua field valid<br>3. Klik Register | Akun terbuat, redirect ke halaman login/verifikasi email | | |
-| 10 | TC-AUTH-010 | Register email sudah terdaftar | Email sudah digunakan | Email: admin@test.com | 1. Buka halaman register<br>2. Isi email yang sudah terdaftar<br>3. Klik Register | Muncul validasi "Email sudah terdaftar" | | |
-| 11 | TC-AUTH-011 | Register password tidak cocok | - | Password: 123456, Konfirmasi: 654321 | 1. Buka halaman register<br>2. Isi password & konfirmasi berbeda<br>3. Klik Register | Muncul validasi "Konfirmasi password tidak cocok" | | |
-| 12 | TC-AUTH-012 | Register password terlalu pendek | - | Password: 12345 | 1. Buka halaman register<br>2. Isi password < 6 karakter<br>3. Klik Register | Muncul validasi "Password minimal 6 karakter" | | |
-| 13 | TC-AUTH-013 | Forgot password - email terdaftar | User sudah terdaftar | Email: admin@test.com | 1. Buka halaman lupa password<br>2. Isi email terdaftar<br>3. Klik Kirim | Email reset password terkirim | | |
-| 14 | TC-AUTH-014 | Forgot password - email tidak terdaftar | User belum terdaftar | Email: tidakada@test.com | 1. Buka halaman lupa password<br>2. Isi email tidak terdaftar<br>3. Klik Kirim | Muncul pesan "Email tidak ditemukan" | | |
-| 15 | TC-AUTH-015 | Reset password berhasil | Token reset valid | Password baru & konfirmasi valid | 1. Klik link reset dari email<br>2. Isi password baru<br>3. Klik Reset | Password berhasil diubah, redirect ke login | | |
-| 16 | TC-AUTH-016 | Update profil berhasil | User sudah login | Nama baru, Email baru | 1. Buka halaman profil<br>2. Ubah nama/email<br>3. Klik Simpan | Data profil berhasil diperbarui | | |
-| 17 | TC-AUTH-017 | Ganti password berhasil | User sudah login | Password lama valid, Password baru & konfirmasi valid | 1. Buka halaman profil<br>2. Isi password lama & baru<br>3. Klik Simpan | Password berhasil diubah | | |
-| 18 | TC-AUTH-018 | Ganti password - password lama salah | User sudah login | Password lama: salah | 1. Buka halaman profil<br>2. Isi password lama salah<br>3. Klik Simpan | Muncul pesan "Password lama tidak sesuai" | | |
-| 19 | TC-AUTH-019 | Register - nama kosong | User belum terdaftar | Nama: (kosong) | 1. Buka halaman register<br>2. Kosongkan nama<br>3. Klik Register | Muncul validasi "Nama wajib diisi" | | |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| 1 | TC-AUTH-001 | Login berhasil | User sudah terdaftar | Email: admin@test.com, Password: password | 1. Buka halaman login<br>2. Isi email & password valid<br>3. Klik Login | Redirect ke dashboard/beranda | Sesuai | Pass |
+| 2 | TC-AUTH-002 | Login email tidak terdaftar | User belum terdaftar | Email: tidakada@test.com, Password: password123 | 1. Buka halaman login<br>2. Isi email tidak terdaftar<br>3. Klik Login | Muncul pesan error "Email tidak terdaftar" | Sesuai | Pass |
+| 3 | TC-AUTH-003 | Login password salah | User sudah terdaftar | Email: admin@test.com, Password: salah123 | 1. Buka halaman login<br>2. Isi password salah<br>3. Klik Login | Muncul pesan "Password salah" | Sesuai | Pass |
+| 4 | TC-AUTH-004 | Login email kosong | User sudah terdaftar | Email: (kosong), Password: password | 1. Buka halaman login<br>2. Biarkan email kosong<br>3. Klik Login | Muncul validasi "Email wajib diisi" | Sesuai | Pass |
+| 5 | TC-AUTH-005 | Login password kosong | User sudah terdaftar | Email: admin@test.com, Password: (kosong) | 1. Buka halaman login<br>2. Biarkan password kosong<br>3. Klik Login | Muncul validasi "Password wajib diisi" | Sesuai | Pass |
+| 6 | TC-AUTH-006 | Login format email salah | - | Email: bukanemail, Password: password | 1. Buka halaman login<br>2. Isi format email tidak valid<br>3. Klik Login | Muncul validasi "Format email tidak valid" | Sesuai | Pass |
+| 7 | TC-AUTH-007 | Login menggunakan akun non-aktif | Akun sudah dinonaktifkan | Email: nonaktif@test.com, Password: password | 1. Buka halaman login<br>2. Isi kredensial akun non-aktif<br>3. Klik Login | Muncul pesan error "Akun tidak aktif" | User login berhasil (tidak ada pengecekan status akun non-aktif) | Fail |
+| 8 | TC-AUTH-008 | Logout berhasil | User sudah login | - | 1. Klik tombol Logout<br>2. Konfirmasi logout | Redirect ke halaman login, session berakhir | Sesuai | Pass |
+| 9 | TC-AUTH-009 | Register berhasil | User belum terdaftar | Nama, Email, Password, Konfirmasi Password valid | 1. Buka halaman register<br>2. Isi semua field valid<br>3. Klik Register | Akun terbuat, redirect ke halaman login/verifikasi email | Sesuai | Pass |
+| 10 | TC-AUTH-010 | Register email sudah terdaftar | Email sudah digunakan | Email: admin@test.com | 1. Buka halaman register<br>2. Isi email yang sudah terdaftar<br>3. Klik Register | Muncul validasi "Email sudah terdaftar" | Sesuai | Pass |
+| 11 | TC-AUTH-011 | Register password tidak cocok | - | Password: 123456, Konfirmasi: 654321 | 1. Buka halaman register<br>2. Isi password & konfirmasi berbeda<br>3. Klik Register | Muncul validasi "Konfirmasi password tidak cocok" | Sesuai | Pass |
+| 12 | TC-AUTH-012 | Register password terlalu pendek | - | Password: 12345 | 1. Buka halaman register<br>2. Isi password < 6 karakter<br>3. Klik Register | Muncul validasi "Password minimal 6 karakter" | Sesuai | Pass |
+| 13 | TC-AUTH-013 | Forgot password - email terdaftar | User sudah terdaftar | Email: admin@test.com | 1. Buka halaman lupa password<br>2. Isi email terdaftar<br>3. Klik Kirim | Email reset password terkirim | Sesuai | Pass |
+| 14 | TC-AUTH-014 | Forgot password - email tidak terdaftar | User belum terdaftar | Email: tidakada@test.com | 1. Buka halaman lupa password<br>2. Isi email tidak terdaftar<br>3. Klik Kirim | Muncul pesan "Email tidak ditemukan" | Sesuai | Pass |
+| 15 | TC-AUTH-015 | Reset password berhasil | Token reset valid | Password baru & konfirmasi valid | 1. Klik link reset dari email<br>2. Isi password baru<br>3. Klik Reset | Password berhasil diubah, redirect ke login | Sesuai | Pass |
+| 16 | TC-AUTH-016 | Update profil berhasil | User sudah login | Nama baru, Email baru | 1. Buka halaman profil<br>2. Ubah nama/email<br>3. Klik Simpan | Data profil berhasil diperbarui | Sesuai | Pass |
+| 17 | TC-AUTH-017 | Ganti password berhasil | User sudah login | Password lama valid, Password baru & konfirmasi valid | 1. Buka halaman profil<br>2. Isi password lama & baru<br>3. Klik Simpan | Password berhasil diubah | Sesuai | Pass |
+| 18 | TC-AUTH-018 | Ganti password - password lama salah | User sudah login | Password lama: salah | 1. Buka halaman profil<br>2. Isi password lama salah<br>3. Klik Simpan | Muncul pesan "Password lama tidak sesuai" | Sesuai | Pass |
+| 19 | TC-AUTH-019 | Register - nama kosong | User belum terdaftar | Nama: (kosong) | 1. Buka halaman register<br>2. Kosongkan nama<br>3. Klik Register | Muncul validasi "Nama wajib diisi" | Sesuai | Pass |
 
 ---
 
 ## MODUL 2 — MANAJEMEN PRODUK (Products CRUD)
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
-|:--:|:---|:---|:---|:---|:---|:---|:---|:--:|
-| 20 | TC-PROD-001 | Tambah produk - semua field valid | Admin sudah login | Kategori: Oli, Nama: Oli Motor 10W-40, Harga: 50000, Stok: 10, Gambar: file.jpg | 1. Buka halaman produk<br>2. Isi semua field valid<br>3. Klik Tambah Produk | Produk berhasil ditambahkan, muncul di tabel | | |
-| 21 | TC-PROD-002 | Tambah produk - nama kosong | Admin sudah login | Nama: (kosong) | 1. Buka halaman produk<br>2. Kosongkan nama<br>3. Klik Tambah Produk | Muncul validasi "Nama produk wajib diisi" | | |
-| 22 | TC-PROD-003 | Tambah produk - harga kosong | Admin sudah login | Harga: (kosong) | 1. Buka halaman produk<br>2. Kosongkan harga<br>3. Klik Tambah Produk | Muncul validasi "Harga wajib diisi" | | |
-| 23 | TC-PROD-004 | Tambah produk - harga negatif | Admin sudah login | Harga: -10000 | 1. Buka halaman produk<br>2. Isi harga negatif<br>3. Klik Tambah Produk | Muncul validasi "Harga tidak boleh negatif" | | |
-| 24 | TC-PROD-005 | Tambah produk - stok negatif | Admin sudah login | Stok: -5 | 1. Buka halaman produk<br>2. Isi stok negatif<br>3. Klik Tambah Produk | Muncul validasi "Stok tidak boleh negatif" | | |
-| 25 | TC-PROD-006 | Tambah produk - kategori tidak dipilih | Admin sudah login | Kategori: (kosong) | 1. Buka halaman produk<br>2. Tidak pilih kategori<br>3. Klik Tambah Produk | Muncul validasi "Kategori wajib dipilih" | | |
-| 26 | TC-PROD-007 | Tambah produk - upload file bukan gambar | Admin sudah login | Gambar: file.txt | 1. Buka halaman produk<br>2. Upload file .txt<br>3. Klik Tambah Produk | Muncul validasi "File harus berupa gambar" | | |
-| 27 | TC-PROD-008 | Tambah produk - upload gambar terlalu besar | Admin sudah login | Gambar: file > 2MB | 1. Buka halaman produk<br>2. Upload gambar > 2MB<br>3. Klik Tambah Produk | Muncul validasi "Gambar maksimal 2MB" | | |
-| 28 | TC-PROD-009 | Tambah produk - nama duplikat | Admin sudah login | Nama produk sudah ada | 1. Buka halaman produk<br>2. Isi nama yang sama dengan produk existing<br>3. Klik Tambah Produk | Produk tetap tersimpan dengan slug unik | | |
-| 29 | TC-PROD-010 | Edit produk - semua field valid | Admin sudah login, ada produk | Data produk baru valid | 1. Klik Edit pada produk<br>2. Ubah field<br>3. Klik Simpan | Produk berhasil diupdate | | |
-| 30 | TC-PROD-011 | Edit produk - ganti gambar | Admin sudah login, ada produk dengan gambar | Gambar baru | 1. Klik Edit pada produk<br>2. Upload gambar baru<br>3. Klik Simpan | Gambar berubah, gambar lama terhapus | | |
-| 31 | TC-PROD-012 | Edit produk - tanpa upload gambar | Admin sudah login, ada produk dengan gambar | Tidak upload gambar | 1. Klik Edit pada produk<br>2. Biarkan field gambar kosong<br>3. Klik Simpan | Gambar lama tetap dipakai | | |
-| 32 | TC-PROD-013 | Hapus produk berhasil | Admin sudah login, ada produk | - | 1. Klik Hapus pada produk<br>2. Konfirmasi hapus | Produk terhapus, tidak muncul di tabel | | |
-| 33 | TC-PROD-014 | Hapus produk - batal konfirmasi | Admin sudah login, ada produk | - | 1. Klik Hapus pada produk<br>2. Batal konfirmasi | Produk tidak jadi dihapus | | |
-| 34 | TC-PROD-015 | Pencarian produk | Admin sudah login, ada beberapa produk | Keyword: nama produk | 1. Isi search produk<br>2. Submit | Produk sesuai keyword tampil | | |
-| 35 | TC-PROD-016 | Filter produk by kategori | Admin sudah login, ada beberapa kategori | Pilih kategori | 1. Pilih filter kategori<br>2. Submit | Hanya produk kategori terpilih tampil | | |
-| 36 | TC-PROD-017 | Produk non-aktif tidak muncul di halaman publik | Ada produk non-aktif | - | 1. Buka halaman publik produk | Produk non-aktif tidak ditampilkan | | |
-| 37 | TC-PROD-018 | Upload gambar produk dengan format PNG/JPEG | Admin sudah login | File .png valid | 1. Upload gambar PNG<br>2. Submit | Gambar tersimpan, tampil di halaman produk | | |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| 20 | TC-PROD-001 | Tambah produk - semua field valid | Admin sudah login | Kategori: Oli, Nama: Oli Motor 10W-40, Harga: 50000, Stok: 10, Gambar: file.jpg | 1. Buka halaman produk<br>2. Isi semua field valid<br>3. Klik Tambah Produk | Produk berhasil ditambahkan, muncul di tabel | Sesuai | Pass |
+| 21 | TC-PROD-002 | Tambah produk - nama kosong | Admin sudah login | Nama: (kosong) | 1. Buka halaman produk<br>2. Kosongkan nama<br>3. Klik Tambah Produk | Muncul validasi "Nama produk wajib diisi" | Sesuai | Pass |
+| 22 | TC-PROD-003 | Tambah produk - harga kosong | Admin sudah login | Harga: (kosong) | 1. Buka halaman produk<br>2. Kosongkan harga<br>3. Klik Tambah Produk | Muncul validasi "Harga wajib diisi" | Sesuai | Pass |
+| 23 | TC-PROD-004 | Tambah produk - harga negatif | Admin sudah login | Harga: -10000 | 1. Buka halaman produk<br>2. Isi harga negatif<br>3. Klik Tambah Produk | Muncul validasi "Harga tidak boleh negatif" | Harga negatif tersimpan (validasi hanya numeric, tanpa min:0) | Fail |
+| 24 | TC-PROD-005 | Tambah produk - stok negatif | Admin sudah login | Stok: -5 | 1. Buka halaman produk<br>2. Isi stok negatif<br>3. Klik Tambah Produk | Muncul validasi "Stok tidak boleh negatif" | Stok negatif tersimpan (validasi hanya integer, tanpa min:0) | Fail |
+| 25 | TC-PROD-006 | Tambah produk - kategori tidak dipilih | Admin sudah login | Kategori: (kosong) | 1. Buka halaman produk<br>2. Tidak pilih kategori<br>3. Klik Tambah Produk | Muncul validasi "Kategori wajib dipilih" | Sesuai | Pass |
+| 26 | TC-PROD-007 | Tambah produk - upload file bukan gambar | Admin sudah login | Gambar: file.txt | 1. Buka halaman produk<br>2. Upload file .txt<br>3. Klik Tambah Produk | Muncul validasi "File harus berupa gambar" | Sesuai | Pass |
+| 27 | TC-PROD-008 | Tambah produk - upload gambar terlalu besar | Admin sudah login | Gambar: file > 2MB | 1. Buka halaman produk<br>2. Upload gambar > 2MB<br>3. Klik Tambah Produk | Muncul validasi "Gambar maksimal 2MB" | Sesuai | Pass |
+| 28 | TC-PROD-009 | Tambah produk - nama duplikat | Admin sudah login | Nama produk sudah ada | 1. Buka halaman produk<br>2. Isi nama yang sama dengan produk existing<br>3. Klik Tambah Produk | Produk tetap tersimpan dengan slug unik | Sesuai | Pass |
+| 29 | TC-PROD-010 | Edit produk - semua field valid | Admin sudah login, ada produk | Data produk baru valid | 1. Klik Edit pada produk<br>2. Ubah field<br>3. Klik Simpan | Produk berhasil diupdate | Sesuai | Pass |
+| 30 | TC-PROD-011 | Edit produk - ganti gambar | Admin sudah login, ada produk dengan gambar | Gambar baru | 1. Klik Edit pada produk<br>2. Upload gambar baru<br>3. Klik Simpan | Gambar berubah, gambar lama terhapus | Sesuai | Pass |
+| 31 | TC-PROD-012 | Edit produk - tanpa upload gambar | Admin sudah login, ada produk dengan gambar | Tidak upload gambar | 1. Klik Edit pada produk<br>2. Biarkan field gambar kosong<br>3. Klik Simpan | Gambar lama tetap dipakai | Sesuai | Pass |
+| 32 | TC-PROD-013 | Hapus produk berhasil | Admin sudah login, ada produk | - | 1. Klik Hapus pada produk<br>2. Konfirmasi hapus | Produk terhapus, tidak muncul di tabel | Sesuai | Pass |
+| 33 | TC-PROD-014 | Hapus produk - batal konfirmasi | Admin sudah login, ada produk | - | 1. Klik Hapus pada produk<br>2. Batal konfirmasi | Produk tidak jadi dihapus | Sesuai | Pass |
+| 34 | TC-PROD-015 | Pencarian produk | Admin sudah login, ada beberapa produk | Keyword: nama produk | 1. Isi search produk<br>2. Submit | Produk sesuai keyword tampil | Sesuai | Pass |
+| 35 | TC-PROD-016 | Filter produk by kategori | Admin sudah login, ada beberapa kategori | Pilih kategori | 1. Pilih filter kategori<br>2. Submit | Hanya produk kategori terpilih tampil | Sesuai | Pass |
+| 36 | TC-PROD-017 | Produk non-aktif tidak muncul di halaman publik | Ada produk non-aktif | - | 1. Buka halaman publik produk | Produk non-aktif tidak ditampilkan | Sesuai | Pass |
+| 37 | TC-PROD-018 | Upload gambar produk dengan format PNG/JPEG | Admin sudah login | File .png valid | 1. Upload gambar PNG<br>2. Submit | Gambar tersimpan, tampil di halaman produk | Sesuai | Pass |
 
 ---
 
 ## MODUL 3 — MANAJEMEN BRAND (Brand Partners CRUD)
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
-|:--:|:---|:---|:---|:---|:---|:---|:---|:--:|
-| 38 | TC-BRAND-001 | Tambah brand berhasil | Admin sudah login | Nama: Honda, Logo: file.jpg | 1. Buka halaman brand<br>2. Isi nama & upload logo<br>3. Klik Tambah | Brand berhasil ditambahkan | | |
-| 39 | TC-BRAND-002 | Tambah brand - nama kosong | Admin sudah login | Nama: (kosong) | 1. Buka halaman brand<br>2. Kosongkan nama<br>3. Klik Tambah | Muncul validasi "Nama brand wajib diisi" | | |
-| 40 | TC-BRAND-003 | Edit brand | Admin sudah login, ada brand | Nama baru, logo baru | 1. Klik Edit<br>2. Ubah data<br>3. Simpan | Brand berhasil diupdate | | |
-| 41 | TC-BRAND-004 | Hapus brand berhasil | Admin sudah login, ada brand | - | 1. Klik Hapus pada brand<br>2. Konfirmasi | Brand terhapus | | |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| 38 | TC-BRAND-001 | Tambah brand berhasil | Admin sudah login | Nama: Honda, Logo: file.jpg | 1. Buka halaman brand<br>2. Isi nama & upload logo<br>3. Klik Tambah | Brand berhasil ditambahkan | Sesuai | Pass |
+| 39 | TC-BRAND-002 | Tambah brand - nama kosong | Admin sudah login | Nama: (kosong) | 1. Buka halaman brand<br>2. Kosongkan nama<br>3. Klik Tambah | Muncul validasi "Nama brand wajib diisi" | Sesuai | Pass |
+| 40 | TC-BRAND-003 | Edit brand | Admin sudah login, ada brand | Nama baru, logo baru | 1. Klik Edit<br>2. Ubah data<br>3. Simpan | Brand berhasil diupdate | Sesuai | Pass |
+| 41 | TC-BRAND-004 | Hapus brand berhasil | Admin sudah login, ada brand | - | 1. Klik Hapus pada brand<br>2. Konfirmasi | Brand terhapus | Sesuai | Pass |
 
 ---
 
 ## MODUL 4 — MANAJEMEN KATEGORI (Category CRUD)
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
-|:--:|:---|:---|:---|:---|:---|:---|:---|:--:|
-| 42 | TC-CAT-001 | Tambah kategori berhasil | Admin sudah login | Nama: Oli, Deskripsi: Kategori oli motor | 1. Buka halaman kategori<br>2. Isi nama & deskripsi<br>3. Klik Tambah | Kategori berhasil ditambahkan | | |
-| 43 | TC-CAT-002 | Tambah kategori - nama kosong | Admin sudah login | Nama: (kosong) | 1. Buka halaman kategori<br>2. Kosongkan nama<br>3. Klik Tambah | Muncul validasi "Nama kategori wajib diisi" | | |
-| 44 | TC-CAT-003 | Tambah kategori - nama duplikat | Admin sudah login | Nama sudah ada | 1. Buka halaman kategori<br>2. Isi nama yang sudah ada<br>3. Klik Tambah | Slug otomatis dibuat unik (nama-1) | | |
-| 45 | TC-CAT-004 | Edit kategori | Admin sudah login, ada kategori | Nama baru | 1. Klik Edit<br>2. Ubah nama<br>3. Simpan | Kategori berhasil diupdate | | |
-| 46 | TC-CAT-005 | Hapus kategori - masih memiliki produk | Admin sudah login, kategori memiliki produk | - | 1. Klik Hapus pada kategori yang memiliki produk<br>2. Konfirmasi | Kategori terhapus, produk ikut terhapus (CASCADE) | | |
-| 47 | TC-CAT-006 | Hapus kategori - tidak memiliki produk | Admin sudah login, kategori tidak memiliki produk | - | 1. Klik Hapus pada kategori tanpa produk<br>2. Konfirmasi | Kategori terhapus | | |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| 42 | TC-CAT-001 | Tambah kategori berhasil | Admin sudah login | Nama: Oli, Deskripsi: Kategori oli motor | 1. Buka halaman kategori<br>2. Isi nama & deskripsi<br>3. Klik Tambah | Kategori berhasil ditambahkan | Sesuai | Pass |
+| 43 | TC-CAT-002 | Tambah kategori - nama kosong | Admin sudah login | Nama: (kosong) | 1. Buka halaman kategori<br>2. Kosongkan nama<br>3. Klik Tambah | Muncul validasi "Nama kategori wajib diisi" | Sesuai | Pass |
+| 44 | TC-CAT-003 | Tambah kategori - nama duplikat | Admin sudah login | Nama sudah ada | 1. Buka halaman kategori<br>2. Isi nama yang sudah ada<br>3. Klik Tambah | Slug otomatis dibuat unik (nama-1) | Sesuai | Pass |
+| 45 | TC-CAT-004 | Edit kategori | Admin sudah login, ada kategori | Nama baru | 1. Klik Edit<br>2. Ubah nama<br>3. Simpan | Kategori berhasil diupdate | Sesuai | Pass |
+| 46 | TC-CAT-005 | Hapus kategori - masih memiliki produk | Admin sudah login, kategori memiliki produk | - | 1. Klik Hapus pada kategori yang memiliki produk<br>2. Konfirmasi | Kategori terhapus, produk ikut terhapus (CASCADE) | Sesuai | Pass |
+| 47 | TC-CAT-006 | Hapus kategori - tidak memiliki produk | Admin sudah login, kategori tidak memiliki produk | - | 1. Klik Hapus pada kategori tanpa produk<br>2. Konfirmasi | Kategori terhapus | Sesuai | Pass |
 
 ---
 
 ## MODUL 5 — MANAJEMEN PELANGGAN (Customers CRUD)
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
-|:--:|:---|:---|:---|:---|:---|:---|:---|:--:|
-| 48 | TC-CUST-001 | Tambah pelanggan berhasil | Admin sudah login | Nama: Budi, Telepon: 08123456789, Alamat: Jl. Merdeka | 1. Buka halaman pelanggan<br>2. Isi data valid<br>3. Klik Tambah | Pelanggan berhasil ditambahkan | | |
-| 49 | TC-CUST-002 | Tambah pelanggan - nama kosong | Admin sudah login | Nama: (kosong) | 1. Buka halaman pelanggan<br>2. Kosongkan nama<br>3. Klik Tambah | Muncul validasi | | |
-| 50 | TC-CUST-003 | Edit pelanggan | Admin sudah login, ada pelanggan | Nama baru, telepon baru | 1. Klik Edit<br>2. Ubah data<br>3. Simpan | Data pelanggan berhasil diupdate | | |
-| 51 | TC-CUST-004 | Hapus pelanggan - memiliki riwayat servis | Admin sudah login, pelanggan memiliki repair_orders | - | 1. Klik Hapus<br>2. Konfirmasi | Pelanggan terhapus, data servis ikut terhapus (CASCADE) | | |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| 48 | TC-CUST-001 | Tambah pelanggan berhasil | Admin sudah login | Nama: Budi, Telepon: 08123456789, Alamat: Jl. Merdeka | 1. Buka halaman pelanggan<br>2. Isi data valid<br>3. Klik Tambah | Pelanggan berhasil ditambahkan | Sesuai | Pass |
+| 49 | TC-CUST-002 | Tambah pelanggan - nama kosong | Admin sudah login | Nama: (kosong) | 1. Buka halaman pelanggan<br>2. Kosongkan nama<br>3. Klik Tambah | Muncul validasi | Sesuai | Pass |
+| 50 | TC-CUST-003 | Edit pelanggan | Admin sudah login, ada pelanggan | Nama baru, telepon baru | 1. Klik Edit<br>2. Ubah data<br>3. Simpan | Data pelanggan berhasil diupdate | Sesuai | Pass |
+| 51 | TC-CUST-004 | Hapus pelanggan - memiliki riwayat servis | Admin sudah login, pelanggan memiliki repair_orders | - | 1. Klik Hapus<br>2. Konfirmasi | Pelanggan terhapus, data servis ikut terhapus (CASCADE) | Sesuai | Pass |
 
 ---
 
 ## MODUL 6 — MANAJEMEN KENDARAAN (Vehicles CRUD)
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
-|:--:|:---|:---|:---|:---|:---|:---|:---|:--:|
-| 52 | TC-VEH-001 | Tambah kendaraan berhasil | Admin sudah login, ada pelanggan | Plat: B 1234 CD, Merk: Honda, Model: Vario, Pelanggan: Budi | 1. Buka halaman kendaraan<br>2. Isi data valid<br>3. Klik Tambah | Kendaraan berhasil ditambahkan | | |
-| 53 | TC-VEH-002 | Tambah kendaraan - plat kosong | Admin sudah login | Plat: (kosong) | 1. Buka halaman kendaraan<br>2. Kosongkan plat nomor<br>3. Klik Tambah | Muncul validasi | | |
-| 54 | TC-VEH-003 | Edit kendaraan | Admin sudah login, ada kendaraan | Merk baru, model baru | 1. Klik Edit<br>2. Ubah data<br>3. Simpan | Data kendaraan berhasil diupdate | | |
-| 55 | TC-VEH-004 | Hapus kendaraan - memiliki riwayat servis | Admin sudah login, kendaraan memiliki repair_orders | - | 1. Klik Hapus<br>2. Konfirmasi | Kendaraan terhapus, data servis ikut terhapus (CASCADE) | | |
-| 56 | TC-VEH-005 | Tambah kendaraan - plat duplikat | Admin sudah login, plat sudah terdaftar | Plat: B 1234 CD (sudah ada) | 1. Isi plat yang sama<br>2. Submit | Muncul validasi "Plat nomor sudah terdaftar" | | |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| 52 | TC-VEH-001 | Tambah kendaraan berhasil | Admin sudah login, ada pelanggan | Plat: B 1234 CD, Merk: Honda, Model: Vario, Pelanggan: Budi | 1. Buka halaman kendaraan<br>2. Isi data valid<br>3. Klik Tambah | Kendaraan berhasil ditambahkan | Sesuai | Pass |
+| 53 | TC-VEH-002 | Tambah kendaraan - plat kosong | Admin sudah login | Plat: (kosong) | 1. Buka halaman kendaraan<br>2. Kosongkan plat nomor<br>3. Klik Tambah | Muncul validasi | Sesuai | Pass |
+| 54 | TC-VEH-003 | Edit kendaraan | Admin sudah login, ada kendaraan | Merk baru, model baru | 1. Klik Edit<br>2. Ubah data<br>3. Simpan | Data kendaraan berhasil diupdate | Sesuai | Pass |
+| 55 | TC-VEH-004 | Hapus kendaraan - memiliki riwayat servis | Admin sudah login, kendaraan memiliki repair_orders | - | 1. Klik Hapus<br>2. Konfirmasi | Kendaraan terhapus, data servis ikut terhapus (CASCADE) | Sesuai | Pass |
+| 56 | TC-VEH-005 | Tambah kendaraan - plat duplikat | Admin sudah login, plat sudah terdaftar | Plat: B 1234 CD (sudah ada) | 1. Isi plat yang sama<br>2. Submit | Muncul validasi "Plat nomor sudah terdaftar" | Plat duplikat tetap tersimpan (tidak ada validasi unique) | Fail |
 
 ---
 
 ## MODUL 7 — MANAJEMEN MEKANIK (Mechanics CRUD)
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
-|:--:|:---|:---|:---|:---|:---|:---|:---|:--:|
-| 57 | TC-MECH-001 | Tambah mekanik berhasil | Admin sudah login | Nama: Agus, Telepon: 0812345, Spesialis: Mesin | 1. Buka halaman mekanik<br>2. Isi data valid<br>3. Klik Tambah | Mekanik berhasil ditambahkan | | |
-| 58 | TC-MECH-002 | Tambah mekanik - nama kosong | Admin sudah login | Nama: (kosong) | 1. Buka halaman mekanik<br>2. Kosongkan nama<br>3. Klik Tambah | Muncul validasi | | |
-| 59 | TC-MECH-003 | Edit mekanik | Admin sudah login, ada mekanik | Spesialis baru: Kelistrikan | 1. Klik Edit<br>2. Ubah data<br>3. Simpan | Data mekanik berhasil diupdate | | |
-| 60 | TC-MECH-004 | Hapus mekanik - sedang ditugaskan | Admin sudah login, mekanik memiliki repair_orders | - | 1. Klik Hapus<br>2. Konfirmasi | Mekanik terhapus, repair_orders.mechanic_id jadi NULL | | |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| 57 | TC-MECH-001 | Tambah mekanik berhasil | Admin sudah login | Nama: Agus, Telepon: 0812345, Spesialis: Mesin | 1. Buka halaman mekanik<br>2. Isi data valid<br>3. Klik Tambah | Mekanik berhasil ditambahkan | Sesuai | Pass |
+| 58 | TC-MECH-002 | Tambah mekanik - nama kosong | Admin sudah login | Nama: (kosong) | 1. Buka halaman mekanik<br>2. Kosongkan nama<br>3. Klik Tambah | Muncul validasi | Sesuai | Pass |
+| 59 | TC-MECH-003 | Edit mekanik | Admin sudah login, ada mekanik | Spesialis baru: Kelistrikan | 1. Klik Edit<br>2. Ubah data<br>3. Simpan | Data mekanik berhasil diupdate | Sesuai | Pass |
+| 60 | TC-MECH-004 | Hapus mekanik - sedang ditugaskan | Admin sudah login, mekanik memiliki repair_orders | - | 1. Klik Hapus<br>2. Konfirmasi | Mekanik terhapus, repair_orders.mechanic_id jadi NULL | Sesuai | Pass |
 
 ---
 
 ## MODUL 8 — KERANJANG BELANJA (Cart)
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
-|:--:|:---|:---|:---|:---|:---|:---|:---|:--:|
-| 61 | TC-CART-001 | Tambah produk ke keranjang | User sudah login, stok tersedia | Produk: Oli Motor 10W-40, qty: 1 | 1. Buka detail produk<br>2. Klik Tambah ke Keranjang | Item masuk keranjang, counter bertambah | | |
-| 62 | TC-CART-002 | Tambah produk ke keranjang - stok habis | User sudah login, stok = 0 | Produk dengan stok 0 | 1. Buka produk stok habis<br>2. Cek tombol | Tombol "Tambah ke Keranjang" disabled atau tidak ada | | |
-| 63 | TC-CART-003 | Tambah produk ke keranjang tanpa login | User belum login | Produk: Oli Motor 10W-40 | 1. Klik Tambah ke Keranjang | Redirect ke halaman login | | |
-| 64 | TC-CART-004 | Update quantity di keranjang | User sudah login, ada item di keranjang | qty: 3 | 1. Buka keranjang<br>2. Ubah qty jadi 3 | Total harga berubah sesuai qty | | |
-| 65 | TC-CART-005 | Hapus item dari keranjang | User sudah login, ada item di keranjang | - | 1. Klik Hapus pada item | Item hilang dari keranjang | | |
-| 66 | TC-CART-006 | Keranjang kosong - tampilkan pesan | User sudah login, keranjang kosong | - | 1. Buka halaman keranjang | Muncul pesan "Keranjang masih kosong" | | |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| 61 | TC-CART-001 | Tambah produk ke keranjang | User sudah login, stok tersedia | Produk: Oli Motor 10W-40, qty: 1 | 1. Buka detail produk<br>2. Klik Tambah ke Keranjang | Item masuk keranjang, counter bertambah | Sesuai | Pass |
+| 62 | TC-CART-002 | Tambah produk ke keranjang - stok habis | User sudah login, stok = 0 | Produk dengan stok 0 | 1. Buka produk stok habis<br>2. Cek tombol | Tombol "Tambah ke Keranjang" disabled atau tidak ada | Sesuai | Pass |
+| 63 | TC-CART-003 | Tambah produk ke keranjang tanpa login | User belum login | Produk: Oli Motor 10W-40 | 1. Klik Tambah ke Keranjang | Redirect ke halaman login | Sesuai | Pass |
+| 64 | TC-CART-004 | Update quantity di keranjang | User sudah login, ada item di keranjang | qty: 3 | 1. Buka keranjang<br>2. Ubah qty jadi 3 | Total harga berubah sesuai qty | Sesuai | Pass |
+| 65 | TC-CART-005 | Hapus item dari keranjang | User sudah login, ada item di keranjang | - | 1. Klik Hapus pada item | Item hilang dari keranjang | Sesuai | Pass |
+| 66 | TC-CART-006 | Keranjang kosong - tampilkan pesan | User sudah login, keranjang kosong | - | 1. Buka halaman keranjang | Muncul pesan "Keranjang masih kosong" | Sesuai | Pass |
 
 ---
 
 ## MODUL 9 — CHECKOUT & PEMBAYARAN PRODUK
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
-|:--:|:---|:---|:---|:---|:---|:---|:---|:--:|
-| 67 | TC-CHK-001 | Checkout berhasil | User sudah login, ada item di cart | Alamat pengiriman | 1. Buka checkout<br>2. Isi alamat<br>3. Klik Checkout | Order terbuat, redirect ke halaman bayar | | |
-| 68 | TC-CHK-002 | Checkout - stok habis saat proses | User sudah login, stok = 0 | - | 1. Buka checkout untuk produk stok habis | Muncul pesan "Stok tidak mencukupi" | | |
-| 69 | TC-CHK-003 | Checkout tanpa login | User belum login | - | 1. Akses halaman checkout langsung via URL | Redirect ke halaman login | | |
-| 70 | TC-CHK-004 | Checkout - keranjang kosong | User sudah login, keranjang kosong | - | 1. Akses halaman checkout langsung | Redirect ke keranjang, pesan "Keranjang kosong" | | |
-| 71 | TC-CHK-005 | Checkout - quantity melebihi stok | User sudah login, stok: 2, quantity di cart: 5 | - | 1. Proses checkout | Muncul pesan "Stok tidak mencukupi" | | |
-| 72 | TC-ORD-001 | Lihat riwayat pesanan | User sudah login, memiliki order | - | 1. Buka halaman riwayat pesanan | Semua pesanan user tampil | | |
-| 73 | TC-ORD-002 | Detail pesanan tampil benar | User sudah login, memiliki order | - | 1. Klik detail pada order | Informasi order, items, total, status tampil | | |
-| 74 | TC-ORD-003 | Invoice pesanan tampil | User sudah login, order sudah dibayar | - | 1. Klik Invoice | Halaman invoice tampil dengan data benar | | |
-| 75 | TC-ORD-004 | Batalkan pesanan - status menunggu | User sudah login, order status pending | - | 1. Klik Batalkan pada order menunggu | Status berubah "Cancelled", stok dikembalikan | | |
-| 76 | TC-ORD-005 | Batalkan pesanan - status sudah diproses | User sudah login, order status processing | - | 1. Klik Batalkan | Tidak bisa dibatalkan, muncul pesan | | |
-| 77 | TC-PAY-001 | Pembayaran produk - redirect ke iPaymu | User sudah login, order baru | - | 1. Klik Bayar pada order | Redirect ke halaman pembayaran iPaymu | | |
-| 78 | TC-PAY-002 | Pembayaran produk - sukses dari callback | User sudah login, order pending | - | 1. Bayar via iPaymu<br>2. Callback diterima | Status order jadi "paid", redirect ke halaman sukses | | |
-| 79 | TC-PAY-003 | Pembayaran produk - gagal | User sudah login, order pending | - | 1. Bayar via iPaymu (gagal) | Status order jadi "failed", stok dikembalikan | | |
-| 80 | TC-PAY-004 | Pembayaran produk - expired | User sudah login, order pending | - | 1. Bayar via iPaymu (expired) | Status payment "expired" | | |
-| 81 | TC-PAY-005 | Pembayaran produk - halaman sukses tampil | User sudah login, order sukses dibayar | - | 1. Redirect ke halaman sukses | Tampil "Pembayaran Berhasil!" dengan nomor order | | |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| 67 | TC-CHK-001 | Checkout berhasil | User sudah login, ada item di cart | Alamat pengiriman | 1. Buka checkout<br>2. Isi alamat<br>3. Klik Checkout | Order terbuat, redirect ke halaman bayar | Sesuai | Pass |
+| 68 | TC-CHK-002 | Checkout - stok habis saat proses | User sudah login, stok = 0 | - | 1. Buka checkout untuk produk stok habis | Muncul pesan "Stok tidak mencukupi" | Sesuai | Pass |
+| 69 | TC-CHK-003 | Checkout tanpa login | User belum login | - | 1. Akses halaman checkout langsung via URL | Redirect ke halaman login | Sesuai | Pass |
+| 70 | TC-CHK-004 | Checkout - keranjang kosong | User sudah login, keranjang kosong | - | 1. Akses halaman checkout langsung | Redirect ke keranjang, pesan "Keranjang kosong" | Sesuai | Pass |
+| 71 | TC-CHK-005 | Checkout - quantity melebihi stok | User sudah login, stok: 2, quantity di cart: 5 | - | 1. Proses checkout | Muncul pesan "Stok tidak mencukupi" | Sesuai | Pass |
+| 72 | TC-ORD-001 | Lihat riwayat pesanan | User sudah login, memiliki order | - | 1. Buka halaman riwayat pesanan | Semua pesanan user tampil | Sesuai | Pass |
+| 73 | TC-ORD-002 | Detail pesanan tampil benar | User sudah login, memiliki order | - | 1. Klik detail pada order | Informasi order, items, total, status tampil | Sesuai | Pass |
+| 74 | TC-ORD-003 | Invoice pesanan tampil | User sudah login, order sudah dibayar | - | 1. Klik Invoice | Halaman invoice tampil dengan data benar | Sesuai | Pass |
+| 75 | TC-ORD-004 | Batalkan pesanan - status menunggu | User sudah login, order status pending | - | 1. Klik Batalkan pada order menunggu | Status berubah "Cancelled", stok dikembalikan | Sesuai | Pass |
+| 76 | TC-ORD-005 | Batalkan pesanan - status sudah diproses | User sudah login, order status processing | - | 1. Klik Batalkan | Tidak bisa dibatalkan, muncul pesan | Sesuai | Pass |
+| 77 | TC-PAY-001 | Pembayaran produk - redirect ke iPaymu | User sudah login, order baru | - | 1. Klik Bayar pada order | Redirect ke halaman pembayaran iPaymu | Sesuai | Pass |
+| 78 | TC-PAY-002 | Pembayaran produk - sukses dari callback | User sudah login, order pending | - | 1. Bayar via iPaymu<br>2. Callback diterima | Status order jadi "paid", redirect ke halaman sukses | Sesuai | Pass |
+| 79 | TC-PAY-003 | Pembayaran produk - gagal | User sudah login, order pending | - | 1. Bayar via iPaymu (gagal) | Status order jadi "failed", stok dikembalikan | Sesuai | Pass |
+| 80 | TC-PAY-004 | Pembayaran produk - expired | User sudah login, order pending | - | 1. Bayar via iPaymu (expired) | Status payment "expired" | Sesuai | Pass |
+| 81 | TC-PAY-005 | Pembayaran produk - halaman sukses tampil | User sudah login, order sukses dibayar | - | 1. Redirect ke halaman sukses | Tampil "Pembayaran Berhasil!" dengan nomor order | Sesuai | Pass |
 
 ---
 
 ## MODUL 10 — BOOKING SERVIS (Customer)
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
-|:--:|:---|:---|:---|:---|:---|:---|:---|:--:|
-| 82 | TC-SRV-001 | Booking servis berhasil | User sudah login, pilih service | Service: Tune Up, Kendaraan: B 1234 CD, Keluhan: "Mesin brebet" | 1. Buka Buat Servis<br>2. Pilih service & kendaraan<br>3. Isi keluhan<br>4. Klik Ajukan | Servis berhasil dibuat dengan nomor SRV-xxx | | |
-| 83 | TC-SRV-002 | Booking servis - tanpa service (jasa saja) | User sudah login | Service: (tidak dipilih) | 1. Buka Buat Servis<br>2. Tidak pilih service<br>3. Isi data lain valid<br>4. Submit | Servis tetap berhasil (biaya jasa Rp0) | | |
-| 84 | TC-SRV-003 | Booking servis - kendaraan baru | User sudah login | Plat, Merk, Model diisi manual | 1. Pilih "Kendaraan Baru"<br>2. Isi data kendaraan baru<br>3. Submit | Kendaraan baru tersimpan, servis berhasil | | |
-| 85 | TC-SRV-004 | Booking servis - tambah sparepart | User sudah login | Pilih sparepart, qty: 1 | 1. Buka Buat Servis<br>2. Klik "+ Pilih Sparepart"<br>3. Pilih sparepart<br>4. Submit | Sparepart tercatat, stok berkurang | | |
-| 86 | TC-SRV-005 | Booking servis - quantity sparepart diubah | User sudah login | Pilih sparepart, ubah qty: 3 | 1. Pilih sparepart<br>2. Ubah quantity ke 3<br>3. Submit | Total sparepart = harga x 3, stok berkurang 3 | | |
-| 87 | TC-SRV-006 | Booking servis - hapus sparepart | User sudah login | Sparepart sudah dipilih | 1. Klik x pada sparepart yang dipilih | Sparepart dihapus, total menyesuaikan | | |
-| 88 | TC-SRV-007 | Booking servis - keluhan kosong | User sudah login | Keluhan: (kosong) | 1. Kosongkan field keluhan<br>2. Submit | Muncul validasi "Keluhan wajib diisi" | | |
-| 89 | TC-SRV-008 | Booking servis - plat kendaraan kosong (kendaraan baru) | User sudah login | Plat: (kosong) | 1. Pilih kendaraan baru<br>2. Kosongkan plat<br>3. Submit | Muncul validasi | | |
-| 90 | TC-SRV-009 | Booking servis - tanpa login | User belum login | - | 1. Akses halaman buat servis langsung | Redirect ke login | | |
-| 91 | TC-SRV-010 | Detail servis tampil | User sudah login, memiliki repair order | - | 1. Klik detail pada servis | Info servis, sparepart, ringkasan biaya tampil | | |
-| 92 | TC-SRV-011 | Invoice servis tampil | User sudah login, repair order sudah dibayar | - | 1. Klik Invoice | Halaman invoice tampil dengan data benar | | |
-| 93 | TC-SRV-012 | Batalkan servis - status menunggu | User sudah login, repair order menunggu | - | 1. Klik Batalkan | Status "dibatalkan", stok sparepart dikembalikan | | |
-| 94 | TC-SRV-013 | Batalkan servis - status sudah diproses | User sudah login, repair order proses | - | 1. Klik Batalkan | Tidak bisa dibatalkan | | |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| 82 | TC-SRV-001 | Booking servis berhasil | User sudah login, pilih service | Service: Tune Up, Kendaraan: B 1234 CD, Keluhan: "Mesin brebet" | 1. Buka Buat Servis<br>2. Pilih service & kendaraan<br>3. Isi keluhan<br>4. Klik Ajukan | Servis berhasil dibuat dengan nomor SRV-xxx | Sesuai | Pass |
+| 83 | TC-SRV-002 | Booking servis - tanpa service (jasa saja) | User sudah login | Service: (tidak dipilih) | 1. Buka Buat Servis<br>2. Tidak pilih service<br>3. Isi data lain valid<br>4. Submit | Servis tetap berhasil (biaya jasa Rp0) | Sesuai | Pass |
+| 84 | TC-SRV-003 | Booking servis - kendaraan baru | User sudah login | Plat, Merk, Model diisi manual | 1. Pilih "Kendaraan Baru"<br>2. Isi data kendaraan baru<br>3. Submit | Kendaraan baru tersimpan, servis berhasil | Sesuai | Pass |
+| 85 | TC-SRV-004 | Booking servis - tambah sparepart | User sudah login | Pilih sparepart, qty: 1 | 1. Buka Buat Servis<br>2. Klik "+ Pilih Sparepart"<br>3. Pilih sparepart<br>4. Submit | Sparepart tercatat, stok berkurang | Sesuai | Pass |
+| 86 | TC-SRV-005 | Booking servis - quantity sparepart diubah | User sudah login | Pilih sparepart, ubah qty: 3 | 1. Pilih sparepart<br>2. Ubah quantity ke 3<br>3. Submit | Total sparepart = harga x 3, stok berkurang 3 | Sesuai | Pass |
+| 87 | TC-SRV-006 | Booking servis - hapus sparepart | User sudah login | Sparepart sudah dipilih | 1. Klik x pada sparepart yang dipilih | Sparepart dihapus, total menyesuaikan | Sesuai | Pass |
+| 88 | TC-SRV-007 | Booking servis - keluhan kosong | User sudah login | Keluhan: (kosong) | 1. Kosongkan field keluhan<br>2. Submit | Muncul validasi "Keluhan wajib diisi" | Sesuai | Pass |
+| 89 | TC-SRV-008 | Booking servis - plat kendaraan kosong (kendaraan baru) | User sudah login | Plat: (kosong) | 1. Pilih kendaraan baru<br>2. Kosongkan plat<br>3. Submit | Muncul validasi | Sesuai | Pass |
+| 90 | TC-SRV-009 | Booking servis - tanpa login | User belum login | - | 1. Akses halaman buat servis langsung | Redirect ke login | Sesuai | Pass |
+| 91 | TC-SRV-010 | Detail servis tampil | User sudah login, memiliki repair order | - | 1. Klik detail pada servis | Info servis, sparepart, ringkasan biaya tampil | Sesuai | Pass |
+| 92 | TC-SRV-011 | Invoice servis tampil | User sudah login, repair order sudah dibayar | - | 1. Klik Invoice | Halaman invoice tampil dengan data benar | Sesuai | Pass |
+| 93 | TC-SRV-012 | Batalkan servis - status menunggu | User sudah login, repair order menunggu | - | 1. Klik Batalkan | Status "dibatalkan", stok sparepart dikembalikan | Sesuai | Pass |
+| 94 | TC-SRV-013 | Batalkan servis - status sudah diproses | User sudah login, repair order proses | - | 1. Klik Batalkan | Tidak bisa dibatalkan | Sesuai | Pass |
 
 ---
 
 ## MODUL 11 — PEMBAYARAN SERVIS
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
-|:--:|:---|:---|:---|:---|:---|:---|:---|:--:|
-| 95 | TC-PAYSRV-001 | Pembayaran servis - redirect ke iPaymu | User sudah login, repair order baru | - | 1. Klik Bayar pada servis | Redirect ke halaman pembayaran iPaymu | | |
-| 96 | TC-PAYSRV-002 | Pembayaran servis - sukses | User sudah login, repair order pending | - | 1. Bayar via iPaymu sukses | Status "paid", redirect ke halaman sukses | | |
-| 97 | TC-PAYSRV-003 | Pembayaran servis - gagal | User sudah login, repair order pending | - | 1. Bayar via iPaymu gagal | Status "failed", stok sparepart dikembalikan | | |
-| 98 | TC-PAYSRV-004 | Pembayaran servis - halaman sukses tampil | User sudah login, pembayaran sukses | - | 1. Bayar sukses via iPaymu | Tampil "Pembayaran Berhasil!" dengan nomor SRV | | |
-| 99 | TC-PAYSRV-005 | Konfirmasi pembayaran manual oleh admin | Admin sudah login, repair order pending | - | 1. Admin klik Konfirmasi Bayar | Status payment jadi "paid" | | |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| 95 | TC-PAYSRV-001 | Pembayaran servis - redirect ke iPaymu | User sudah login, repair order baru | - | 1. Klik Bayar pada servis | Redirect ke halaman pembayaran iPaymu | Sesuai | Pass |
+| 96 | TC-PAYSRV-002 | Pembayaran servis - sukses | User sudah login, repair order pending | - | 1. Bayar via iPaymu sukses | Status "paid", redirect ke halaman sukses | Sesuai | Pass |
+| 97 | TC-PAYSRV-003 | Pembayaran servis - gagal | User sudah login, repair order pending | - | 1. Bayar via iPaymu gagal | Status "failed", stok sparepart dikembalikan | Sesuai | Pass |
+| 98 | TC-PAYSRV-004 | Pembayaran servis - halaman sukses tampil | User sudah login, pembayaran sukses | - | 1. Bayar sukses via iPaymu | Tampil "Pembayaran Berhasil!" dengan nomor SRV | Sesuai | Pass |
+| 99 | TC-PAYSRV-005 | Konfirmasi pembayaran manual oleh admin | Admin sudah login, repair order pending | - | 1. Admin klik Konfirmasi Bayar | Status payment jadi "paid" | Sesuai | Pass |
 
 ---
 
 ## MODUL 12 — ADMIN SERVIS (Repair Order Management)
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
-|:--:|:---|:---|:---|:---|:---|:---|:---|:--:|
-| 100 | TC-ADMSRV-001 | Admin terima servis (ubah status ke proses) | Admin sudah login, repair order menunggu | - | 1. Buka detail servis<br>2. Klik "Terima Proses" | Status berubah "proses", sparepart tetap ada | | |
-| 101 | TC-ADMSRV-002 | Admin selesai servis (ubah status ke selesai) | Admin sudah login, repair order proses | - | 1. Buka detail servis<br>2. Klik "Selesai" | Status berubah "selesai" | | |
-| 102 | TC-ADMSRV-003 | Admin edit servis - tambah sparepart | Admin sudah login, ada repair order | Sparepart baru | 1. Buka edit servis<br>2. Tambah sparepart baru<br>3. Simpan | Sparepart baru tercatat, stok berkurang | | |
-| 103 | TC-ADMSRV-004 | Admin edit servis - hapus sparepart | Admin sudah login, ada repair order | - | 1. Buka edit servis<br>2. Hapus sparepart existing<br>3. Simpan | Sparepart dihapus, stok dikembalikan | | |
-| 104 | TC-ADMSRV-005 | Admin edit servis - ubah biaya jasa | Admin sudah login, ada repair order | Biaya jasa baru: 250000 | 1. Buka edit servis<br>2. Ubah biaya jasa<br>3. Simpan | Biaya jasa berubah, total menyesuaikan | | |
-| 105 | TC-ADMSRV-006 | Admin edit servis - ubah status | Admin sudah login, ada repair order | Status: selesai | 1. Buka edit servis<br>2. Ubah status<br>3. Simpan | Status berubah sesuai pilihan | | |
-| 106 | TC-ADMSRV-007 | Admin edit servis - tanpa mengubah apapun | Admin sudah login, ada repair order | - | 1. Buka edit servis<br>2. Simpan tanpa perubahan | Data tetap sama, tidak ada error | | |
-| 107 | TC-ADMSRV-008 | Sparepart otomatis jadi transaksi penjualan | Admin sudah login, repair order selesai & paid | - | 1. Ubah status ke proses/selesai (sudah paid) | Order + OrderItem tercatat untuk sparepart | | |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| 100 | TC-ADMSRV-001 | Admin terima servis (ubah status ke proses) | Admin sudah login, repair order menunggu | - | 1. Buka detail servis<br>2. Klik "Terima Proses" | Status berubah "proses", sparepart tetap ada | Sesuai | Pass |
+| 101 | TC-ADMSRV-002 | Admin selesai servis (ubah status ke selesai) | Admin sudah login, repair order proses | - | 1. Buka detail servis<br>2. Klik "Selesai" | Status berubah "selesai" | Sesuai | Pass |
+| 102 | TC-ADMSRV-003 | Admin edit servis - tambah sparepart | Admin sudah login, ada repair order | Sparepart baru | 1. Buka edit servis<br>2. Tambah sparepart baru<br>3. Simpan | Sparepart baru tercatat, stok berkurang | Sesuai | Pass |
+| 103 | TC-ADMSRV-004 | Admin edit servis - hapus sparepart | Admin sudah login, ada repair order | - | 1. Buka edit servis<br>2. Hapus sparepart existing<br>3. Simpan | Sparepart dihapus, stok dikembalikan | Sesuai | Pass |
+| 104 | TC-ADMSRV-005 | Admin edit servis - ubah biaya jasa | Admin sudah login, ada repair order | Biaya jasa baru: 250000 | 1. Buka edit servis<br>2. Ubah biaya jasa<br>3. Simpan | Biaya jasa berubah, total menyesuaikan | Sesuai | Pass |
+| 105 | TC-ADMSRV-006 | Admin edit servis - ubah status | Admin sudah login, ada repair order | Status: selesai | 1. Buka edit servis<br>2. Ubah status<br>3. Simpan | Status berubah sesuai pilihan | Sesuai | Pass |
+| 106 | TC-ADMSRV-007 | Admin edit servis - tanpa mengubah apapun | Admin sudah login, ada repair order | - | 1. Buka edit servis<br>2. Simpan tanpa perubahan | Data tetap sama, tidak ada error | Sesuai | Pass |
+| 107 | TC-ADMSRV-008 | Sparepart otomatis jadi transaksi penjualan | Admin sudah login, repair order selesai & paid | - | 1. Ubah status ke proses/selesai (sudah paid) | Order + OrderItem tercatat untuk sparepart | Sesuai | Pass |
 
 ---
 
 ## MODUL 13 — DASHBOARD & LAPORAN
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
-|:--:|:---|:---|:---|:---|:---|:---|:---|:--:|
-| 108 | TC-DASH-001 | Dashboard - statistik tampil | Admin sudah login | - | 1. Buka dashboard admin | Total order, revenue, pelanggan tampil | | |
-| 109 | TC-DASH-002 | Dashboard - grafik mingguan tampil | Admin sudah login | - | 1. Buka dashboard admin | Grafik revenue & jumlah transaksi 7 hari tampil | | |
-| 110 | TC-DASH-003 | Dashboard - recent order tampil | Admin sudah login | - | 1. Buka dashboard admin | 10 order terbaru tampil | | |
-| 111 | TC-DASH-004 | Dark Mode - toggle berfungsi | User sudah login | - | 1. Klik toggle Dark Mode | Tampilan berubah ke tema gelap | | |
-| 112 | TC-DASH-005 | Dark Mode - konsisten di semua halaman | User sudah login, Dark Mode aktif | - | 1. Navigasi ke halaman lain | Semua halaman tetap menggunakan tema gelap | | |
-| 113 | TC-DASH-006 | Dashboard - responsive mobile | Admin sudah login, buka via HP | - | 1. Buka dashboard di viewport mobile | Layout menyesuaikan, sidebar bisa di-toggle | | |
-| 114 | TC-LAP-001 | Laporan - filter periode harian | Admin sudah login | Periode: Harian | 1. Buka halaman laporan<br>2. Pilih "Harian"<br>3. Submit | Data transaksi hari ini tampil | | |
-| 115 | TC-LAP-002 | Laporan - filter periode bulanan | Admin sudah login | Periode: Bulanan | 1. Buka halaman laporan<br>2. Pilih "Bulanan"<br>3. Submit | Data transaksi bulan ini tampil | | |
-| 116 | TC-LAP-003 | Laporan - revenue produk & servis tampil | Admin sudah login | - | 1. Buka halaman laporan | Revenue produk dan servis terpisah | | |
-| 117 | TC-LAP-004 | Laporan - ekspor CSV Produk | Admin sudah login | - | 1. Klik Export CSV (Produk) | File CSV laporan produk terdownload | | |
-| 118 | TC-LAP-005 | Laporan - ekspor CSV Servis | Admin sudah login | - | 1. Klik Export CSV (Servis) | File CSV laporan servis terdownload | | |
-| 119 | TC-LAP-006 | Laporan - format CSV benar | Admin sudah login | - | 1. Buka file CSV hasil ekspor | Data terbaca dengan delimiter titik koma (;) | | |
-| 120 | TC-LAP-007 | Laporan - filter tahunan | Admin sudah login | Periode: Tahunan | 1. Pilih "Tahunan"<br>2. Submit | Data transaksi tahun ini tampil | | |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| 108 | TC-DASH-001 | Dashboard - statistik tampil | Admin sudah login | - | 1. Buka dashboard admin | Total order, revenue, pelanggan tampil | Sesuai | Pass |
+| 109 | TC-DASH-002 | Dashboard - grafik mingguan tampil | Admin sudah login | - | 1. Buka dashboard admin | Grafik revenue & jumlah transaksi 7 hari tampil | Sesuai | Pass |
+| 110 | TC-DASH-003 | Dashboard - recent order tampil | Admin sudah login | - | 1. Buka dashboard admin | 10 order terbaru tampil | Sesuai | Pass |
+| 111 | TC-DASH-004 | Dark Mode - toggle berfungsi | User sudah login | - | 1. Klik toggle Dark Mode | Tampilan berubah ke tema gelap | Sesuai | Pass |
+| 112 | TC-DASH-005 | Dark Mode - konsisten di semua halaman | User sudah login, Dark Mode aktif | - | 1. Navigasi ke halaman lain | Semua halaman tetap menggunakan tema gelap | Sesuai | Pass |
+| 113 | TC-DASH-006 | Dashboard - responsive mobile | Admin sudah login, buka via HP | - | 1. Buka dashboard di viewport mobile | Layout menyesuaikan, sidebar bisa di-toggle | Sesuai | Pass |
+| 114 | TC-LAP-001 | Laporan - filter periode harian | Admin sudah login | Periode: Harian | 1. Buka halaman laporan<br>2. Pilih "Harian"<br>3. Submit | Data transaksi hari ini tampil | Sesuai | Pass |
+| 115 | TC-LAP-002 | Laporan - filter periode bulanan | Admin sudah login | Periode: Bulanan | 1. Buka halaman laporan<br>2. Pilih "Bulanan"<br>3. Submit | Data transaksi bulan ini tampil | Sesuai | Pass |
+| 116 | TC-LAP-003 | Laporan - revenue produk & servis tampil | Admin sudah login | - | 1. Buka halaman laporan | Revenue produk dan servis terpisah | Sesuai | Pass |
+| 117 | TC-LAP-004 | Laporan - ekspor CSV Produk | Admin sudah login | - | 1. Klik Export CSV (Produk) | File CSV laporan produk terdownload | Sesuai | Pass |
+| 118 | TC-LAP-005 | Laporan - ekspor CSV Servis | Admin sudah login | - | 1. Klik Export CSV (Servis) | File CSV laporan servis terdownload | Sesuai | Pass |
+| 119 | TC-LAP-006 | Laporan - format CSV benar | Admin sudah login | - | 1. Buka file CSV hasil ekspor | "Data terbaca dengan delimiter titik koma ( | Sesuai | Pass |
+| 120 | TC-LAP-007 | Laporan - filter tahunan | Admin sudah login | Periode: Tahunan | 1. Pilih "Tahunan"<br>2. Submit | Data transaksi tahun ini tampil | Sesuai | Pass |
 
 ---
 
 ## MODUL 14 — REST API (Laravel Sanctum)
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
-|:--:|:---|:---|:---|:---|:---|:---|:---|:--:|
-| 121 | TC-API-001 | API - login dapat token | - | Email & password valid | 1. POST /api/token dengan credentials valid | Return token Sanctum | | |
-| 122 | TC-API-002 | API - login dengan credentials salah | - | Email & password salah | 1. POST /api/token dengan credentials salah | Return error 422 | | |
-| 123 | TC-API-003 | API - akses services tanpa token | - | - | 1. GET /api/services tanpa Authorization header | Return 401 Unauthenticated | | |
-| 124 | TC-API-004 | API - services menampilkan history | Token admin valid | Search: (opsional), Status: (opsional) | 1. GET /api/services dengan token | Return repair orders dengan pagination | | |
-| 125 | TC-API-005 | API - customers menampilkan data | Token admin valid | - | 1. GET /api/customers dengan token | Return daftar customer | | |
-| 126 | TC-API-006 | API - search services | Token admin valid | ?search=Tune | 1. GET /api/services?search=Tune | Hasil difilter sesuai keyword | | |
-| 127 | TC-API-007 | API - filter status services | Token admin valid | ?status=selesai | 1. GET /api/services?status=selesai | Hanya repair order dengan status selesai | | |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| 121 | TC-API-001 | API - login dapat token | - | Email & password valid | 1. POST /api/token dengan credentials valid | Return token Sanctum | Sesuai | Pass |
+| 122 | TC-API-002 | API - login dengan credentials salah | - | Email & password salah | 1. POST /api/token dengan credentials salah | Return error 422 | Sesuai | Pass |
+| 123 | TC-API-003 | API - akses services tanpa token | - | - | 1. GET /api/services tanpa Authorization header | Return 401 Unauthenticated | Sesuai | Pass |
+| 124 | TC-API-004 | API - services menampilkan history | Token admin valid | Search: (opsional), Status: (opsional) | 1. GET /api/services dengan token | Return repair orders dengan pagination | Sesuai | Pass |
+| 125 | TC-API-005 | API - customers menampilkan data | Token admin valid | - | 1. GET /api/customers dengan token | Return daftar customer | Sesuai | Pass |
+| 126 | TC-API-006 | API - search services | Token admin valid | ?search=Tune | 1. GET /api/services?search=Tune | Hasil difilter sesuai keyword | Sesuai | Pass |
+| 127 | TC-API-007 | API - filter status services | Token admin valid | ?status=selesai | 1. GET /api/services?status=selesai | Hanya repair order dengan status selesai | Sesuai | Pass |
 
 ---
 
 ## MODUL 15 — KEAMANAN & VALIDASI
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
-|:--:|:---|:---|:---|:---|:---|:---|:---|:--:|
-| 128 | TC-VAL-001 | Field input terlalu panjang (XSS) | - | Input: `<script>alert('xss')</script>` | 1. Isi field dengan script XSS<br>2. Submit | Script tidak dieksekusi, tersimpan sebagai teks biasa | | |
-| 129 | TC-VAL-002 | SQL Injection pada search | - | Input: `' OR 1=1 --` | 1. Isi search dengan SQL injection<br>2. Submit | Query aman, tidak terjadi SQL injection | | |
-| 130 | TC-VAL-003 | Upload file ekstensi tidak diizinkan | - | File: script.php | 1. Upload file .php | Ditolak validasi | | |
-| 131 | TC-VAL-004 | Akses halaman admin tanpa login | User belum login | - | 1. Akses URL admin langsung | Redirect ke halaman login | | |
-| 132 | TC-VAL-005 | Akses halaman admin sebagai customer biasa | User login sebagai customer | - | 1. Akses URL admin langsung | Return 403 Forbidden | | |
-| 133 | TC-VAL-006 | Akses halaman milik user lain | User sudah login | - | 1. Akses URL order/servis milik user lain | Return 403 Forbidden | | |
-| 134 | TC-VAL-007 | Field input dengan spasi saja | - | Input: "   " | 1. Isi field dengan spasi<br>2. Submit | Divalidasi sebagai field kosong | | |
-| 135 | TC-VAL-008 | Double submit form | - | - | 1. Klik submit 2x cepat | Tidak membuat duplikasi data | | |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| 128 | TC-VAL-001 | Field input terlalu panjang (XSS) | - | Input: `<script>alert('xss')</script>` | 1. Isi field dengan script XSS<br>2. Submit | Script tidak dieksekusi, tersimpan sebagai teks biasa | Sesuai | Pass |
+| 129 | TC-VAL-002 | SQL Injection pada search | - | Input: `' OR 1=1 --` | 1. Isi search dengan SQL injection<br>2. Submit | Query aman, tidak terjadi SQL injection | Sesuai | Pass |
+| 130 | TC-VAL-003 | Upload file ekstensi tidak diizinkan | - | File: script.php | 1. Upload file .php | Ditolak validasi | Sesuai | Pass |
+| 131 | TC-VAL-004 | Akses halaman admin tanpa login | User belum login | - | 1. Akses URL admin langsung | Redirect ke halaman login | Sesuai | Pass |
+| 132 | TC-VAL-005 | Akses halaman admin sebagai customer biasa | User login sebagai customer | - | 1. Akses URL admin langsung | Return 403 Forbidden | Sesuai | Pass |
+| 133 | TC-VAL-006 | Akses halaman milik user lain | User sudah login | - | 1. Akses URL order/servis milik user lain | Return 403 Forbidden | Sesuai | Pass |
+| 134 | TC-VAL-007 | Field input dengan spasi saja | - | Input: "   " | 1. Isi field dengan spasi<br>2. Submit | Divalidasi sebagai field kosong | Input spasi lolos validasi (required tidak memfilter spasi) | Fail |
+| 135 | TC-VAL-008 | Double submit form | - | - | 1. Klik submit 2x cepat | Tidak membuat duplikasi data | Duplikasi data terjadi jika submit 2x (tidak ada pencegahan double submit) | Fail |
 
 ---
 
 ## MODUL 16 — END-TO-END FLOW
 
-| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Hasil Aktual | Status |
-|:--:|:---|:---|:---|:---|:---|:---|:---|:--:|
-| 136 | TC-FLOW-001 | End-to-end: register - login - beli produk - bayar | User baru | Data register, produk, pembayaran | 1. Register akun baru<br>2. Login<br>3. Cari produk<br>4. Add to cart<br>5. Checkout<br>6. Bayar | Semua langkah berhasil, order terbuat dengan status paid | | |
-| 137 | TC-FLOW-002 | End-to-end: booking servis - admin proses - selesai | User dan admin | Kendaraan, keluhan, sparepart | 1. User booking servis<br>2. Admin terima proses<br>3. Admin selesai<br>4. User bayar | Servis selesai, sparepart tercatat sebagai penjualan | | |
-| 138 | TC-FLOW-003 | End-to-end: admin tambah produk - tampil di halaman publik | Admin | Produk baru | 1. Admin tambah produk<br>2. Buka halaman publik | Produk baru tampil di halaman publik | | |
+| No | ID | Nama Uji | Precondition | Data Input | Langkah Uji | Hasil Diharapkan | Sesuai | Pass |
+| :--: | :--- | :--- | :--- | :--- | :--- | :--- | Sesuai | Pass |
+| 136 | TC-FLOW-001 | End-to-end: register - login - beli produk - bayar | User baru | Data register, produk, pembayaran | 1. Register akun baru<br>2. Login<br>3. Cari produk<br>4. Add to cart<br>5. Checkout<br>6. Bayar | Semua langkah berhasil, order terbuat dengan status paid | Sesuai | Pass |
+| 137 | TC-FLOW-002 | End-to-end: booking servis - admin proses - selesai | User dan admin | Kendaraan, keluhan, sparepart | 1. User booking servis<br>2. Admin terima proses<br>3. Admin selesai<br>4. User bayar | Servis selesai, sparepart tercatat sebagai penjualan | Sesuai | Pass |
+| 138 | TC-FLOW-003 | End-to-end: admin tambah produk - tampil di halaman publik | Admin | Produk baru | 1. Admin tambah produk<br>2. Buka halaman publik | Produk baru tampil di halaman publik | Sesuai | Pass |
 
 ---
 

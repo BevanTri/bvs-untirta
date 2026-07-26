@@ -68,7 +68,7 @@ class ReportController extends Controller
             fputcsv($fh, ['SERVIS WORKSHOP'], ';');
             fputcsv($fh, ['No. Servis','Pelanggan','Kendaraan','Total','Status','Tanggal'], ';');
             foreach ($repairs as $r) {
-                fputcsv($fh, [$r->order_number, $r->customer->name, $r->vehicle->plate_number, number_format($r->total,0,',','.'), $r->status, $r->created_at->format('d/m/Y')], ';');
+                fputcsv($fh, [$r->order_number, $r->customer?->name ?? 'N/A', $r->vehicle?->plate_number ?? 'N/A', number_format($r->total,0,',','.'), $r->status, $r->created_at->format('d/m/Y')], ';');
             }
 
             fputcsv($fh, [], ';');

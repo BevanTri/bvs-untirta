@@ -6,6 +6,7 @@ use App\Models\CartItem;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CheckoutController extends Controller
 {
@@ -31,41 +32,48 @@ class CheckoutController extends Controller
             'notes' => 'nullable|string',
         ]);
 
-        $order = Order::create([
-            'user_id' => Auth::id(),
-            'order_number' => 'INV-' . now()->format('Ymd') . '-' . str()->upper(str()->random(6)),
-            'customer_name' => $data['customer_name'],
-            'notes' => $data['notes'],
-            'subtotal' => 0,
-            'total' => 0,
-        ]);
-
-        $subtotal = 0;
         foreach ($items as $ci) {
-            $price = $ci->unit_price;
-            $qty = $ci->quantity;
-            $lineTotal = $price * $qty;
-            $subtotal += $lineTotal;
-
-            if ($ci->itemable_type === 'App\Models\Product' && $ci->itemable) {
-                if ($ci->itemable->stock < $qty) {
-                    return redirect()->route('checkout.index')->with('success', 'Stok ' . $ci->itemable->name . ' tidak mencukupi.');
-                }
-                $ci->itemable->decrement('stock', $qty);
+            if ($ci->itemable_type === 'App\Models\Product' && $ci->itemable && $ci->itemable->stock < $ci->quantity) {
+                return redirect()->route('checkout.index')->with('error', 'Stok ' . $ci->itemable->name . ' tidak mencukupi.');
             }
-
-            $order->items()->create([
-                'itemable_id' => $ci->itemable_id,
-                'itemable_type' => $ci->itemable_type,
-                'name' => $ci->name,
-                'quantity' => $qty,
-                'price' => $price,
-                'subtotal' => $lineTotal,
-            ]);
-            $ci->delete();
         }
 
-        $order->update(['subtotal' => $subtotal, 'total' => $subtotal]);
+        $order = DB::transaction(function () use ($items, $data) {
+            $order = Order::create([
+                'user_id' => Auth::id(),
+                'order_number' => 'INV-' . now()->format('Ymd') . '-' . str()->upper(str()->random(6)),
+                'customer_name' => $data['customer_name'],
+                'notes' => $data['notes'],
+                'subtotal' => 0,
+                'total' => 0,
+            ]);
+
+            $subtotal = 0;
+            foreach ($items as $ci) {
+                $price = $ci->unit_price;
+                $qty = $ci->quantity;
+                $lineTotal = $price * $qty;
+                $subtotal += $lineTotal;
+
+                if ($ci->itemable_type === 'App\Models\Product' && $ci->itemable) {
+                    $ci->itemable->decrement('stock', $qty);
+                }
+
+                $order->items()->create([
+                    'itemable_id' => $ci->itemable_id,
+                    'itemable_type' => $ci->itemable_type,
+                    'name' => $ci->name,
+                    'quantity' => $qty,
+                    'price' => $price,
+                    'subtotal' => $lineTotal,
+                ]);
+                $ci->delete();
+            }
+
+            $order->update(['subtotal' => $subtotal, 'total' => $subtotal]);
+
+            return $order;
+        });
 
         return redirect()->route('orders.pay', $order);
     }

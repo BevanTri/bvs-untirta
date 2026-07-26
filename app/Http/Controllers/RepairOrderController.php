@@ -66,60 +66,64 @@ class RepairOrderController extends Controller
             'items.*.price' => 'required|numeric|min:0',
         ]);
 
-        $customer = Customer::firstOrCreate(
-            ['email' => Auth::user()->email],
-            ['name' => $data['name']]
-        );
-        $customer->update(['name' => $data['name']]);
-
-        if (!empty($data['vehicle_id'])) {
-            $vehicle = Vehicle::find($data['vehicle_id']);
-        } else {
-            $vehicle = Vehicle::firstOrCreate(
-                ['plate_number' => $data['plate_number']],
-                ['customer_id' => $customer->id, 'brand' => $data['brand'], 'model' => $data['model']]
+        $order = DB::transaction(function () use ($data) {
+            $customer = Customer::firstOrCreate(
+                ['email' => Auth::user()->email],
+                ['name' => $data['name']]
             );
-        }
+            $customer->update(['name' => $data['name']]);
 
-        $serviceFee = 0;
-        if (!empty($data['service_id'])) {
-            $service = Service::find($data['service_id']);
-            $serviceFee = $service ? $service->price : 0;
-        }
+            if (!empty($data['vehicle_id'])) {
+                $vehicle = Vehicle::findOrFail($data['vehicle_id']);
+            } else {
+                $vehicle = Vehicle::firstOrCreate(
+                    ['plate_number' => $data['plate_number']],
+                    ['customer_id' => $customer->id, 'brand' => $data['brand'], 'model' => $data['model']]
+                );
+            }
 
-        $order = RepairOrder::create([
-            'customer_id' => $customer->id,
-            'vehicle_id' => $vehicle->id,
-            'mechanic_id' => $data['mechanic_id'] ?? null,
-            'user_id' => Auth::id(),
-            'order_number' => 'SRV-' . now()->format('Ymd') . '-' . str()->upper(str()->random(6)),
-            'date' => now()->toDateString(),
-            'complaint' => $data['complaint'],
-            'service_fee' => $serviceFee,
-            'total' => $serviceFee,
-            'status' => 'menunggu',
-        ]);
+            $serviceFee = 0;
+            if (!empty($data['service_id'])) {
+                $service = Service::find($data['service_id']);
+                $serviceFee = $service ? $service->price : 0;
+            }
 
-        $itemsTotal = 0;
-        if (!empty($data['items'])) {
-            foreach ($data['items'] as $item) {
-                $subtotal = $item['price'] * $item['quantity'];
-                $itemsTotal += $subtotal;
-                $productName = $item['product_id'] ? Product::find($item['product_id'])?->name : 'Sparepart';
-                $order->items()->create([
-                    'product_id' => $item['product_id'] ?? null,
-                    'name' => $productName,
-                    'quantity' => $item['quantity'],
-                    'price' => $item['price'],
-                    'subtotal' => $subtotal,
-                ]);
+            $order = RepairOrder::create([
+                'customer_id' => $customer->id,
+                'vehicle_id' => $vehicle->id,
+                'mechanic_id' => $data['mechanic_id'] ?? null,
+                'user_id' => Auth::id(),
+                'order_number' => 'SRV-' . now()->format('Ymd') . '-' . str()->upper(str()->random(6)),
+                'date' => now()->toDateString(),
+                'complaint' => $data['complaint'],
+                'service_fee' => $serviceFee,
+                'total' => $serviceFee,
+                'status' => 'menunggu',
+            ]);
 
-                if (!empty($item['product_id'])) {
-                    Product::where('id', $item['product_id'])->decrement('stock', $item['quantity']);
+            $itemsTotal = 0;
+            if (!empty($data['items'])) {
+                foreach ($data['items'] as $item) {
+                    $subtotal = $item['price'] * $item['quantity'];
+                    $itemsTotal += $subtotal;
+                    $productName = $item['product_id'] ? Product::find($item['product_id'])?->name : 'Sparepart';
+                    $order->items()->create([
+                        'product_id' => $item['product_id'] ?? null,
+                        'name' => $productName,
+                        'quantity' => $item['quantity'],
+                        'price' => $item['price'],
+                        'subtotal' => $subtotal,
+                    ]);
+
+                    if (!empty($item['product_id'])) {
+                        Product::where('id', $item['product_id'])->decrement('stock', $item['quantity']);
+                    }
                 }
             }
-        }
-        $order->update(['total' => $serviceFee + $itemsTotal]);
+            $order->update(['total' => $serviceFee + $itemsTotal]);
+
+            return $order;
+        });
 
         return redirect()->route('repairs.show', $order)->with('success', 'Servis berhasil diajukan');
     }

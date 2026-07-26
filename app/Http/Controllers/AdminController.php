@@ -108,15 +108,30 @@ class AdminController extends Controller
         return view('admin.invoice', ['order' => $order->load('items')]);
     }
 
-    public function storeCategory(Request $r) { Category::create([...$r->validate(['name'=>'required']), 'slug' => str($r->name)->slug()->toString()]); return back(); }
+    private function uniqueSlug(string $model, string $name, ?int $ignoreId = null): string
+    {
+        $slug = str($name)->slug()->toString();
+        $base = $slug;
+        $i = 1;
+        $query = $model::where('slug', $slug);
+        if ($ignoreId) $query->where('id', '!=', $ignoreId);
+        while ($query->exists()) {
+            $slug = $base . '-' . $i++;
+            $query = $model::where('slug', $slug);
+            if ($ignoreId) $query->where('id', '!=', $ignoreId);
+        }
+        return $slug;
+    }
+
+    public function storeCategory(Request $r) { Category::create([...$r->validate(['name'=>'required']), 'slug' => $this->uniqueSlug(Category::class, $r->name)]); return back(); }
     public function storeProduct(Request $r) {
         $data = $r->validate(['category_id'=>'required|exists:categories,id','name'=>'required','price'=>'required|numeric','description'=>'nullable|string','stock'=>'nullable|integer','image'=>'nullable|image|mimes:jpeg,png,jpg,webp|max:2048']);
-        $data['slug'] = str($r->name)->slug()->toString();
+        $data['slug'] = $this->uniqueSlug(Product::class, $r->name);
         if ($r->hasFile('image')) $data['image'] = $r->file('image')->store('products', 'public');
         Product::create($data);
-        return back();
+        return back()->with('success', 'Produk berhasil ditambahkan');
     }
-    public function storeService(Request $r) { Service::create([...$r->validate(['name'=>'required','price'=>'required|numeric']), 'slug' => str($r->name)->slug()->toString()]); return back(); }
+    public function storeService(Request $r) { Service::create([...$r->validate(['name'=>'required','price'=>'required|numeric']), 'slug' => $this->uniqueSlug(Service::class, $r->name)]); return back(); }
     public function storeBrand(Request $r) {
         $data = $r->validate(['name'=>'required','logo'=>'nullable|image|mimes:jpeg,png,jpg,webp|max:2048']);
         if ($r->hasFile('logo')) $data['logo'] = $r->file('logo')->store('brands', 'public');
@@ -124,17 +139,18 @@ class AdminController extends Controller
         return back();
     }
 
-    public function updateCategory(Request $r, Category $category) { $category->update([...$r->validate(['name'=>'required']), 'slug' => str($r->name)->slug()->toString()]); return back(); }
+    public function updateCategory(Request $r, Category $category) { $category->update([...$r->validate(['name'=>'required']), 'slug' => $this->uniqueSlug(Category::class, $r->name, $category->id)]); return back(); }
     public function updateProduct(Request $r, Product $product) {
         $data = $r->validate(['category_id'=>'required|exists:categories,id','name'=>'required','price'=>'required|numeric','description'=>'nullable|string','stock'=>'nullable|integer','image'=>'nullable|image|mimes:jpeg,png,jpg,webp|max:2048']);
         if ($r->hasFile('image')) {
             if ($product->image) Storage::disk('public')->delete($product->image);
             $data['image'] = $r->file('image')->store('products', 'public');
         }
+        $data['slug'] = $this->uniqueSlug(Product::class, $r->name, $product->id);
         $product->update($data);
         return back()->with('success', 'Produk berhasil diupdate');
     }
-    public function updateService(Request $r, Service $service) { $service->update($r->validate(['name'=>'required','price'=>'required|numeric'])); return back(); }
+    public function updateService(Request $r, Service $service) { $service->update([...$r->validate(['name'=>'required','price'=>'required|numeric']), 'slug' => $this->uniqueSlug(Service::class, $r->name, $service->id)]); return back(); }
     public function updateBrand(Request $r, BrandPartner $brand) {
         $data = $r->validate(['name'=>'required','logo'=>'nullable|image|mimes:jpeg,png,jpg,webp|max:2048']);
         if ($r->hasFile('logo')) {
@@ -147,7 +163,11 @@ class AdminController extends Controller
     public function updateOrder(Order $order, Request $r) { $order->update($r->validate(['status'=>'required|in:pending,processing,completed,cancelled','payment_status'=>'nullable|in:pending,paid,failed'])); return back()->with('success', 'Pesanan diupdate'); }
 
     public function destroyCategory(Category $category) { $category->delete(); return back(); }
-    public function destroyProduct(Product $product) { $product->delete(); return back(); }
+    public function destroyProduct(Product $product) {
+        if ($product->image) Storage::disk('public')->delete($product->image);
+        $product->delete();
+        return back()->with('success', 'Produk berhasil dihapus');
+    }
     public function destroyService(Service $service) { $service->delete(); return back(); }
     public function destroyBrand(BrandPartner $brand) { $brand->delete(); return back(); }
 
